@@ -3,6 +3,7 @@ package com.example.spotifyclone;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,9 @@ public class TimerClass extends BottomSheetDialogFragment {
     private TextView thirty2; private LinearLayout thirty1;
     private TextView forty2; private LinearLayout forty1;
     private TextView hour2; private LinearLayout hour1;
+    private TextView turnoff2; private LinearLayout turnoff1;
+    private LinearLayout endOF;
+    public static int check=0;
 
     private TextView timer3;
     private static CountDownTimer mCountDownTimer;
@@ -46,6 +50,17 @@ public class TimerClass extends BottomSheetDialogFragment {
         forty2=t.findViewById(R.id.forty2);
         hour1=t.findViewById(R.id.hour1);
         hour2=t.findViewById(R.id.hour2);
+        turnoff1=t.findViewById(R.id.turnoff1);
+        turnoff2=t.findViewById(R.id.turnoff2);
+        endOF=t.findViewById(R.id.endOF);
+
+        if(check==0){
+            turnoff1.setVisibility(View.GONE);
+        }else{
+
+            turnoff1.setVisibility(View.VISIBLE);
+        }
+
 //        timer3=t.findViewById(R.id.timer3);
 
         five1.setOnClickListener(new View.OnClickListener() {
@@ -54,110 +69,144 @@ public class TimerClass extends BottomSheetDialogFragment {
                 stopTimer(300000);
                 mTimeLeftInMillis=300000;
                 startTimer();
+                check=1;
                 dismiss();
             }
         });
-        five2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopTimer(300000);
-                mTimeLeftInMillis=300000;
-                startTimer();
-                dismiss();
-            }
-        });
+//        five2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stopTimer(300000);
+//                mTimeLeftInMillis=300000;
+//                startTimer();
+//                check=1;
+//                dismiss();
+//            }
+//        });
         ten1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     stopTimer(600000);
                     mTimeLeftInMillis = 600000;
                     startTimer();
+                check=1;
                 dismiss();
 
             }
         });
-        ten2.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                stopTimer(600000);
-                mTimeLeftInMillis=600000;
-                startTimer();
-                dismiss();
-            }
-        });
+//        ten2.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                stopTimer(600000);
+//                mTimeLeftInMillis=600000;
+//                startTimer();
+//                dismiss();
+//            }
+//        });
         fiften1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopTimer(900000);
                 mTimeLeftInMillis=900000;
                 startTimer();
+                check=1;
                 dismiss();
             }
         });
-        fiften2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopTimer(900000);
-                mTimeLeftInMillis=900000;
-                startTimer();
-                dismiss();
-            }
-        });
+//        fiften2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stopTimer(900000);
+//                mTimeLeftInMillis=900000;
+//                startTimer();
+//
+//                dismiss();
+//            }
+//        });
         thirty1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopTimer(1800000);
                 mTimeLeftInMillis=1800000;
                 startTimer();
+                check=1;
                 dismiss();
             }
         });
-        thirty2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopTimer(1800000);
-                mTimeLeftInMillis=1800000;
-                startTimer();
-                dismiss();
-            }
-        });
+//        thirty2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stopTimer(1800000);
+//                mTimeLeftInMillis=1800000;
+//                startTimer();
+//                dismiss();
+//            }
+//        });
         forty1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopTimer(2400000);
                 mTimeLeftInMillis=2400000;
                 startTimer();
+                check=1;
                 dismiss();
             }
         });
-        forty2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopTimer(2400000);
-                mTimeLeftInMillis=2400000;
-                startTimer();
-                dismiss();
-            }
-        });
+//        forty2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stopTimer(2400000);
+//                mTimeLeftInMillis=2400000;
+//                startTimer();
+//
+//                dismiss();
+//            }
+//        });
         hour1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stopTimer(3600000);
                 mTimeLeftInMillis=3600000;
                 startTimer();
+                check=1;
                 dismiss();
             }
         });
-        hour2.setOnClickListener(new View.OnClickListener() {
+//        hour2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                stopTimer(3600000);
+//                mTimeLeftInMillis=3600000;
+//                startTimer();
+//                dismiss();
+//            }
+//        });
+        turnoff1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopTimer(3600000);
-                mTimeLeftInMillis=3600000;
-                startTimer();
+                stopTimer(0);
+                check=0;
                 dismiss();
             }
         });
+
+        endOF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final MusicActivity main = (MusicActivity) getActivity();
+                long remaining=main.getRemaining();
+                stopTimer(0);
+                mTimeLeftInMillis=remaining;
+                endstartTimer();
+                check=1;
+                dismiss();
+
+
+
+            }
+        });
+
         return t;
     }
 
@@ -188,10 +237,37 @@ public class TimerClass extends BottomSheetDialogFragment {
                 more.timer3.setText("Sleep timer");
                 main.stopTimer();
                 mTimerRunning=0;
+                check=0;
             }
         }.start();
         mTimerRunning=1;
 
+    }
+
+    private void endstartTimer() {
+        final MusicActivity main = (MusicActivity) getActivity();
+        mCountDownTimer = new CountDownTimer(main.getRemaining(), 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+                mTimeLeftInMillis = main.getRemaining();
+                updateCountDownText();
+
+
+            }
+
+            @Override
+            public void onFinish() {
+                MorePageDown more = MorePageDown.getInstance();
+                more.timer2.setImageResource(R.drawable.moon_waning_crescent);
+                more.timer3.setText("Sleep timer");
+                main.stopTimer();
+                mTimerRunning=0;
+                check=0;
+            }
+        }.start();
+        mTimerRunning=1;
     }
 
     private void stopTimer(int a) {
@@ -223,4 +299,11 @@ public class TimerClass extends BottomSheetDialogFragment {
         String timeLeftFormatted = String.format(Locale.getDefault(), "%d", minutes);
         more.timer3.setText("Sleep timer"+" - " +timeLeftFormatted+" min left");
     }
+    public void updateendCountDownText() {
+
+        MorePageDown more = MorePageDown.getInstance();
+        more.timer2.setImageResource(R.drawable.cresecentgreen);
+        more.timer3.setText("Sleep timer"+" - " +"End of track");
+    }
+
 }

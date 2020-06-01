@@ -30,4 +30,13 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
     </style>
+    <style name="addspop">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+
+
+    </style>
 </resources>

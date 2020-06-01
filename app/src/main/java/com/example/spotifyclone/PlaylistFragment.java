@@ -28,10 +28,6 @@ public class PlaylistFragment extends Fragment implements OnClickListener{
 
     private ArrayList<RowItem> Rowitems=new ArrayList<RowItem>();
     private  int index=0;
-    public PlaylistFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

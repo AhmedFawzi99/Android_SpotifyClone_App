@@ -78,43 +78,7 @@ public class createPassword extends AppCompatActivity implements View.OnClickLis
     private void userSignUp() {
         String password = etNewPass.getText().toString().trim();
 
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .createUser("s@yah.com", password, "sara", "2/2/1999", "male");
 
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    if(response.isSuccessful()){
-                        String s = response.body().string();
-                        int d = response.code();
-                        Toast.makeText(createPassword.this, "Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(createPassword.this, Birthdate.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-
-                    }
-                    else {
-                        Toast.makeText(createPassword.this, "Not Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(createPassword.this, Birthdate.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(createPassword.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
     @Override
     public void onClick(View v) {

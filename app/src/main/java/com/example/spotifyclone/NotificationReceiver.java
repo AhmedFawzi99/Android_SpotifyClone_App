@@ -17,9 +17,11 @@ public class NotificationReceiver extends BroadcastReceiver {
         if(aTYPE.contentEquals("ACTION_PLAY")) {
             main.buttonPlayerAction();
         }else if(aTYPE.contentEquals("ACTION_NEXT")){
-            Toast.makeText(context, aTYPE, Toast.LENGTH_SHORT).show();
+            main.next();
         }else if(aTYPE.contentEquals("ACTION_LIKE")){
             main.buttonLikeAction();
+        }else  if(aTYPE.contentEquals("ACTION_PREV")) {
+            main.prev();
         }
 
     }

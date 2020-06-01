@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
@@ -37,6 +38,7 @@ import com.muddzdev.styleabletoast.StyleableToast;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +46,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.example.spotifyclone.App.CHANNEL_1_ID;
 import static com.example.spotifyclone.App.CHANNEL_2_ID;
 
 public class MusicActivity<pubic> extends AppCompatActivity {
@@ -55,27 +58,36 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     private ImageButton btn_pause_stop;
     private TextView current_duration;
     private TextView full_duration;
+    public long remaining_duration;
     private ImageView music_image;
     private String sID;
     private MediaPlayer media_player;
     private Handler mHandler = new Handler();
     private MusicControl control;
-    private TextView name_song;
+    public TextView name_song;
     public TextView name_artist;
     public TextView name_playlist;
     public TextView name_hit;
+    public int song_index;
     public int flag=1;
     private ImageButton btn_share;
     private ImageButton btn_playerdown;
     private TextView btn_share2;
     private ImageButton btn_share3;
+    private ImageButton next;
+    private ImageButton prev;
     public int likeToggle;
     public ImageButton btn_like;
     public String imageUrl;
+    public String musicUrl;
     private int likeDrawable=R.drawable.baseline_favorite_24;
     private int pauseplayDrawable=R.drawable.play;
     private NotificationManagerCompat notificationManager;
     private MediaSessionCompat mediaSession;
+    private static CountDownTimer addtimer;
+    public static int maddtimer=0;
+    EachPlaylist playlist=new EachPlaylist("kkkk","aaa");
+
 
 
 
@@ -84,6 +96,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         @Override
         public void run() {
             song_progress.setProgress(media_player.getCurrentPosition());
+            MainActivitysha.song_progress2.setProgress(media_player.getCurrentPosition());
             mHandler.postDelayed(this, 50);
         }
     };
@@ -107,7 +120,11 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_music);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancelAll();
         btn_playerdown=findViewById(R.id.btn_playerdown);
+        next=findViewById(R.id.btn_forward);
+        prev=findViewById(R.id.btn_rewind);
         name_song=findViewById(R.id.song_name);
         name_hit=findViewById(R.id.hit_name);
         name_playlist=findViewById(R.id.playlist_name);
@@ -137,13 +154,8 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent=new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = "Your Body";
-                String shareSuB = "This Message was Sent By Player App ";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT,shareBody);
-                myIntent.putExtra(Intent.EXTRA_TEXT,shareSuB);
-                startActivity(Intent.createChooser(myIntent,"Share Using"));
+                ShareFragment share=new ShareFragment();
+                share.show(getSupportFragmentManager(),"SHARE");
             }
         }) ;
 
@@ -172,33 +184,67 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             }
         });
 
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                next();
+            }
+        });
+
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prev();
+            }
+        });
+
+
+
 
     }
+
 
 
     public void onBackPressed() {
 
         Intent activityIntent = new Intent(MusicActivity.this,MainActivitysha.class);
 //        activityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        activityIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
         startActivity(activityIntent);
+
     }
 
 
 
 
 
-    public void setMusicPlayerComponents(String sName,String aName,String pName,String hName, String iURL,String mURL){
+    public void setMusicPlayerComponents( int position, String sName, String aName, String pName, String hName, final String iURL, final String mURL, boolean isliked){
 
+        btn_pause_stop.setImageResource(R.drawable.baseline_pause_circle_filled_24);
+        song_index=position;
         name_song.setText(sName);
+        MainActivitysha.barsonfname.setText(sName);
+        MainActivitysha.barartistname.setText(aName);
         name_artist.setText(aName);
         name_playlist.setText(pName);
         name_hit.setText(hName);
         imageUrl=iURL;
         Picasso.with(this).load(imageUrl).into(music_image);
+        Picasso.with(this).load(imageUrl).into(MainActivitysha.barimage);
         String path= mURL;
+        musicUrl=mURL;
         Uri uri=Uri.parse(path);
         media_player=new MediaPlayer();
         media_player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+        if(isliked==true){
+            likeToggle=0;
+            btn_like.setImageResource(R.drawable.favorite_green);
+        }else{
+            likeToggle=1;
+            btn_like.setImageResource(R.drawable.like);
+        }
 
         try {
             media_player.reset();
@@ -214,7 +260,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
+//        addPOP(	5000);
 
 //        btn_pause_stop.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -227,6 +273,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
         control=new MusicControl();
         song_progress.setMax(media_player.getDuration());
+        MainActivitysha.song_progress2.setMax(media_player.getDuration());
 
 //        song_progress.getThumb().mutate().setAlpha(0);
 //        song_progress.setOnTouchListener(new View.OnTouchListener() {
@@ -265,6 +312,8 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         media_player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             public void onCompletion(MediaPlayer mp) {
 
+                next();
+
             }
         });
         mHandler.postDelayed(mUpdateSeekbar, 0);
@@ -279,6 +328,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             sendOnChannel2(parent_view,pauseplayDrawable,likeDrawable);
             media_player.pause();
             mHandler.removeCallbacks(mUpdateSeekbar);
+            MainActivitysha.barpausestop.setImageResource(R.drawable.barplay);
             btn_pause_stop.setImageResource(R.drawable.baseline_play_circle_filled_24);
 //                if(timer.mTimerRunning==1)
 //                {
@@ -290,8 +340,34 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             media_player.start();
             mHandler.postDelayed(mUpdateSeekbar, 0);
             btn_pause_stop.setImageResource(R.drawable.baseline_pause_circle_filled_24);
+            MainActivitysha.barpausestop.setImageResource(R.drawable.barpause);
             mHandler.post(mUpdateTimeTask);
         }
+    }
+    public void next()
+    {
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancelAll();
+        media_player.reset();
+        song_index=song_index+1;
+        playlist.check();
+        Tracks track= playlist.getSONG(song_index);
+        setMusicPlayerComponents(song_index,track.getName(),"salmaaa","Playing from Playlist","salmaaaaa",track.getImageid(),track.getURL(),track.getIsliked());
+        pauseplayDrawable=R.drawable.pause;
+        sendOnChannel2(parent_view,pauseplayDrawable,likeDrawable);
+    }
+
+    public void prev()
+    {
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancelAll();
+        media_player.reset();
+        song_index=song_index-1;
+        playlist.check();
+        Tracks track= playlist.getSONG(song_index);
+        setMusicPlayerComponents(song_index,track.getName(),"salmaaa","Playing from Playlist","salmaaaaa",track.getImageid(),track.getURL(),track.getIsliked());
+        pauseplayDrawable=R.drawable.pause;
+        sendOnChannel2(parent_view,pauseplayDrawable,likeDrawable);
     }
 
     public void stopTimer()
@@ -317,8 +393,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         String id = i.getStringExtra("ID");
         String playlistnamee = i.getStringExtra("PLAYLISTNAME");
         String artist = i.getStringExtra("Artist");
-
-        setMusicPlayerComponents(name,artist,"Playing from Playlist",playlistnamee,imageid,url);
+        int position =i.getIntExtra("pos",0);
+        boolean isliked=i.getBooleanExtra("isliked",false);
+        setMusicPlayerComponents(position,name,artist,"Playing from Playlist",playlistnamee,imageid,url,isliked);
         sID=id;
     }
 
@@ -361,6 +438,11 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         PendingIntent nextAction = PendingIntent.getBroadcast(this,
                 0, next,0 );
 
+        Intent prev = new Intent(this, NotificationReceiver.class);
+        prev.setType("ACTION_PREV");
+        PendingIntent prevAction = PendingIntent.getBroadcast(this,
+                0, prev,0 );
+
         Intent like = new Intent(this, NotificationReceiver.class);
         like.setType("ACTION_LIKE");
         PendingIntent likeAction = PendingIntent.getBroadcast(this,
@@ -374,7 +456,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
                 .setContentIntent(contentIntent)
                 .setLargeIcon(drawableToBitmap(music_image.getDrawable()))
                 .addAction(likeDrawable, "Like", likeAction)
-                .addAction(R.drawable.notifyprev, "Previous", null)
+                .addAction(R.drawable.notifyprev, "Previous", prevAction)
                 .addAction(drawable, "Play", playAction)
                 .addAction(R.drawable.notifynext, "Next", nextAction)
                 .addAction(R.drawable.minus_circle_outline, "Dislike", null)
@@ -410,6 +492,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             likeDrawable=R.drawable.favorite_green;
             btn_like.setImageResource(R.drawable.favorite_green);
             sendOnChannel2(parent_view,pauseplayDrawable,likeDrawable);
+            MainActivitysha.barlike.setImageResource(R.drawable.favorite_green);
             putlike();
             likeToggle=1;
             showLikeToast(" Added to Liked Songs. ");
@@ -420,6 +503,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             btn_like.setImageResource(R.drawable.like);
             sendOnChannel2(parent_view,pauseplayDrawable,likeDrawable);
 //            notificationManager.notify(1, );
+            MainActivitysha.barlike.setImageResource((R.drawable.like));
             deletelike();
             likeToggle=0;
             showLikeToast(" Removed from Liked Songs. ");
@@ -444,49 +528,22 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         long totalDuration= media_player.getDuration();
         long currentDuration=media_player.getCurrentPosition();
 
+        setRemaining(totalDuration-currentDuration);
 
         full_duration.setText(control.milliSecondsToTIme(totalDuration));
         current_duration.setText(control.milliSecondsToTIme(currentDuration));
 
 
+
     }
 
-//    public void mockgetsong()
-//    {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-//
-//        Call<getid> call = jsonPlaceHolderApi.getid();
-//
-//        call.enqueue(new Callback<getid>() {
-//            @Override
-//            public void onResponse(Call<getid> call, Response<getid> response) {
-//                if (!response.isSuccessful()) {
-//                    return;
-//
-//                }
-//                getid gets = response.body();
-//
-//                String songname = gets.getSongname();
-//                String artist = gets.getArtist();
-//                String playlist = gets.getPlaylist();
-//                String hit = gets.getHit();
-//                String image = gets.getImage();
-//                String url = gets.getUrl();
-//                int songid = gets.getSongid();
-//                setMusicPlayerComponents(songname,artist,playlist,hit,image,url);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<getid> call, Throwable t) {
-//                return;
-//            }
-//        });
-//    }
+    private void setRemaining(long a){
+        remaining_duration=a;
+    }
+    public long getRemaining(){
+        return remaining_duration;
+    }
+
 
     public void putlike() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -557,11 +614,37 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
     }
 
+    public void addPOP(final int a ){
+
+            addtimer = new CountDownTimer(a, 1000) {
+
+                @Override
+                public void onTick(long millisUntilFinished) {
+
+                }
+
+                @Override
+                public void onFinish() {
+                    startActivity(new Intent(MusicActivity.this,Pop.class));
+                    addPOP(a);
+                }
+            }.start();
+            maddtimer=1;
+
+
+    }
+
+
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onDestroy(){
-        notificationManager.deleteNotificationChannel(CHANNEL_2_ID);
+
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.cancelAll();
+//        notificationManager.cancelAll();
         super.onDestroy();
         mHandler.removeCallbacks(mUpdateTimeTask);
         mHandler.removeCallbacks(mUpdateSeekbar);
@@ -569,6 +652,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         if(item.getItemId()==android.R.id.home)

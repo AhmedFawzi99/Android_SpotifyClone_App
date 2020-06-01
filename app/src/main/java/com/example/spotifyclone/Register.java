@@ -79,46 +79,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
     private void userSignUp() {
+        Profile_DATA profile=new Profile_DATA();
         String email = etNewEmail.getText().toString().trim();
+        profile.setMail(email);
 
-        Call<ResponseBody> call= jsonPlaceHolderApi.
-                createUser(email,"1234567895","salma","1/1/1999", "female");
-
-//            Call<ResponseBody> call = RetrofitClient
-//                    .getInstance()
-//                    .getApi()
-//                    .createEmail(email);
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    if(response.isSuccessful()){
-                        String s = response.body().string();
-                        int d = response.code();
-                        Toast.makeText(Register.this, "Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Register.this, createPassword.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-
-                    }
-                    else {
-                        Toast.makeText(Register.this, "Not Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Register.this, createPassword.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(Register.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
 
     @Override
@@ -126,6 +90,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.bNext:
                 userSignUp();
+                Intent intent = new Intent(Register.this, createPassword.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 // startActivity(new Intent(this, createPassword.class));
 
 

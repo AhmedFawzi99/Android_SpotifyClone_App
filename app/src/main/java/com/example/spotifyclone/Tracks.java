@@ -8,6 +8,9 @@ public class Tracks {
     private String image;
     private String url;
     private  String id;
+    private boolean isliked;
+
+
 private ArrayList<Artist> artists;
 
     public ArrayList<Artist> getArtists() {
@@ -55,7 +58,13 @@ private ArrayList<Artist> artists;
         this.image = imageid;
     }
 
+    public boolean getIsliked() {
+        return isliked;
+    }
 
+    public void setIsliked(boolean isliked) {
+        this.isliked = isliked;
+    }
 
 
 
