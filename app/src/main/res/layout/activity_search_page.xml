@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:background="@drawable/angled_gradient_black"
+    >
+
+    <TextView
+        android:id="@+id/tvSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="10dp"
+        android:text="Search"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/tvSearch"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+
+            <Button
+                android:id="@+id/bSearch"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Artists, songs, or albums"
+                android:textColor="@color/grey"
+                android:background="@drawable/white_curved_corners" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="They say oh my god I see the way you shine
+Take your hand, my dear, and place them both in mine
+You know you stopped me dead while I was passing by
+And now I beg to see you dance just one more time
+Ooh I see you, see you, see you every time
+And oh my I, I, I like your style
+You, you make me, make me, make me wanna cry
+And now I beg to see you dance just one more time
+So they say
+Dance for me, dance for me, dance for me, oh, oh, oh
+I've never seen anybody do the things you do before
+They say move for me, move for me, move for me, ay, ay, ay
+And when you're done I'll make you do it all again
+I said oh my god I see you walking by
+Take my hands, my dear, and look me in my eyes
+Just like a monkey I've been dancing my whole life
+But you just beg to see me dance…"
+                android:textColor="@color/white"
+                android:textSize="30dp"/>
+
+
+
+            <!--        <ListView-->
+            <!--            android:padding="10dp"-->
+            <!--            android:id="@+id/lvSearch"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"/>-->
+
+            <!--        <TextView-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:text="Browse all"-->
+            <!--            android:textStyle="bold"-->
+            <!--            android:textSize="15dp"-->
+            <!--            android:textColor="@color/white"-->
+            <!--            android:layout_height="wrap_content" />-->
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

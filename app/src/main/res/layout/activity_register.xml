@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:background="@color/black"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="What's your email?"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:textFontWeight="10"
+        android:layout_height="wrap_content" />
+
+
+
+    <EditText
+        android:id="@+id/etNewEmail"
+        android:layout_width="match_parent"
+        android:background="@color/grey"
+        android:height="50dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="You'll need to confirm this email later"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/bNext"
+        android:text="NEXT"
+        android:textColor="#000000"
+        android:textAlignment="center"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/disabled_button"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:enabled="false"/>
+
+
+
+
+</LinearLayout>

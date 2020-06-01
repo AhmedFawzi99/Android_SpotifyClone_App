@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Spotify</string>
+    <string name="facebook_app_id">2665768846834072</string>
+    <string name="fb_login_protocol_scheme">fb2665768846834072</string>
+    <!--    <string-array name="my_songs">-->
+    <!--        <item>Low Key</item>-->
+    <!--        <item>Shallow</item>-->
+    <!--        <item>Courage</item>-->
+    <!--        <item>Chandelier</item>-->
+    <!--        <item>Symphony</item>-->
+    <!--        <item>Bring It On</item>-->
+    <!--        <item>Drama Club</item>-->
+    <!--    </string-array>-->
+    <string name="hint_search">Searching for…</string>
+    <string name="search_description">City, Cities</string>
+</resources>

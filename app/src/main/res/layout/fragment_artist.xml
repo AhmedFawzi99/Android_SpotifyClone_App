@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".ArtistFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/text_view_result2"
+        android:layout_width="69dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="25dp"
+
+        android:layout_marginRight="640dp"
+        android:background="#000000"
+        android:backgroundTint="#000000"
+        android:clickable="true"
+        android:onClick="functionF"
+        android:tint="#FFFFFF"
+        app:backgroundTint="#7A7A7A"
+        app:rippleColor="#7A7A7A"
+        app:srcCompat="@drawable/ic_add_box_black_24dp"
+        tools:ignore="OnClick" />
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="Choose Artists"
+        android:id="@+id/text_view_result"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="30dp"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        />
+</androidx.core.widget.NestedScrollView>
+
+
+</FrameLayout>

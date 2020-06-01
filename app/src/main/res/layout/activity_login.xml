@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:layout_width="match_parent"
+    android:background="@color/black"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Email or username"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:background="@color/grey"
+        android:height="50dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Password"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:background="@color/grey"
+        android:layout_height="50dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/bLogin"
+        android:text="LOG IN"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:textAlignment="center"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@drawable/disabled_button"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+        android:enabled="false"/>
+
+    <Button
+        android:id="@+id/bforgot"
+        android:text="  FORGOT YOUR PASSWORD?  "
+        android:textAlignment="center"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_outline"
+        android:textColor="@color/white"
+        android:outlineSpotShadowColor="@color/white"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

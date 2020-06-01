@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">95580984782-4752hsqff6p28bac9qluai4g9tgthe0i.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://maestro-d49ea.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">95580984782</string>
+    <string name="google_api_key" translatable="false">AIzaSyBC6mcMGlicBbEnz5XqvRSjH7SfMZFRQq4</string>
+    <string name="google_app_id" translatable="false">1:95580984782:android:7236bc8cca2a4bd5cd079f</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBC6mcMGlicBbEnz5XqvRSjH7SfMZFRQq4</string>
+    <string name="google_storage_bucket" translatable="false">maestro-d49ea.appspot.com</string>
+    <string name="project_id" translatable="false">maestro-d49ea</string>
+</resources>
