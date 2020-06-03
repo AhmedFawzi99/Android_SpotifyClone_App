@@ -77,8 +77,10 @@ public class createPassword extends AppCompatActivity implements View.OnClickLis
     };
     private void userSignUp() {
         String password = etNewPass.getText().toString().trim();
-
-
+        Profile_DATA.Password=password;
+        Intent intent = new Intent(createPassword.this, Birthdate.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
     @Override
     public void onClick(View v) {

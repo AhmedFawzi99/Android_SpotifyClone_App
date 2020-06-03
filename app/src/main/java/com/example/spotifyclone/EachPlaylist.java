@@ -87,6 +87,7 @@ public class EachPlaylist extends Fragment
                     //RESET WIDGETS
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_PREVIOUS_IS_TOP);
                     startActivityForResult(i,0);
+                    getActivity().overridePendingTransition(R.anim.fade, R.anim.hold);
                     //activity.setMusicPlayerComponents(s1.getName(),PlaylistName,PlaylistName,s1.getImageid(),s1.getURL());
 
 

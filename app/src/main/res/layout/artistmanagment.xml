@@ -15,7 +15,7 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
+            android:id="@+id/artist_profile_image"
             android:layout_marginTop="30dp"
             android:layout_width="150dp"
             android:layout_gravity="center_horizontal"
@@ -27,6 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:id="@+id/aartname"
             android:layout_gravity="center_horizontal"
             android:text="Amr Diab"
             android:textSize="20dp"
@@ -49,6 +50,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/aplaylists"
             android:layout_gravity="center_horizontal"
             android:text="0"
             android:textSize="15dp"
@@ -79,6 +81,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/afollower"
                     android:layout_gravity="center_horizontal"
                     android:text="0"
                     android:textSize="15dp"
@@ -109,6 +112,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:id="@+id/atotalsongs"
                     android:text="0"
                     android:textSize="15dp"
                     android:textColor="@android:color/white">
@@ -152,6 +156,7 @@
                 android:layout_weight="1"
                 android:gravity="fill_vertical"
                 android:text="Song Name "
+                android:id="@+id/apopularsongs"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#FFFFFF"
                 android:fontFamily="sans-serif-medium"
@@ -198,6 +203,7 @@
             android:layout_weight="1"
             android:text="0 "
             android:textColor="#FFFFFF"
+            android:id="@+id/atotallisteners"
             android:fontFamily="sans-serif-medium"
             android:textSize="20dp" />
     </LinearLayout>
@@ -223,7 +229,6 @@
         <com.github.mikephil.charting.charts.BarChart
             android:layout_width="match_parent"
             android:layout_height="250dp">
-
         </com.github.mikephil.charting.charts.BarChart>
 
         <LinearLayout
@@ -244,6 +249,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0 "
+                android:id="@+id/atotallikes"
                 android:textColor="#FFFFFF"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="20dp" />

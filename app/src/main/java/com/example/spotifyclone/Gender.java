@@ -90,11 +90,13 @@ public class Gender extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.bFemale:
                 gender = "Female";
+                Profile_DATA.Gender=gender;
                 userSignUp();
                 //startActivity(new Intent(this, Name.class));
                 break;
             case R.id.bMale:
                 gender = "Male";
+                Profile_DATA.Gender=gender;
                 userSignUp();
                 // startActivity(new Intent(this, Name.class));
 

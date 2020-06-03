@@ -79,9 +79,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
     private void userSignUp() {
-        Profile_DATA profile=new Profile_DATA();
         String email = etNewEmail.getText().toString().trim();
-        profile.setMail(email);
+        Profile_DATA.mail=email;
+
 
     }
 

@@ -1,25 +1,18 @@
 package com.example.spotifyclone;
 
+
 import android.animation.ArgbEvaluator;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Premium Fragment in Home Layout
- */
-public class PermiumFragment extends Fragment {
-    Context context; //Declare the variable context
+public class Premium extends AppCompatActivity {
     Button bPremium;
     private static final String TAG = "Premium";
 
@@ -29,25 +22,21 @@ public class PermiumFragment extends Fragment {
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
 
-        //Pass your layout xml to the inflater and assign it to rootView.
-        View f = inflater.inflate(R.layout.activity_premium, container, false);
-        context = f.getContext(); // Assign your rootView to context
-
-        bPremium = f.findViewById(R.id.bPremium);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_premium);
+        bPremium = findViewById(R.id.bPremium);
         models = new ArrayList<>();
         models.add(new Model(R.drawable.ad, "", ""));
         models.add(new Model(R.drawable.shuffle, "", ""));
         models.add(new Model(R.drawable.skips, "", ""));
 
 
-        adapter = new Adapter(models, getContext());
+        adapter = new Adapter(models, this);
 
-        viewPager =f.findViewById(R.id.viewPager);
+        viewPager =findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
         viewPager.setPadding(130, 0 ,130, 0);
         bPremium.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +45,6 @@ public class PermiumFragment extends Fragment {
                 sendMail();
             }
         });
-        return f;
     }
     private void sendMail() {
         // This should be the email saved in the server
@@ -65,14 +53,11 @@ public class PermiumFragment extends Fragment {
         String subject = "Getting Premium";
 
         //Send Mail
-        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(),mail,subject,message);
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getBaseContext(),mail,subject,message);
 
         javaMailAPI.execute();
 
 
 
     }
-
-
-
 }

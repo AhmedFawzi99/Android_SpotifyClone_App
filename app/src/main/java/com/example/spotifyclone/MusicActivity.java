@@ -81,7 +81,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     public String imageUrl;
     public String musicUrl;
     private int likeDrawable=R.drawable.baseline_favorite_24;
-    private int pauseplayDrawable=R.drawable.play;
+    private int pauseplayDrawable=R.drawable.pause;
     private NotificationManagerCompat notificationManager;
     private MediaSessionCompat mediaSession;
     private static CountDownTimer addtimer;
@@ -212,6 +212,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         activityIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
         startActivity(activityIntent);
+        overridePendingTransition(R.anim.hold, R.anim.slide_down);
 
     }
 
@@ -239,10 +240,10 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         media_player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
         if(isliked==true){
-            likeToggle=0;
+            likeToggle=1;
             btn_like.setImageResource(R.drawable.favorite_green);
         }else{
-            likeToggle=1;
+            likeToggle=0;
             btn_like.setImageResource(R.drawable.like);
         }
 

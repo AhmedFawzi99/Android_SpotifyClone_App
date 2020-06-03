@@ -40,7 +40,6 @@ public class ShareFragment extends BottomSheetDialogFragment {
     private LinearLayout facebook;
     private LinearLayout messenger;
     private LinearLayout twitter;
-    private LinearLayout sms;
     private LinearLayout copylink;
     private LinearLayout Moreee;
 
@@ -59,8 +58,8 @@ public class ShareFragment extends BottomSheetDialogFragment {
         facebook=s.findViewById(R.id.facebookshare);
         messenger=s.findViewById(R.id.Messengerr);
         twitter=s.findViewById(R.id.Twitterr);
-        sms=s.findViewById(R.id.Sms);
         copylink=s.findViewById(R.id.CopyLink);
+        Moreee=s.findViewById(R.id.more);
 
 
 
@@ -165,6 +164,16 @@ public class ShareFragment extends BottomSheetDialogFragment {
 
             }
 
+        });
+        Moreee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicActivity main = (MusicActivity) getActivity();
+                Intent myIntent=new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                myIntent.putExtra(Intent.EXTRA_TEXT, "Listen to: "+main.name_song.getText()+"\n"+"By: "+main.name_artist.getText()+"\n"+main.musicUrl);
+                startActivity(Intent.createChooser(myIntent,"Share Using:"));
+            }
         });
 
 

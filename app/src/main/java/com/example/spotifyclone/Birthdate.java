@@ -49,43 +49,12 @@ public class Birthdate extends AppCompatActivity implements View.OnClickListener
         int year = picker.getYear();
         int month = picker.getMonth();
         int day = picker.getDayOfMonth();
+        Profile_DATA.Date=day+"/"+month+"/"+year;
 
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .createUser("h@h.com", "7894568","farajfksd", "5/5/1999", "female");
+        Intent intent = new Intent(Birthdate.this, Gender.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
 
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    if(response.isSuccessful()){
-                        String s = response.body().string();
-                        int d = response.code();
-                        Toast.makeText(Birthdate.this, "Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Birthdate.this, Gender.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-
-                    }
-                    else {
-                        Toast.makeText(Birthdate.this, "Not Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Birthdate.this, Gender.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(Birthdate.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
 
     @Override

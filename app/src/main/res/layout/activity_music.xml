@@ -273,7 +273,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/baseline_library_music_24"
+                        android:src="@drawable/outline_volume_up_24"
                         android:tint="@android:color/white" />
 
                     <View

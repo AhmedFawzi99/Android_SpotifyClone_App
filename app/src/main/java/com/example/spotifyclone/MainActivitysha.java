@@ -146,6 +146,13 @@ public class MainActivitysha extends AppCompatActivity {
         toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Log.d(Profile_DATA.UserName, "Name: ");
+        Log.d(Profile_DATA.mail, "Mail: ");
+        Log.d(Profile_DATA.Password, "Password: ");
+        Log.d(Profile_DATA.Gender, "Gender: ");
+        Log.d(Profile_DATA.Date, "Date: ");
+        Log.d(Profile_DATA.Type, "Type: ");
+
 
         Retrofit retrofit =new Retrofit.Builder()
                 .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/").addConverterFactory(GsonConverterFactory.create())
@@ -174,8 +181,8 @@ public class MainActivitysha extends AppCompatActivity {
             public void onClick(View v) {
                 Intent activityIntent = new Intent(MainActivitysha.this,MusicActivity.class);
                 activityIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
                 startActivity(activityIntent);
+                overridePendingTransition(R.anim.slide_up, R.anim.hold);
             }
         });
 

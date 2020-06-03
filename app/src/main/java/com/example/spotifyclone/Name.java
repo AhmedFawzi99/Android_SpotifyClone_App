@@ -76,6 +76,7 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
     };
     private void userSignUp() {
         String name = etName.getText().toString().trim();
+        Profile_DATA.UserName=name;
 
         Call<ResponseBody> call = RetrofitClient
                 .getInstance()

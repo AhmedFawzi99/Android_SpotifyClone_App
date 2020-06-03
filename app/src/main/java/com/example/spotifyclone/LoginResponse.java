@@ -1,31 +1,87 @@
 package com.example.spotifyclone;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class LoginResponse {
-    private boolean error;
-    private String message1 = "Successful";
-    private String message2 = "Unsuccessful";
-    private User user;
 
-    public LoginResponse(boolean error, String message1, String message2, User user) {
-        this.error = error;
-        this.message1 = message1;
-        this.message2 = message2;
-        this.user = user;
+    @SerializedName("email")
+    @Expose
+    private String email;
+    @SerializedName("ID")
+    @Expose
+    private String iD;
+    @SerializedName("usertype")
+    @Expose
+    private String usertype;
+    @SerializedName("password")
+    @Expose
+    private String password;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("birthDate")
+    @Expose
+    private String birthDate;
+    @SerializedName("gender")
+    @Expose
+    private String gender;
+
+
+    public String getlID() {
+        return iD;
     }
 
-    public User getUser() {
-        return user;
+    public void setlID(String iD) {
+        this.iD = iD;
     }
 
-    public boolean isError() {
-        return error;
+    public String getlEmail() {
+        return email;
     }
 
-    public String getMessage1() {
-        return message1;
+    public void setlEmail(String email) {
+        this.email = email;
     }
 
-    public String getMessage2() {
-        return message2;
+    public String getlPassword() {
+        return password;
     }
+
+    public void setlPassword(String password) {
+        this.password = password;
+    }
+
+    public String getlName() {
+        return name;
+    }
+
+    public void setlName(String name) {
+        this.name = name;
+    }
+
+    public String getlBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getlGender() {
+        return gender;
+    }
+
+    public void setlGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getlUsertype() {
+        return usertype;
+    }
+
+    public void setlUsertype(String usertype) {
+        this.usertype = usertype;
+    }
+
 }

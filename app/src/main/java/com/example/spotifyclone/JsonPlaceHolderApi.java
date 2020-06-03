@@ -13,6 +13,7 @@ import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface JsonPlaceHolderApi {
 
@@ -47,35 +48,12 @@ public interface JsonPlaceHolderApi {
     );
 
 
-    @FormUrlEncoded
-    @POST("userlogin")
-    Call<LoginResponse> userLogin(
-            @Field("email") String email,
-            @Field("password") String password
-    );
 
-    @FormUrlEncoded
-    @POST("createEmail")
-    Call<ResponseBody> createEmail(@Field("email") String email);
+    @GET("login")
+    Call<List<LoginResponse>> userLogin();
 
-    @FormUrlEncoded
-    @POST("createPassword")
-    Call<ResponseBody> createPassword(@Field("password") String password);
-
-    @FormUrlEncoded
-    @POST("createBirthdate")
-    Call<ResponseBody> createbirthDate(
-            @Field("year") int year,
-            @Field("month") int month,
-            @Field("day") int day);
-
-    @FormUrlEncoded
-    @POST("createGender")
-    Call<ResponseBody> createGender(@Field("gender") String gender);
-
-    @FormUrlEncoded
-    @POST("createName")
-    Call<ResponseBody> createName( @Field("name") String name);
+    @GET("ArtistD")
+    Call<List<ArtistResponse>> artistdata(@Query("ID") String ID);
 
 
 
