@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.muddzdev.styleabletoast.StyleableToast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,11 +26,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("http://3.137.69.49:3000/user/")
-            .addConverterFactory(GsonConverterFactory.create());
-    Retrofit retrofit = builder.build();
-    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
     Button bLogin,bforgot;
     private EditText etUsername, etPassword;
@@ -49,30 +50,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     private static String token;
-//    private  void login(){
-//        Login login = new Login();
-//        Call<User> call = jsonPlaceHolderApi.userLogin(email,password);
-//        call.enqueue(new Callback<User>() {
-//            @Override
-//            public void onResponse(Call<User> call, Response<User> response) {
-//                if(response.isSuccessful()){
-//                    Toast.makeText(Login.this, response.body().getToken(), Toast.LENGTH_SHORT).show();
-//                    token = response.body().getToken();
-//
-//                }
-//                else{
-//                    Toast.makeText(Login.this, "login not correct :(", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<User> call, Throwable t) {
-//                Toast.makeText(Login.this, "error :(", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//
-//    }
 
     @Override
     protected void onStart() {
@@ -86,8 +63,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
 
     private void userLogin(){
-        String email = etUsername.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
+        final String email = etUsername.getText().toString().trim();
+        final String password = etPassword.getText().toString().trim();
 
         if(email.isEmpty()) {
             etUsername.setError("Email is required");
@@ -110,54 +87,51 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             return;
         }
 
-        Call<LoginResponse> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .userLogin(email,password);
-        call.enqueue(new Callback<LoginResponse>() {
-            @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if(response.isSuccessful()) {
-                    LoginResponse loginResponse = response.body();
-                    SharedPrefManager.getInstance(Login.this)
-                            .saveUser(loginResponse.getUser());
-                    Intent intent = new Intent(Login.this, MainActivitysha.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(Login.this, "error", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(Login.this, MainActivitysha.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
+
+        Call<List<LoginResponse>> call = jsonPlaceHolderApi.userLogin();
+        call.enqueue(new Callback<List<LoginResponse>>() {
+            @Override
+            public void onResponse(Call<List<LoginResponse>> call, Response<List<LoginResponse>> response) {
+
+                Log.d(response.message(), "onResponse: ");
+                List<LoginResponse> login= response.body();
+
+
+                for (LoginResponse log :login)
+                {
+                    String mail=log.getlEmail();
+                    String pass=log.getlPassword();
+                    if((email.equals(mail)) && (pass.equals(password)))
+                    {
+                        Profile_DATA.mail=log.getlEmail();
+                        Profile_DATA.password=log.getlPassword();
+                        Profile_DATA.date=log.getlBirthDate();
+                        Profile_DATA.gender=log.getlGender();
+                        Profile_DATA.userName=log.getlName();
+
+                        Intent intent = new Intent(Login.this, MainActivitysha.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(Login.this, "Wrong email or password", Toast.LENGTH_LONG).show();
+                    }
                 }
+
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-
+            public void onFailure(Call<List<LoginResponse>> call, Throwable t) {
+                Log.d("Error",t.getMessage());
             }
         });
+
     }
-
-
-//    loginButton.setPermissions(Arrays.asList("email", "public_profile"));
-//
-//        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-//            @Override
-//            public void onSuccess(LoginResult loginResult) {
-//                Log.d(TAG, "facebook:onSuccess"+loginResult);
-//
-//                AccessToken accessToken = loginResult.getAccessToken();
-//                Profile profile = Profile.getCurrentProfile();
-//                handleFacebookAccessToken(accessToken);
-//
-//                Toast.makeText(getApplicationContext(), "Login Success with facebook", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(facebook .this, LoggedIn.class));
-//
-//               // startActivity(new Intent(this, MainActivity.class));
-//                //call new activity here.
-//            }
 
     private TextWatcher emailTextWatcher = new TextWatcher() {
         @Override
@@ -197,14 +171,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if(id==android.R.id.home) {
-//            this.finish();
-//
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+
 }

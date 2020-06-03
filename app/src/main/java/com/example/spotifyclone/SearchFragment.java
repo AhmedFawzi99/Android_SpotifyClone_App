@@ -1,5 +1,6 @@
 package com.example.spotifyclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,24 +9,32 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements View.OnClickListener{
+    Button bSearch;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View s;
 
-        s=inflater.inflate(R.layout.fragment_search,container,false);
-        final Button button=(Button) s.findViewById(R.id.button3);
-        Button button2=(Button) s.findViewById(R.id.button4);
-       button2.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-                button.setVisibility(View.VISIBLE);
-           }
-       });
+        s=inflater.inflate(R.layout.activity_search_page,container,false);
+        bSearch = (Button)s.findViewById(R.id.bSearch);
+        bSearch.setOnClickListener(this);
 
-        return inflater.inflate(R.layout.fragment_search,container,false);
+
+        return s;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bSearch:
+                Intent intent = new Intent(getActivity(), Search.class);
+                startActivity(intent);
+        }
+
     }
 }

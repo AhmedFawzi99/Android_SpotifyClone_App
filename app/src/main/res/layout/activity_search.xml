@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.spotifyclone.MainActivity">
+    tools:context="com.example.spotifyclone.MainActivity"
+    android:background="#000">
 
     <SearchView
         android:id="@+id/search"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
+        android:background="#706B70"
         tools:ignore="MissingConstraints">
 
         <requestFocus />
@@ -20,8 +22,8 @@
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:layout_below="@+id/search"
+        android:backgroundTint="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/search"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />

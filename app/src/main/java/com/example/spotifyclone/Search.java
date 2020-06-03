@@ -8,16 +8,28 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-
+/**
+ * Search activity to type what the user wants to search
+ * @author Salma Hazem
+ * @version 1.0
+ */
 public class Search extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     // Declare Variables
+    /**
+     *List that contains the animals
+     * Abimal list in a String array
+     */
     ListView list;
     ListViewAdapter adapter;
     SearchView editsearch;
     String[] animalNameList;
     ArrayList<AnimalNames> arraylist = new ArrayList<AnimalNames>();
 
+    /**
+     * Assign Instances
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

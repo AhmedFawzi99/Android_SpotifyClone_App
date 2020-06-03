@@ -16,6 +16,9 @@ import retrofit2.http.PUT;
 
 public interface JsonPlaceHolderApi {
 
+    @GET("login")
+    Call<List<LoginResponse>> userLogin();
+
     @GET("posts")
     Call<List<post>> getPosts();
 

@@ -2,6 +2,7 @@ package com.example.spotifyclone;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class ListViewAdapter extends BaseAdapter {
         }
         // Set the results into TextViews
         holder.name.setText(animalNamesList.get(position).getAnimalName());
+        holder.name.setTextColor(Color.WHITE);
         return view;
     }
 
