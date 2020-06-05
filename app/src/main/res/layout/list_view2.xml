@@ -3,15 +3,57 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:contentDescription="desc"
+        android:layout_marginTop="10dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp" />
+
     <TextView
         android:id="@+id/namesong"
-        android:layout_width="267dp"
-        android:layout_height="51dp"
-        android:layout_marginLeft="15dp"
+        android:layout_width="115dp"
+        android:layout_height="57dp"
+        android:layout_alignRight="@id/image2"
+        android:layout_marginLeft="90dp"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="-295dp"
+        android:layout_marginRight="-135dp"
         android:text="txt"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/btn_hide2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="35dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/minus_circle_outline"
+        android:tint="@android:color/white" />
+
+    <ImageButton
+        android:id="@+id/btn_Like2"
+        android:layout_width="38dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="26dp"
+        android:adjustViewBounds="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/like" />
+
+    <ImageButton
+        android:id="@+id/btn_more2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="30dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        android:src="@drawable/baseline_more_vert_24"
+        android:tint="@android:color/white" />
 
 </RelativeLayout>

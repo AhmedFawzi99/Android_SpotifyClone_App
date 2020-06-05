@@ -5,12 +5,96 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivitysha">
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/player_control1"
+        android:layout_marginBottom="1dp">
+
+
+    </FrameLayout>
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/song_progress2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/player_control1"
+        android:layout_marginBottom="-14dp"
+        android:layout_weight="1"
+        android:progress="0"
+        android:progressBackgroundTint="#A4000000"
+        android:progressTint="#FFFFFF"
+        android:thumbTint="#000000" />
+
+    <RelativeLayout
+
+        android:id="@+id/player_control1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@id/bottom_navigation"
-        />
+        android:layout_marginBottom="0dp"
+        android:background="#A4000000"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/music_image2"
+            android:layout_width="55dp"
+            android:layout_height="59dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/dec110" />
+
+
+        <ImageButton
+            android:id="@+id/btn_Like2"
+            android:layout_width="52dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/like" />
+
+        <ImageButton
+            android:id="@+id/btn_pause_stop"
+            android:layout_width="50dp"
+            android:layout_height="49dp"
+
+            android:layout_marginLeft="13dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/btn_Like2"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitXY"
+            android:src="@drawable/pause_foreground" />
+
+        <TextView
+            android:id="@+id/artist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/Song_NAME"
+            android:layout_weight="2"
+            android:adjustViewBounds="true"
+            android:gravity="center"
+            android:text="Artist Name "
+            android:textColor="#9EA2A2" />
+
+        <TextView
+            android:id="@+id/Song_NAME"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/music_image2"
+            android:layout_marginLeft="14dp"
+            android:text="Song name"
+            android:textColor="#FFFFFF" />
+
+
+    </RelativeLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -21,5 +105,7 @@
         app:itemIconTint="#FFFFFF"
         app:itemTextColor="#E7E7E7"
         app:menu="@menu/bottom_nav" />
+
+
 
 </RelativeLayout>

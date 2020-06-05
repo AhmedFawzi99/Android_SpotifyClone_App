@@ -16,7 +16,13 @@ import com.google.android.material.tabs.TabLayout;
 public class LibraryFragment extends Fragment {
 
     @Nullable
+    /**
+     * the Toolbar that contains (Music)
+     */
     Toolbar toolbar;
+    /**
+     * the TabLayout that contains (Playlist, Artists, Album)
+     */
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
@@ -29,6 +35,9 @@ public class LibraryFragment extends Fragment {
         tabLayout=(TabLayout)s.findViewById(R.id.tablayout);
         viewPager=(ViewPager)s.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
+        /**
+         * adding fragments and their titles
+         */
         viewPagerAdapter.addfragments(new PlaylistFragment(),"Playlist");
         viewPagerAdapter.addfragments(new ArtistFragment(),"Artist");
         viewPagerAdapter.addfragments(new AlbumFragment(),"Album");

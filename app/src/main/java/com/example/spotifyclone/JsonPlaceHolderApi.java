@@ -13,8 +13,18 @@ import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface JsonPlaceHolderApi {
+    @GET("home")
+    Call<HomeBodyResponse> getPlaylistsByCategory();
+    @GET("home")
+    Call<HomeBodyResponse> getrecentlyplayed();
+
+    @GET("Category")
+    Call<Category> getplaylistsdetails(@Query("id") String ID);
+    @GET("Category")
+    Call<Category> getalbumsdetails(@Query("ID") String ID);
 
     @GET("posts")
     Call<List<post>> getPosts();

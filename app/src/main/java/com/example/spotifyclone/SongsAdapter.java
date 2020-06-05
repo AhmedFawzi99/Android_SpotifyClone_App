@@ -21,6 +21,9 @@ public class SongsAdapter extends ArrayAdapter<Tracks> {
     }
     @NonNull
     @Override
+    /**
+     * to fill the ListView (names and images ) of the songs (Tracks) in the Each playlist page
+     */
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItemView=convertView;
 

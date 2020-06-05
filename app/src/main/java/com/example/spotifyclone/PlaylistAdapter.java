@@ -19,7 +19,9 @@ public class PlaylistAdapter extends ArrayAdapter<RowItem> {
     public PlaylistAdapter(@NonNull Context context, @NonNull ArrayList<RowItem> rowItems) {
         super(context, 0, rowItems);
     }
-
+    /**
+     * to fill the listview (names and images ) of the playlist (rowItems) in the playlist page
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -31,7 +33,7 @@ public class PlaylistAdapter extends ArrayAdapter<RowItem> {
         TextView name =(TextView) listItemView.findViewById(R.id.name);
         name.setText(rowItem.getName());
         ImageView image =(ImageView) listItemView.findViewById(R.id.image);
-        image.setImageResource(Integer.parseInt(rowItem.getImageid()));
+        image.setImageResource(Integer.parseInt(rowItem.getImage()));
 
         return listItemView;
     }

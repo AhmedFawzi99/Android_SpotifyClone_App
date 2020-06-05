@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+/**
+ * fragment which is going to appear when the user wants to add a bew playlist
+ */
 
 public class FloatingFragment extends DialogFragment implements View.OnClickListener {
     static FloatingFragment newInstance() {
@@ -40,7 +43,10 @@ public class FloatingFragment extends DialogFragment implements View.OnClickList
         return view;
     }
 
-
+    /**
+     * determining the response of the user selection
+     * @param view
+     */
     @Override
     public void onClick(View view) {
         {

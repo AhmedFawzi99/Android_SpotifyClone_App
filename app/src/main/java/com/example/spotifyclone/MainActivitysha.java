@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,7 +30,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivitysha extends AppCompatActivity {
+    /**
+     * ArrayList for Tracks that received from the server
+     */
     public ArrayList<Tracks> Songs= new ArrayList<Tracks>();
+    /**
+     * ArrayList for Playlists that received from the server
+     */
     ArrayList<RowItem> Rowitems=new ArrayList<RowItem>();
     private TextView textViewResult;
     public String sName,aName,pName,hName,iURL,mURL;
@@ -104,10 +111,23 @@ public class MainActivitysha extends AppCompatActivity {
         builder.show(getSupportFragmentManager(),"tag");
 
     }
+    /**
+     * JsonPlaceHolderApi that is used for accessing the requests in the interface
+     */
     private  JsonPlaceHolderApi jsonPlaceHolderApi;
+
     Toolbar toolbar;
+    /**
+     * TabLayout used in library
+     */
     TabLayout tabLayout;
+    /**
+     * ViewPager is used in library
+     */
     ViewPager viewPager;
+    /**
+     * ViewPagerAdapter is used in library
+     */
     ViewPagerAdapter viewPagerAdapter;
     @Override
 
@@ -125,20 +145,30 @@ public class MainActivitysha extends AppCompatActivity {
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         gettrackss();
+        SeekBar seekBar=findViewById(R.id.song_progress2);
+        seekBar.getThumb().mutate().setAlpha(0);
 
     }
     public  ArrayList<RowItem> getplaylists()
     {
 
         Call <ArrayList<RowItem>> call = jsonPlaceHolderApi.getplaylists();
+
         call.enqueue(new Callback<ArrayList<RowItem>>() {
+            /**
+             * will be called on response to the request
+             * @param call came from the request getplaylists
+             * @param response is the response of the request
+             */
             @Override
             public void onResponse(Call<ArrayList<RowItem>> call, Response<ArrayList<RowItem>> response) {
                 if (!response.isSuccessful()) {
                     return;
 
                 }
-
+                /**
+                 * ArrayList of the playlists received from the server
+                 */
                 ArrayList<RowItem> rowItems = response.body();
                 int i ;
                 for (RowItem rowItem :rowItems)
@@ -146,7 +176,7 @@ public class MainActivitysha extends AppCompatActivity {
                     String id=rowItem.getId();
                     String name=rowItem.getName();
                     String type=rowItem.getType();
-                    String imageid=rowItem.getImageid();
+                    String imageid=rowItem.getImage();
                     String description=rowItem.getDescription();
                     Rowitems.add(new RowItem(name,id));
 
@@ -158,7 +188,11 @@ public class MainActivitysha extends AppCompatActivity {
 
             }
 
-
+            /**
+             * on Failure of the request this function will be called
+             * @param call
+             * @param t
+             */
 
             @Override
             public void onFailure(Call<ArrayList<RowItem>> call, Throwable t) {
@@ -167,6 +201,10 @@ public class MainActivitysha extends AppCompatActivity {
         });
         return Rowitems;
     }
+    /**
+     * BottomNavigationView that appears in the bottom of the screen that contains home , library, Premium, Search
+     * it will detect the selected fragment and will open it
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
