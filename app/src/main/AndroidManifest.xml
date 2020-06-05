@@ -15,11 +15,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MorePage"></activity>
         <activity android:name=".firstPage">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".Login" />
@@ -28,6 +28,7 @@
         <activity android:name=".Gender" />
         <activity android:name=".Name" />
         <activity android:name=".facebook"/>
+
         <activity
             android:name=".Search"
             android:parentActivityName=".MainActivitysha"/>
@@ -58,11 +59,11 @@
 
         <activity android:name=".MainActivitysha"
             android:launchMode="singleInstance">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".MusicActivity"

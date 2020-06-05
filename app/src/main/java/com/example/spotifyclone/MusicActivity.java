@@ -1,12 +1,16 @@
 package com.example.spotifyclone;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -72,12 +76,16 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     public int flag=1;
     private ImageButton btn_share;
     private ImageButton btn_playerdown;
+    private ImageButton volumebut;
+    private AudioManager audiomanager;
+    private SeekBar volume;
     private TextView btn_share2;
     private ImageButton btn_share3;
     private ImageButton next;
     private ImageButton prev;
     public int likeToggle;
     public ImageButton btn_like;
+    public int addcount=0;
     public String imageUrl;
     public String musicUrl;
     private int likeDrawable=R.drawable.baseline_favorite_24;
@@ -113,6 +121,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         return instance;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -132,6 +141,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         btn_share=findViewById(R.id.btn_share);
         btn_share2=findViewById(R.id.btn_share2);
         btn_share3=findViewById(R.id.btn_share3);
+        volume=findViewById(R.id.volume);
+        volumebut=findViewById(R.id.volumebut);
+        volumeinit();
         btn_more= findViewById(R.id.btn_more);
         parent_view=findViewById(R.id.parent_view);
         btn_like=findViewById(R.id.btn_Like);
@@ -198,7 +210,45 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             }
         });
 
+        volumebut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                volume.setVisibility(View.VISIBLE);
+
+            }
+        });
+        volume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("ResourceAsColor")
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    audiomanager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+                    if(progress==volume.getMax()){
+                        volumebut.setImageResource(R.drawable.outline_volume_up_24);
+                    }
+                    else if (progress==volume.getMin()){
+                        volumebut.setImageResource(R.drawable.outline_volume_off_24);
+                    }
+                    else{
+                        volumebut.setImageResource(R.drawable.volumemed);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                volume.setVisibility(View.GONE);
+            }
+        });
 
 
     }
@@ -217,7 +267,23 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     }
 
 
-
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public void volumeinit(){
+        volume.setVisibility(View.GONE);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        audiomanager=(AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        volume.setMax(audiomanager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        volume.setProgress(audiomanager.getStreamVolume(AudioManager.STREAM_MUSIC));
+        if (audiomanager.getStreamVolume(AudioManager.STREAM_MUSIC)==audiomanager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)){
+            volumebut.setImageResource(R.drawable.outline_volume_up_24);
+        }
+        else if (audiomanager.getStreamVolume(AudioManager.STREAM_MUSIC)==audiomanager.getStreamMinVolume(AudioManager.STREAM_MUSIC)){
+            volumebut.setImageResource(R.drawable.outline_volume_off_24);
+        }
+        else {
+            volumebut.setImageResource(R.drawable.volumemed);
+        }
+    }
 
 
     public void setMusicPlayerComponents( int position, String sName, String aName, String pName, String hName, final String iURL, final String mURL, boolean isliked){
@@ -347,11 +413,20 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     }
     public void next()
     {
+        addcount=addcount+1;
+        if(addcount==6)
+        {
+            startActivity(new Intent(MusicActivity.this,Pop.class));
+            addcount=0;
+        }
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancelAll();
         media_player.reset();
         song_index=song_index+1;
         playlist.check();
+        if(song_index>EachPlaylist.Songs.size()-1){
+            song_index=0;
+        }
         Tracks track= playlist.getSONG(song_index);
         setMusicPlayerComponents(song_index,track.getName(),"salmaaa","Playing from Playlist","salmaaaaa",track.getImageid(),track.getURL(),track.getIsliked());
         pauseplayDrawable=R.drawable.pause;
@@ -360,11 +435,20 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
     public void prev()
     {
+        addcount=addcount+1;
+        if(addcount==6)
+        {
+            startActivity(new Intent(MusicActivity.this,Pop.class));
+            addcount=0;
+        }
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancelAll();
         media_player.reset();
         song_index=song_index-1;
         playlist.check();
+        if(song_index<0){
+            song_index=EachPlaylist.Songs.size()-1;
+        }
         Tracks track= playlist.getSONG(song_index);
         setMusicPlayerComponents(song_index,track.getName(),"salmaaa","Playing from Playlist","salmaaaaa",track.getImageid(),track.getURL(),track.getIsliked());
         pauseplayDrawable=R.drawable.pause;

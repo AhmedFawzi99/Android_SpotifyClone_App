@@ -58,6 +58,9 @@ public class MainActivitysha extends AppCompatActivity {
 
 
 
+
+
+
     public ArrayList<Tracks> gettrackss()
     {
 
@@ -280,6 +283,10 @@ public class MainActivitysha extends AppCompatActivity {
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancelAll();
         super.onDestroy();
+    }
+    @Override
+    public void onBackPressed() {
+            return;
     }
 
 }

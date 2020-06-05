@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -25,7 +26,7 @@ public class TimerClass extends BottomSheetDialogFragment {
     private TextView turnoff2; private LinearLayout turnoff1;
     private LinearLayout endOF;
     public static int check=0;
-
+    private RelativeLayout layoutti;
     private TextView timer3;
     private static CountDownTimer mCountDownTimer;
     private Handler mHandler = new Handler();
@@ -53,6 +54,7 @@ public class TimerClass extends BottomSheetDialogFragment {
         turnoff1=t.findViewById(R.id.turnoff1);
         turnoff2=t.findViewById(R.id.turnoff2);
         endOF=t.findViewById(R.id.endOF);
+        layoutti=t.findViewById(R.id.timerpage);
 
         if(check==0){
             turnoff1.setVisibility(View.GONE);
@@ -61,7 +63,7 @@ public class TimerClass extends BottomSheetDialogFragment {
             turnoff1.setVisibility(View.VISIBLE);
         }
 
-//        timer3=t.findViewById(R.id.timer3);
+
 
         five1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,16 +75,7 @@ public class TimerClass extends BottomSheetDialogFragment {
                 dismiss();
             }
         });
-//        five2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                stopTimer(300000);
-//                mTimeLeftInMillis=300000;
-//                startTimer();
-//                check=1;
-//                dismiss();
-//            }
-//        });
+
         ten1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,16 +87,7 @@ public class TimerClass extends BottomSheetDialogFragment {
 
             }
         });
-//        ten2.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                stopTimer(600000);
-//                mTimeLeftInMillis=600000;
-//                startTimer();
-//                dismiss();
-//            }
-//        });
+
         fiften1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,16 +98,7 @@ public class TimerClass extends BottomSheetDialogFragment {
                 dismiss();
             }
         });
-//        fiften2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                stopTimer(900000);
-//                mTimeLeftInMillis=900000;
-//                startTimer();
-//
-//                dismiss();
-//            }
-//        });
+
         thirty1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,15 +109,7 @@ public class TimerClass extends BottomSheetDialogFragment {
                 dismiss();
             }
         });
-//        thirty2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                stopTimer(1800000);
-//                mTimeLeftInMillis=1800000;
-//                startTimer();
-//                dismiss();
-//            }
-//        });
+
         forty1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,16 +120,7 @@ public class TimerClass extends BottomSheetDialogFragment {
                 dismiss();
             }
         });
-//        forty2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                stopTimer(2400000);
-//                mTimeLeftInMillis=2400000;
-//                startTimer();
-//
-//                dismiss();
-//            }
-//        });
+
         hour1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,15 +131,7 @@ public class TimerClass extends BottomSheetDialogFragment {
                 dismiss();
             }
         });
-//        hour2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                stopTimer(3600000);
-//                mTimeLeftInMillis=3600000;
-//                startTimer();
-//                dismiss();
-//            }
-//        });
+
         turnoff1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,8 +152,13 @@ public class TimerClass extends BottomSheetDialogFragment {
                 check=1;
                 dismiss();
 
+            }
+        });
 
-
+        layoutti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
             }
         });
 

@@ -268,13 +268,22 @@
                     >
 
                     <ImageButton
-                        android:id="@+id/btn_library"
+                        android:id="@+id/volumebut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/outline_volume_up_24"
-                        android:tint="@android:color/white" />
+                         />
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:id="@+id/volume"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:progress="0"
+                        android:progressBackgroundTint="#DCDCDC"
+                        android:progressTint="#FFFFFF"
+                        android:thumbTint="#FFFFFF" />
 
                     <View
                         android:layout_width="0dp"

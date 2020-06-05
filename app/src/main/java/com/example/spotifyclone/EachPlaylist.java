@@ -24,7 +24,7 @@ public class EachPlaylist extends Fragment
     private  String image2;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private ImageButton next;
-    private  static ArrayList<Tracks> Songs= new ArrayList<Tracks>();
+    public  static ArrayList<Tracks> Songs= new ArrayList<Tracks>();
 //    private  ArrayList<Tracks> Songs2= new ArrayList<Tracks>();
 
     private Tracks s1;

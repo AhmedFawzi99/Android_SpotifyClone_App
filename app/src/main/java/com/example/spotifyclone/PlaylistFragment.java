@@ -100,8 +100,6 @@ public class PlaylistFragment extends Fragment implements OnClickListener{
                 DialogFragment builder2 = FloatingFragment.newInstance();
                 builder2.show(getFragmentManager(), "tag");
 
-
-
                 break;
         }
 

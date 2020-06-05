@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:id="@+id/searchPage"
+    android:id="@+id/searchhPage"
     android:padding="20dp"
     android:layout_width="match_parent"
     android:background="@drawable/angled_gradient_black"
