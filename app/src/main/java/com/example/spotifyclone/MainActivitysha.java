@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -55,6 +56,15 @@ public class MainActivitysha extends AppCompatActivity {
     public static ImageButton barlike;
     public static ImageButton barpausestop;
     public static SeekBar song_progress2;
+    public static int barval;
+
+    final Fragment fragment1 = new HomeFragment();
+    final Fragment fragment3 = new LibraryFragment();
+    final Fragment fragment4 = new PermiumFragment();
+    final Fragment fragment2 = new SearchFragment();
+
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragment1;
 
 
 
@@ -64,7 +74,7 @@ public class MainActivitysha extends AppCompatActivity {
     public ArrayList<Tracks> gettrackss()
     {
 
-        Call <ArrayList<Tracks>> call =jsonPlaceHolderApi.gettracks();
+        Call <ArrayList<Tracks>> call = RetrofitSingleton.getInstance().getApi().gettracks();
         call.enqueue(new Callback<ArrayList<Tracks>>() {
 
             @Override
@@ -155,15 +165,15 @@ public class MainActivitysha extends AppCompatActivity {
         Log.d(Profile_DATA.Gender, "Gender: ");
         Log.d(Profile_DATA.Date, "Date: ");
         Log.d(Profile_DATA.Type, "Type: ");
+        Log.d(Profile_DATA.ID, "ID: ");
 
 
-        Retrofit retrofit =new Retrofit.Builder()
-                .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/").addConverterFactory(GsonConverterFactory.create())
-                .build();
-        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
         gettrackss();
-        selectedFragment= new HomeFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).addToBackStack(null).commit();
+        fm.beginTransaction().add(R.id.fragment_container, fragment4, "4").hide(fragment4).commit();
+        fm.beginTransaction().add(R.id.fragment_container, fragment3, "3").hide(fragment3).commit();
+        fm.beginTransaction().add(R.id.fragment_container, fragment2, "2").hide(fragment2).commit();
+        fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
         barartistname=findViewById(R.id.barartistname);
         barsonfname=findViewById(R.id.barsongname);
         barimage=findViewById(R.id.barimage);
@@ -182,18 +192,23 @@ public class MainActivitysha extends AppCompatActivity {
         barcontrol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activityIntent = new Intent(MainActivitysha.this,MusicActivity.class);
-                activityIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(activityIntent);
-                overridePendingTransition(R.anim.slide_up, R.anim.hold);
+                if(barval==0){
+                    return;
+                }
+                else {
+                    Intent activityIntent = new Intent(MainActivitysha.this, MusicActivity.class);
+                    activityIntent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(activityIntent);
+                    overridePendingTransition(R.anim.slide_up, R.anim.hold);
+                }
             }
         });
 
         barlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            MusicActivity main= MusicActivity.getInstance();
-            main.buttonLikeAction();
+                MusicActivity main= MusicActivity.getInstance();
+                main.buttonLikeAction();
             }
         });
         barpausestop.setOnClickListener(new View.OnClickListener() {
@@ -203,14 +218,20 @@ public class MainActivitysha extends AppCompatActivity {
                 main.buttonPlayerAction();
             }
         });
-
+        if(barval==0){
+            barimage.setImageResource(R.drawable.spotify);
+            barsonfname.setText("Welcome Back to Maestro");
+            barartistname.setText("!!");
+            barlike.setVisibility(View.GONE);
+            barpausestop.setVisibility(View.GONE);
+        }
 
 
     }
     public  ArrayList<RowItem> getplaylists()
     {
 
-        Call <ArrayList<RowItem>> call = jsonPlaceHolderApi.getplaylists();
+        Call <ArrayList<RowItem>> call =  RetrofitSingleton.getInstance().getApi().getplaylists();
         call.enqueue(new Callback<ArrayList<RowItem>>() {
             @Override
             public void onResponse(Call<ArrayList<RowItem>> call, Response<ArrayList<RowItem>> response) {
@@ -226,7 +247,7 @@ public class MainActivitysha extends AppCompatActivity {
                     String id=rowItem.getId();
                     String name=rowItem.getName();
                     String type=rowItem.getType();
-                    String imageid=rowItem.getImageid();
+                    String imageid=rowItem.getImage();
                     String description=rowItem.getDescription();
                     Rowitems.add(new RowItem(name,id));
 
@@ -251,29 +272,27 @@ public class MainActivitysha extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-            switch(menuItem.getItemId())
-            {
+            switch (menuItem.getItemId()) {
                 case R.id.home_item:
-                    selectedFragment= new HomeFragment();
+                    fm.beginTransaction().hide(active).show(fragment1).commit();
+                    active = fragment1;
+                    return true;
 
-                    break;
                 case R.id.search_item:
-                    selectedFragment=new SearchFragment();
-                    break;
+                    fm.beginTransaction().hide(active).show(fragment2).commit();
+                    active = fragment2;
+                    return true;
+
                 case R.id.Library_item:
-
-
-                    selectedFragment=new LibraryFragment();
-
-                    break;
+                    fm.beginTransaction().hide(active).show(fragment3).commit();
+                    active = fragment3;
+                    return true;
                 case R.id.Premium_item:
-                    selectedFragment=new PermiumFragment();
-                    break;
-
-
+                    fm.beginTransaction().hide(active).show(fragment4).commit();
+                    active = fragment4;
+                    return true;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).addToBackStack(null).commit();
-            return true;
+            return false;
         }
 
     };
@@ -286,7 +305,7 @@ public class MainActivitysha extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-            return;
+        return;
     }
 
 }

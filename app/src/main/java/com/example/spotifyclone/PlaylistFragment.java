@@ -2,11 +2,13 @@ package com.example.spotifyclone;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,9 +27,16 @@ public class PlaylistFragment extends Fragment implements OnClickListener{
 
 
 
-
+    /**
+     * array of playlists
+     */
+    private static final String TAG = "MyActivity";
     private ArrayList<RowItem> Rowitems=new ArrayList<RowItem>();
     private  int index=0;
+    public PlaylistFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,19 +47,23 @@ public class PlaylistFragment extends Fragment implements OnClickListener{
         // Rowitems=main.Rowitems;
         addPlaylist();
         TextView textView1= (TextView) s.findViewById(R.id.createplaylist);
-        FloatingActionButton button=(FloatingActionButton) s.findViewById(R.id.floatingActionButton202);
+        ImageView button=(ImageView) s.findViewById(R.id.floatingActionButton202);
         textView1.setOnClickListener(this);
         button.setOnClickListener(this);
         PlaylistAdapter adapter =new PlaylistAdapter(this.getContext(),Rowitems);
         ListView listView=(ListView) s.findViewById(R.id.listview);
         listView.setAdapter(adapter);
+        /**
+         * to detect which playlist selected and open the page that shows its songs
+         * @see EachPlaylist
+         */
         listView.setClickable(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 RowItem r1 = Rowitems.get(position);
-                Fragment selectedFragment=new EachPlaylist(r1.getName(),r1.getImageid());
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+                Fragment selectedFragment=new EachPlaylist(r1.getName(),r1.getImage(),r1.getId());
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).addToBackStack(null).commit();
 
             }
         });
@@ -63,6 +76,9 @@ public class PlaylistFragment extends Fragment implements OnClickListener{
         // Inflate the layout for this fragment
         return s;
     }
+    /**
+     * filling the ArrayList with values
+     */
     public void addPlaylist()
     {
         ArrayList<Tracks> songs= new ArrayList<Tracks>();
@@ -87,19 +103,24 @@ public class PlaylistFragment extends Fragment implements OnClickListener{
         RowItem r2 = Rowitems.get(2);
         ////r2.setSongs(songs);
     }
+    /**
+     * opening the dialogFragment in case the user clicked on the floating button or "Create playlist"
+     * @see DialogFragment
+     * @param v
+     */
     public void onClick(View v)
     {
         int id = v.getId();
         switch (id) {
             case R.id.createplaylist:
+
                 DialogFragment builder = FloatingFragment.newInstance();
                 builder.show(getFragmentManager(), "tag");
-
                 break;
             case R.id.floatingActionButton202:
+                Log.i(TAG, "MyClass");
                 DialogFragment builder2 = FloatingFragment.newInstance();
                 builder2.show(getFragmentManager(), "tag");
-
                 break;
         }
 

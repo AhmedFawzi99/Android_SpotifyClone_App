@@ -3,11 +3,29 @@ package com.example.spotifyclone;
 import java.util.ArrayList;
 
 public class RowItem {
-    private String imageid;
+    /**
+     * each playlist contains of an image
+     */
+    private String image;
+    /**
+     * each playlist contains of a name
+     */
     private String name;
+    /**
+     * each playlist contains of an id
+     */
     private String id;
+    /**
+     * each playlist contains of a description
+     */
     private String description;
+    /**
+     * each playlist contains of a type
+     */
     private String type;
+    /**
+     * each playlist contains of an array of songs
+     */
     private ArrayList<Tracks> songs;
 
     public String getId() {
@@ -45,7 +63,7 @@ public class RowItem {
     public RowItem(String Name, String Imageid)
     {
         this.name=Name;
-        this.imageid=Imageid;
+        this.image =Imageid;
     }
     public String getName()
     {
@@ -53,16 +71,16 @@ public class RowItem {
         return name;
     }
 
-    public void setImageid(String imageid) {
-        this.imageid = imageid;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getImageid()
+    public String getImage()
     {
-        return imageid;
+        return image;
     }
 }

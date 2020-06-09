@@ -31,7 +31,7 @@ public class PlaylistAdapter extends ArrayAdapter<RowItem> {
         TextView name =(TextView) listItemView.findViewById(R.id.name);
         name.setText(rowItem.getName());
         ImageView image =(ImageView) listItemView.findViewById(R.id.image);
-        image.setImageResource(Integer.parseInt(rowItem.getImageid()));
+        image.setImageResource(Integer.parseInt(rowItem.getImage()));
 
         return listItemView;
     }

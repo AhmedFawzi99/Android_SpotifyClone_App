@@ -24,11 +24,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     Button bNext;
     EditText etNewEmail;
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-            .addConverterFactory(GsonConverterFactory.create());
-    Retrofit retrofit = builder.build();
-    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
 
     @Override
@@ -42,9 +37,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         bNext.setOnClickListener(this);
         etNewEmail.addTextChangedListener(registerTextWatcher);
 
-        // Adding back button
-//        this.getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private TextWatcher registerTextWatcher = new TextWatcher() {
@@ -55,33 +47,21 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            String passwordInput = etNewPass.getText().toString().trim();
-//
-//            bNext2.setEnabled(!passwordInput.isEmpty());
 
             if (etNewEmail.getText().toString().trim().contains("@") && etNewEmail.getText().toString().trim().endsWith(".com")) {
                 bNext.setEnabled(true);
             }
 
         }
-
         @Override
         public void afterTextChanged(Editable s) {
 
         }
     };
-    protected void onStart() {
-        super.onStart();
-        if(SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent= new Intent(this, Register.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }
-    }
+
     private void userSignUp() {
         String email = etNewEmail.getText().toString().trim();
         Profile_DATA.mail=email;
-
 
     }
 
@@ -100,14 +80,4 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if(id==android.R.id.home) {
-//            this.finish();
-//
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

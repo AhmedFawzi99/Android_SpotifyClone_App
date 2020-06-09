@@ -25,10 +25,10 @@ public class LibraryFragment extends Fragment {
         View s;
 
         s=inflater.inflate(R.layout.fragment_library,container,false);
-
+        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         tabLayout=(TabLayout)s.findViewById(R.id.tablayout);
         viewPager=(ViewPager)s.findViewById(R.id.viewPager);
-        viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
+
         viewPagerAdapter.addfragments(new PlaylistFragment(),"Playlist");
         viewPagerAdapter.addfragments(new ArtistFragment(),"Artist");
         viewPagerAdapter.addfragments(new AlbumFragment(),"Album");

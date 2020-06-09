@@ -16,6 +16,18 @@ import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface JsonPlaceHolderApi {
+    @GET("home")
+    Call<HomeBodyResponse> getPlaylistsByCategory();
+    @GET("home")
+    Call<HomeBodyResponse> getrecentlyplayed();
+
+    @GET("Category")
+    Call<Category> getplaylistsdetails(@Query("id") String ID);
+    @GET("Category")
+    Call<Category> getalbumsdetails(@Query("ID") String ID);
+
+    @GET("login")
+    Call<List<LoginResponse>> userLogin();
 
     @GET("posts")
     Call<List<post>> getPosts();
@@ -29,33 +41,40 @@ public interface JsonPlaceHolderApi {
     @GET ("tracks")
     Call<ArrayList<Tracks>> gettracks();
 
+    @GET("search")
+    Call<List<SearchResponse>> searchList();
 
-    @PUT("likedislike")
-    Call<getmessage> putlike(@Header("Authorization") String token, @Body likeDislike a);
+    @GET("get_growth_info")
+    Call<List<Growth>> getGrowthInfo();
 
-
-    @HTTP(method = "DELETE", path = "likedislike", hasBody = true)
-    Call<getmessage> deletelike(@Header("Authorization") String token,@Body likeDislike a);
-
-    @FormUrlEncoded
-    @POST("signup")
-    Call<ResponseBody> createUser(
-            @Field("email") String email,
-            @Field("password") String password,
-            @Field("name") String name,
-            @Field("birthdate") String birthDate,
-            @Field("gender") String gender
-    );
-
-
-
-    @GET("login")
-    Call<List<LoginResponse>> userLogin();
+    @GET("Playlist")
+    Call<List<PlaylistResponse>> getplaylist(@Query("userassociated") String ID);
 
     @GET("ArtistD")
     Call<List<ArtistResponse>> artistdata(@Query("ID") String ID);
 
 
+    @PUT("likedislike")
+    Call<likeDislike> putlike(@Header("Authorization") String token, @Body likeDislike a);
+
+
+    @HTTP(method = "DELETE", path = "likedislike", hasBody = true)
+    Call<getmessage> deletelike(@Header("Authorization") String token,@Body likeDislike a);
+
+
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<SignUP> createuser(
+             @Field("email") String Email,
+             @Field("password") String Password,
+             @Field("birthDate") String Date,
+             @Field("gender") String Gender,
+             @Field("name") String Name,
+             @Field("usertype") String Type,
+             @Field("ID") String ID
+
+    );
 
 
 }

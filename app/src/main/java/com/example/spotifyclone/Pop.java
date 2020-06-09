@@ -5,12 +5,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-
-import androidx.fragment.app.Fragment;
 
 public class Pop extends Activity {
     public Button subscribeadd;

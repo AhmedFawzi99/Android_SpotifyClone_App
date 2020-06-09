@@ -1,16 +1,13 @@
 package com.example.spotifyclone;
 
-import android.annotation.SuppressLint;
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
@@ -30,27 +27,17 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.palette.graphics.Palette;
-
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.squareup.picasso.Picasso;
-
 import java.io.IOException;
-import java.util.ArrayList;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.spotifyclone.App.CHANNEL_1_ID;
 import static com.example.spotifyclone.App.CHANNEL_2_ID;
 
 public class MusicActivity<pubic> extends AppCompatActivity {
@@ -94,7 +81,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     private MediaSessionCompat mediaSession;
     private static CountDownTimer addtimer;
     public static int maddtimer=0;
-    EachPlaylist playlist=new EachPlaylist("kkkk","aaa");
+    EachPlaylist playlist=new EachPlaylist("kkkk","aaa","aa");
 
 
 
@@ -121,7 +108,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         return instance;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.P)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -154,6 +141,10 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         music_image=findViewById(R.id.music_image);
         notificationManager = NotificationManagerCompat.from(this);
         mediaSession = new MediaSessionCompat(this, "tag");
+        MainActivitysha.barval=1;
+        MainActivitysha.barimage.setVisibility(View.VISIBLE);
+        MainActivitysha.barpausestop.setVisibility(View.VISIBLE);
+        MainActivitysha.barlike.setVisibility(View.VISIBLE);
 
         final String sender=this.getIntent().getExtras().getString("SENDER_KEY");
 
@@ -219,8 +210,6 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             }
         });
         volume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @SuppressLint("ResourceAsColor")
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (fromUser) {
@@ -228,7 +217,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
                     if(progress==volume.getMax()){
                         volumebut.setImageResource(R.drawable.outline_volume_up_24);
                     }
-                    else if (progress==volume.getMin()){
+                    else if (progress==0){
                         volumebut.setImageResource(R.drawable.outline_volume_off_24);
                     }
                     else{
@@ -267,28 +256,21 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.P)
+
     public void volumeinit(){
         volume.setVisibility(View.GONE);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         audiomanager=(AudioManager) getSystemService(Context.AUDIO_SERVICE);
         volume.setMax(audiomanager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
         volume.setProgress(audiomanager.getStreamVolume(AudioManager.STREAM_MUSIC));
-        if (audiomanager.getStreamVolume(AudioManager.STREAM_MUSIC)==audiomanager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)){
-            volumebut.setImageResource(R.drawable.outline_volume_up_24);
-        }
-        else if (audiomanager.getStreamVolume(AudioManager.STREAM_MUSIC)==audiomanager.getStreamMinVolume(AudioManager.STREAM_MUSIC)){
-            volumebut.setImageResource(R.drawable.outline_volume_off_24);
-        }
-        else {
-            volumebut.setImageResource(R.drawable.volumemed);
-        }
     }
 
 
-    public void setMusicPlayerComponents( int position, String sName, String aName, String pName, String hName, final String iURL, final String mURL, boolean isliked){
+    public void setMusicPlayerComponents( int position, String sName, String aName, String pName, String hName, final String iURL, final String mURL, boolean isliked,String id){
 
+        sID=id;
         btn_pause_stop.setImageResource(R.drawable.baseline_pause_circle_filled_24);
+        MainActivitysha.barpausestop.setImageResource(R.drawable.barpause);
         song_index=position;
         name_song.setText(sName);
         MainActivitysha.barsonfname.setText(sName);
@@ -428,7 +410,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             song_index=0;
         }
         Tracks track= playlist.getSONG(song_index);
-        setMusicPlayerComponents(song_index,track.getName(),"salmaaa","Playing from Playlist","salmaaaaa",track.getImageid(),track.getURL(),track.getIsliked());
+        setMusicPlayerComponents(song_index,track.getName(),"salmaaa","Playing from Playlist","salmaaaaa",track.getImageid(),track.getURL(),track.getIsliked(),track.getId());
         pauseplayDrawable=R.drawable.pause;
         sendOnChannel2(parent_view,pauseplayDrawable,likeDrawable);
     }
@@ -450,7 +432,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             song_index=EachPlaylist.Songs.size()-1;
         }
         Tracks track= playlist.getSONG(song_index);
-        setMusicPlayerComponents(song_index,track.getName(),"salmaaa","Playing from Playlist","salmaaaaa",track.getImageid(),track.getURL(),track.getIsliked());
+        setMusicPlayerComponents(song_index,track.getName(),"salmaaa","Playing from Playlist","salmaaaaa",track.getImageid(),track.getURL(),track.getIsliked(),track.getId());
         pauseplayDrawable=R.drawable.pause;
         sendOnChannel2(parent_view,pauseplayDrawable,likeDrawable);
     }
@@ -480,8 +462,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         String artist = i.getStringExtra("Artist");
         int position =i.getIntExtra("pos",0);
         boolean isliked=i.getBooleanExtra("isliked",false);
-        setMusicPlayerComponents(position,name,artist,"Playing from Playlist",playlistnamee,imageid,url,isliked);
-        sID=id;
+        setMusicPlayerComponents(position,name,artist,"Playing from Playlist",playlistnamee,imageid,url,isliked,id);
     }
 
     public static Bitmap drawableToBitmap (Drawable drawable) {
@@ -631,36 +612,26 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
 
     public void putlike() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
-
 
         likeDislike likee=new likeDislike(sID);
-        Call<getmessage> likeee = jsonPlaceHolderApi.putlike("",likee);
+        Call<likeDislike> likeee =  RetrofitSingleton.getInstance().getApi().putlike("",likee);
 
-        likeee.enqueue(new Callback<getmessage>() {
+        likeee.enqueue(new Callback<likeDislike>() {
             @Override
-            public void onResponse(Call<getmessage> call, Response<getmessage> response) {
+            public void onResponse(Call<likeDislike> call, Response<likeDislike> response) {
                 if (!response.isSuccessful()) {
+                    Log.d("errrrrer", "onResponse: ");
                     return;
                 }
 
                 Log.d("update", "onResponse: ");
-//                getmessage message=response.body();
-//                String content = "";
-//                content += "Code:" + response.code()+"\n";
-//                content += "message: " + message.getMessage();
-//                textViewResult.setText(content);
+                likeDislike l=response.body();
+                Log.d(l.getId(), "onResponse: ");
 
             }
 
-
             @Override
-            public void onFailure(Call<getmessage> call, Throwable t) {
+            public void onFailure(Call<likeDislike> call, Throwable t) {
 //                textViewResult.setText(t.getMessage());
             }
         });
@@ -668,20 +639,21 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     }
 
     public void deletelike() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-        likeDislike likee=new likeDislike(sID);
-        Call<getmessage> likeee = jsonPlaceHolderApi.deletelike("",likee);
+
+
+        likeDislike likee=new likeDislike("7fmVIBMLYiXRtTFOlxv90i");
+        Call<getmessage> likeee =  RetrofitSingleton.getInstance().getApi().deletelike("",likee);
 
         likeee.enqueue(new Callback<getmessage>() {
             @Override
             public void onResponse(Call<getmessage> call, Response<getmessage> response) {
 //                textViewResult.setText("Code: " + response.code());
 
+                if (!response.isSuccessful()) {
+                    Log.d("errrrrer", "onResponse: ");
+                    return;
+                }
                 Log.d("delete", "onResponse: ");
 //                getmessage message=response.body();
 //                String content = "";
@@ -701,20 +673,20 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
     public void addPOP(final int a ){
 
-            addtimer = new CountDownTimer(a, 1000) {
+        addtimer = new CountDownTimer(a, 1000) {
 
-                @Override
-                public void onTick(long millisUntilFinished) {
+            @Override
+            public void onTick(long millisUntilFinished) {
 
-                }
+            }
 
-                @Override
-                public void onFinish() {
-                    startActivity(new Intent(MusicActivity.this,Pop.class));
-                    addPOP(a);
-                }
-            }.start();
-            maddtimer=1;
+            @Override
+            public void onFinish() {
+                startActivity(new Intent(MusicActivity.this,Pop.class));
+                addPOP(a);
+            }
+        }.start();
+        maddtimer=1;
 
 
     }
@@ -722,8 +694,6 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
 
 
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onDestroy(){
 
@@ -734,6 +704,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         mHandler.removeCallbacks(mUpdateTimeTask);
         mHandler.removeCallbacks(mUpdateSeekbar);
         media_player.release();
+
 
 
     }

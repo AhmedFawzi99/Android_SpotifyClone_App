@@ -87,14 +87,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             return;
         }
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
 
-        Call<List<LoginResponse>> call = jsonPlaceHolderApi.userLogin();
+
+        Call<List<LoginResponse>> call = RetrofitSingleton.getInstance().getApi().userLogin();
         call.enqueue(new Callback<List<LoginResponse>>() {
             @Override
             public void onResponse(Call<List<LoginResponse>> call, Response<List<LoginResponse>> response) {
@@ -121,7 +117,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             Profile_DATA.Type=log.getlUsertype();
 
                             Intent intent = new Intent(Login.this, MainActivitysha.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            Login.this.finish();
                             startActivity(intent);
                         }
                         else if(log.getlUsertype().equals("a")){

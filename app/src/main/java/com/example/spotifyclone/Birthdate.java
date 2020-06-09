@@ -29,12 +29,6 @@ public class Birthdate extends AppCompatActivity implements View.OnClickListener
     int month = cal.get(Calendar.MONTH);
     int day = cal.get(Calendar.DAY_OF_MONTH);
 
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-            .addConverterFactory(GsonConverterFactory.create());
-    Retrofit retrofit = builder.build();
-    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,11 +66,6 @@ public class Birthdate extends AppCompatActivity implements View.OnClickListener
                 }
 
                 break;
-
         }
     }
 }
-
-
-
-// tvw.setText("Selected Date: "+ picker.getDayOfMonth()+"/"+ (picker.getMonth() + 1)+"/"+picker.getYear());

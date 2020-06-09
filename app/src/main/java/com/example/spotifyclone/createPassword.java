@@ -24,11 +24,7 @@ public class createPassword extends AppCompatActivity implements View.OnClickLis
 
     private Button bNext2;
     private EditText etNewPass;
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-            .addConverterFactory(GsonConverterFactory.create());
-    Retrofit retrofit = builder.build();
-    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +38,6 @@ public class createPassword extends AppCompatActivity implements View.OnClickLis
 
         etNewPass.addTextChangedListener(passTextWatcher);
 
-        // Adding back button
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -88,21 +81,8 @@ public class createPassword extends AppCompatActivity implements View.OnClickLis
             case R.id.bNext2:
                 userSignUp();
 
-
-
                 break;
         }
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if(id==android.R.id.home) {
-//            this.finish();
-//
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }

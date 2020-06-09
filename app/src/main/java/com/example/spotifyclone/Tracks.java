@@ -11,7 +11,7 @@ public class Tracks {
     private boolean isliked;
 
 
-private ArrayList<Artist> artists;
+    private ArrayList<Artist> artists;
 
     public ArrayList<Artist> getArtists() {
         return artists;

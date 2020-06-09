@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class EachPlaylist extends Fragment
@@ -22,6 +24,7 @@ public class EachPlaylist extends Fragment
     private static EachPlaylist instance;
     private  String PlaylistName;
     private  String image2;
+
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private ImageButton next;
     public  static ArrayList<Tracks> Songs= new ArrayList<Tracks>();
@@ -29,7 +32,7 @@ public class EachPlaylist extends Fragment
 
     private Tracks s1;
 
-    public EachPlaylist(String playlistname, String image ) {
+    public EachPlaylist(String playlistname, String image , String id ) {
         PlaylistName=playlistname;
         image2=image;
     }
@@ -56,7 +59,9 @@ public class EachPlaylist extends Fragment
             listView.setClickable(true);
             adapter.notifyDataSetChanged();
             ImageView imagee=(ImageView) s.findViewById(R.id.image2);
-            imagee.setImageResource(Integer.parseInt(image2));
+            Picasso.with(getContext()).
+                    load(image2)
+                    .into(imagee);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -89,11 +94,6 @@ public class EachPlaylist extends Fragment
                     startActivityForResult(i,0);
                     getActivity().overridePendingTransition(R.anim.fade, R.anim.hold);
                     //activity.setMusicPlayerComponents(s1.getName(),PlaylistName,PlaylistName,s1.getImageid(),s1.getURL());
-
-
-
-
-
                 }
             });
 
