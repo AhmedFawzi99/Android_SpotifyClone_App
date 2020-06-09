@@ -21,6 +21,12 @@ public class LoggedIn extends AppCompatActivity implements View.OnClickListener{
 
         bLogout.setOnClickListener(this);
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Shared shared = new Shared(getApplicationContext());
+        shared.firstTime();
+    }
 
     @Override
     public void onClick(View v) {

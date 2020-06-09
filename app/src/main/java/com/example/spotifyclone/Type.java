@@ -2,6 +2,17 @@ package com.example.spotifyclone;
 
 public class Type {
     String type;
+<<<<<<< HEAD
+    PlaylistResponse rowitem;
+    Album album;
+ Track track;
+
+    public Track getTrack() {
+        return track;
+    }
+
+    public void setTrack(Track track) {
+=======
     RowItem rowitem;
     Album album;
  Tracks track;
@@ -11,6 +22,7 @@ public class Type {
     }
 
     public void setTrack(Tracks track) {
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         this.track = track;
     }
 
@@ -22,11 +34,19 @@ public class Type {
         this.type = type;
     }
 
+<<<<<<< HEAD
+    public PlaylistResponse getRowitem() {
+        return rowitem;
+    }
+
+    public void setRowitem(PlaylistResponse rowitem) {
+=======
     public RowItem getRowitem() {
         return rowitem;
     }
 
     public void setRowitem(RowItem rowitem) {
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         this.rowitem = rowitem;
     }
 

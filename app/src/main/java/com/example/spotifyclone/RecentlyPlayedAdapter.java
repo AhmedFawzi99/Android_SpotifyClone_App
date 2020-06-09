@@ -19,10 +19,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecentlyPlayedAdapter extends RecyclerView.Adapter<RecentlyPlayedAdapter.PlaylistsViewHolder2> {
 
 
+<<<<<<< HEAD
+    private List<PlaylistResponse> playlists=new ArrayList<>();
+    private Context context;
+
+    public RecentlyPlayedAdapter(Context context, List<PlaylistResponse> list) {
+=======
     private List<RowItem> playlists=new ArrayList<>();
     private Context context;
 
     public RecentlyPlayedAdapter(Context context, List<RowItem> list) {
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 
         this.playlists = list;
         this.context = context;
@@ -38,7 +45,11 @@ public class RecentlyPlayedAdapter extends RecyclerView.Adapter<RecentlyPlayedAd
 
     @Override
     public void onBindViewHolder(@NonNull PlaylistsViewHolder2 holder, int position) {
+<<<<<<< HEAD
+        PlaylistResponse playlist = playlists.get(position);
+=======
         RowItem playlist = playlists.get(position);
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 
         holder.textViewTitle.setText(playlist.getDescription());
 
@@ -46,7 +57,11 @@ public class RecentlyPlayedAdapter extends RecyclerView.Adapter<RecentlyPlayedAd
 
 // load images using picasso
         Picasso.with(context).
+<<<<<<< HEAD
+                load(playlist.getArtimg())
+=======
                 load(playlist.getImage())
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
                 .into(holder.imageViewMovie);
 
     }

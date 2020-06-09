@@ -28,9 +28,13 @@
         <activity android:name=".Gender" />
         <activity android:name=".Name" />
         <activity android:name=".facebook"/>
-        <activity android:name=".Search"/>
-        <activity android:name=".SearchPage"/>
+
+        <activity
+            android:name=".Search"
+            android:parentActivityName=".MainActivitysha"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".ArtistManagment"/>
+
 
 
 
@@ -53,6 +57,25 @@
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 
+<<<<<<< HEAD
+        <activity android:name=".MainActivitysha"
+            android:launchMode="singleInstance">
+<!--                        <intent-filter>-->
+<!--                            <action android:name="android.intent.action.MAIN" />-->
+
+<!--                            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                        </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".MusicActivity"
+            android:parentActivityName=".MainActivitysha"
+
+
+            >
+            <!--            <intent-filter>-->
+            <!--                <action android:name="android.intent.action.MAIN" />-->
+
+=======
         <activity android:name=".MainActivitysha">
 
             <intent-filter>
@@ -67,6 +90,7 @@
             <!--            <intent-filter>-->
             <!--                <action android:name="android.intent.action.MAIN" />-->
 
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
             <!--                <category android:name="android.intent.category.LAUNCHER" />-->
             <!--            </intent-filter>-->
         </activity>
@@ -77,7 +101,9 @@
             </intent-filter>
         </receiver>
 
-
+        <activity android:name=".Pop"
+            android:theme="@style/addspop">
+        </activity>
 
 
     </application

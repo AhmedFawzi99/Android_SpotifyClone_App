@@ -20,9 +20,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
-    Retrofit.Builder builder = new Retrofit.Builder()
+  /*  Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl("http://3.137.69.49:3000/user/")
             .addConverterFactory(GsonConverterFactory.create());
     Retrofit retrofit = builder.build();
@@ -88,13 +88,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        });
 
     }
+    // This is to keep the user logged in
+    @Override
     protected void onStart() {
         super.onStart();
-        if(SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent= new Intent(this, MainActivitysha.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }
+        Shared shared = new Shared(getApplicationContext());
+        shared.firstTime();
     }
     private void userSignUp() {
         String email = etEmail.getText().toString().trim();
@@ -143,5 +142,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, firstPage.class));
                 break;
         }
-    }
+    }*/
 }

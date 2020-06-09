@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+<<<<<<< HEAD
+import java.util.ArrayList;
+=======
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 import java.util.List;
 
 
@@ -62,18 +66,32 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.HomeVi
                 Type BLOCK= data.get(position).getBlocks().get(abc);
                 Toast.makeText(context,BLOCK.getType(), Toast.LENGTH_LONG).show();
                if(BLOCK.getType().equals("playlist")) {
+<<<<<<< HEAD
+                    String image = BLOCK.rowitem.getArtimg();
+                    String name = BLOCK.rowitem.getPlayname();
+                    String id=BLOCK.rowitem.getPlayid();
+                    Fragment selectedFragment=new EachPlaylist(name,image,id);
+                    fragmentmanager.beginTransaction().replace(R.id.fragment_container,selectedFragment).addToBackStack(null).commit();
+=======
                     String image = BLOCK.rowitem.getImage();
                     String name = BLOCK.rowitem.getName();
                     String id=BLOCK.rowitem.getId();
                     Fragment selectedFragment=new EachPlaylist(name,image,id);
                     fragmentmanager.beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
                 }
                 else if(BLOCK.getType().equals("album")) {
                     String image = BLOCK.getAlbum().getImage_id();
                     String name = BLOCK.getAlbum().getAlbum_name();
                     String id=BLOCK.getAlbum().getID();
+<<<<<<< HEAD
+                   ArrayList<Artist> artists=BLOCK.getAlbum().getArtists();
+                    Fragment selectedFragment=new Each_album(name,image,id,artists);
+                    fragmentmanager.beginTransaction().replace(R.id.fragment_container,selectedFragment).addToBackStack(null).commit();
+=======
                     Fragment selectedFragment=new Each_album(name,image,id);
                     fragmentmanager.beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
                 }
 
                 // if(dataList.get(abc).)

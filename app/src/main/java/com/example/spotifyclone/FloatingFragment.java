@@ -1,12 +1,15 @@
 package com.example.spotifyclone;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,11 +22,16 @@ public class FloatingFragment extends DialogFragment implements View.OnClickList
     static FloatingFragment newInstance() {
         return new FloatingFragment();
     }
+    private   EditText editText;
+    private   TextView skip;
+    private  String GetEditText;
 
+    private int REQUEST_CODE=0;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullscreenDialogTheme);
+
     }
 
     @Nullable
@@ -32,14 +40,21 @@ public class FloatingFragment extends DialogFragment implements View.OnClickList
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.floating, container, false);
         TextView cancel = (TextView) view.findViewById(R.id.cancel);
-        TextView skip = (TextView) view.findViewById(R.id.skip);
-        EditText editText = (EditText) view.findViewById(R.id.editText22);
+        skip = (TextView) view.findViewById(R.id.skip);
+        editText = (EditText) view.findViewById(R.id.editText22);
         String GetEditText = editText.getText().toString();
         cancel.setOnClickListener(this);
         skip.setOnClickListener(this);
-        if (!TextUtils.isEmpty(GetEditText)) {
-            skip.setText("Create");
+        skip.setText("Create");
+
+    /*   String sUsername = editText.getText().toString();
+
+        if (sUsername.matches("")) {
+            Toast.makeText(getContext(), "You did not enter a username", Toast.LENGTH_SHORT).show();
+            skip.setText("skip");
         }
+        else { skip.setText("Create");}*/
+
         return view;
     }
 
@@ -55,11 +70,16 @@ public class FloatingFragment extends DialogFragment implements View.OnClickList
                 case R.id.cancel:
                     dismiss();
                     break;
-                case R.id.skip:
+                case R.id.skip: {
+                    GetEditText = editText.getText().toString();
+                    Intent intent = new Intent();
+                    intent.putExtra("STRING_RESULT", GetEditText);
+                    getTargetFragment().onActivityResult(
+                            getTargetRequestCode(), REQUEST_CODE, intent);
                     dismiss();
                     break;
-            }
+                }
 
+            }
         }
-    }
-}
+    }}

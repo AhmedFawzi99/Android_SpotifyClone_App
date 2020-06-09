@@ -1,7 +1,10 @@
 package com.example.spotifyclone;
 
 
+<<<<<<< HEAD
+=======
 import android.content.Context;
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,15 +23,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+<<<<<<< HEAD
+=======
 
 import java.util.ArrayList;
 import java.util.List;
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import java.util.ArrayList;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -109,8 +113,13 @@ public class ArtistFragment extends Fragment {
                 // list.remove(abc);
                 Toast.makeText(getContext(),"Position is"+abc, Toast.LENGTH_LONG).show();
                 Artist r1 = artistslist.get(abc);
+<<<<<<< HEAD
+                Fragment selectedFragment=new EachArtist(r1.getName(),r1.getImage(),r1.getID(),r1.getFANSALSOLIKE(),r1.getPopular_releases());
+                getFragmentManager().beginTransaction().replace(R.id.fragmentplaylist,selectedFragment).commit();
+=======
                 Fragment selectedFragment=new EachArtist(r1.getName(),r1.getImage(),r1.getId());
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
             }
         };
         myadapter = new Artist_Adapter(getContext(), artistslist,onclickInterface);

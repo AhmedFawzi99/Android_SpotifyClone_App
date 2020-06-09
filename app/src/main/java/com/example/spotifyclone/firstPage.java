@@ -32,15 +32,18 @@ public class firstPage extends AppCompatActivity implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bLogin1:
+                this.finish();
                 startActivity(new Intent(this, Login.class));
 
                 break;
             case R.id.bFacebook:
+                this.finish();
                 startActivity(new Intent(this, facebook.class));
 
                 break;
 
             case R.id.bSignup:
+                this.finish();
                 startActivity(new Intent(this, Register.class));
 
                 break;

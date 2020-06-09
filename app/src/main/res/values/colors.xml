@@ -7,4 +7,7 @@
     <color name="black">#000000</color>
     <color name="grey">#3A3A3A</color>
     <color name="green">#2CBC37</color>
+    <color name="seekgreen">#008000</color>
+    <color name="seekred">#8B0000</color>
+    <color name="seekyellow">#808000</color>
 </resources>

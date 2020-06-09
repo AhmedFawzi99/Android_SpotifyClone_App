@@ -24,11 +24,7 @@ public class createPassword extends AppCompatActivity implements View.OnClickLis
 
     private Button bNext2;
     private EditText etNewPass;
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-            .addConverterFactory(GsonConverterFactory.create());
-    Retrofit retrofit = builder.build();
-    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +38,6 @@ public class createPassword extends AppCompatActivity implements View.OnClickLis
 
         etNewPass.addTextChangedListener(passTextWatcher);
 
-        // Adding back button
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -77,44 +70,10 @@ public class createPassword extends AppCompatActivity implements View.OnClickLis
     };
     private void userSignUp() {
         String password = etNewPass.getText().toString().trim();
-
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .createUser("s@yah.com", password, "sara", "2/2/1999", "male");
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    if(response.isSuccessful()){
-                        String s = response.body().string();
-                        int d = response.code();
-                        Toast.makeText(createPassword.this, "Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(createPassword.this, Birthdate.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-
-                    }
-                    else {
-                        Toast.makeText(createPassword.this, "Not Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(createPassword.this, Birthdate.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(createPassword.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
+        Profile_DATA.Password=password;
+        Intent intent = new Intent(createPassword.this, Birthdate.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
     @Override
     public void onClick(View v) {
@@ -122,21 +81,8 @@ public class createPassword extends AppCompatActivity implements View.OnClickLis
             case R.id.bNext2:
                 userSignUp();
 
-
-
                 break;
         }
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if(id==android.R.id.home) {
-//            this.finish();
-//
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 }

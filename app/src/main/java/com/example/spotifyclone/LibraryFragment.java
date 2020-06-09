@@ -26,18 +26,23 @@ public class LibraryFragment extends Fragment {
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
+ PlaylistFragment play=   new PlaylistFragment();
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View s;
 
         s=inflater.inflate(R.layout.fragment_library,container,false);
-
+        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         tabLayout=(TabLayout)s.findViewById(R.id.tablayout);
         viewPager=(ViewPager)s.findViewById(R.id.viewPager);
+<<<<<<< HEAD
+
+=======
         viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
         /**
          * adding fragments and their titles
          */
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         viewPagerAdapter.addfragments(new PlaylistFragment(),"Playlist");
         viewPagerAdapter.addfragments(new ArtistFragment(),"Artist");
         viewPagerAdapter.addfragments(new AlbumFragment(),"Album");

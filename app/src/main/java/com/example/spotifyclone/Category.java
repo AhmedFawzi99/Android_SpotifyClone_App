@@ -11,7 +11,11 @@ public class Category {
     /**
      * ArrayList of playlists
      */
+<<<<<<< HEAD
+    ArrayList<PlaylistResponse> playlists =new ArrayList<PlaylistResponse>();
+=======
     ArrayList<RowItem> playlists =new ArrayList<RowItem>();
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 
     public ArrayList<Type> getBlocks() {
         return blocks;
@@ -26,12 +30,21 @@ public class Category {
      */
     ArrayList<Album> albums = new ArrayList<>();
     ArrayList<Type> blocks = new ArrayList<>();
+<<<<<<< HEAD
+    ArrayList<Artist> artists=new ArrayList<>();
+    public ArrayList<PlaylistResponse> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(ArrayList<PlaylistResponse> playlists) {
+=======
 
     public ArrayList<RowItem> getPlaylists() {
         return playlists;
     }
 
     public void setPlaylists(ArrayList<RowItem> playlists) {
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         this.playlists = playlists;
     }
 
@@ -65,7 +78,11 @@ public class Category {
      * gets the ArrayList of playlists
      * @return
      */
+<<<<<<< HEAD
+    public ArrayList<PlaylistResponse> getplaylist() {
+=======
     public ArrayList<RowItem> getplaylist() {
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         return playlists;
     }
 
@@ -73,7 +90,11 @@ public class Category {
      * sets the ArrayList of playlists
      * @param rowitems
      */
+<<<<<<< HEAD
+    public void setplaylists(ArrayList<PlaylistResponse> rowitems) {
+=======
     public void setplaylists(ArrayList<RowItem> rowitems) {
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         this.playlists = rowitems;
     }
 }

@@ -7,7 +7,11 @@ public class Album {
     String Album_name;
     String Image_id;
     ArrayList<Artist> artists ;
+<<<<<<< HEAD
+    ArrayList<Track> Songs;
+=======
     ArrayList<Tracks> Songs;
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 
     public String getDescription() {
         return description;
@@ -63,11 +67,19 @@ public class Album {
         this.artists = artists;
     }
 
+<<<<<<< HEAD
+    public ArrayList<Track> getSongs() {
+        return Songs;
+    }
+
+    public void setSongs(ArrayList<Track> songs) {
+=======
     public ArrayList<Tracks> getSongs() {
         return Songs;
     }
 
     public void setSongs(ArrayList<Tracks> songs) {
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         Songs = songs;
     }
 }

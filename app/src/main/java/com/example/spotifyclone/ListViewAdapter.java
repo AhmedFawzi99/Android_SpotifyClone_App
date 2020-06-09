@@ -1,7 +1,7 @@
 package com.example.spotifyclone;
 
-
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +18,15 @@ public class ListViewAdapter extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
-    private List<AnimalNames> animalNamesList = null;
-    private ArrayList<AnimalNames> arraylist;
+    private List<SongNames> songNamesList = null;
+    private ArrayList<SongNames> arraylist;
 
-    public ListViewAdapter(Context context, List<AnimalNames> animalNamesList) {
+    public ListViewAdapter(Context context, List<SongNames> songNamesList) {
         mContext = context;
-        this.animalNamesList = animalNamesList;
+        this.songNamesList = songNamesList;
         inflater = LayoutInflater.from(mContext);
-        this.arraylist = new ArrayList<AnimalNames>();
-        this.arraylist.addAll(animalNamesList);
+        this.arraylist = new ArrayList<SongNames>();
+        this.arraylist.addAll(songNamesList);
     }
 
     public class ViewHolder {
@@ -35,12 +35,12 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return animalNamesList.size();
+        return songNamesList.size();
     }
 
     @Override
-    public AnimalNames getItem(int position) {
-        return animalNamesList.get(position);
+    public SongNames getItem(int position) {
+        return songNamesList.get(position);
     }
 
     @Override
@@ -60,20 +60,21 @@ public class ListViewAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
         // Set the results into TextViews
-        holder.name.setText(animalNamesList.get(position).getAnimalName());
+        holder.name.setText(songNamesList.get(position).getSongName());
+        holder.name.setTextColor(Color.WHITE);
         return view;
     }
 
     // Filter Class
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
-        animalNamesList.clear();
+        songNamesList.clear();
         if (charText.length() == 0) {
-            animalNamesList.addAll(arraylist);
+            songNamesList.addAll(arraylist);
         } else {
-            for (AnimalNames wp : arraylist) {
-                if (wp.getAnimalName().toLowerCase(Locale.getDefault()).contains(charText)) {
-                    animalNamesList.add(wp);
+            for (SongNames wp : arraylist) {
+                if (wp.getSongName().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    songNamesList.add(wp);
                 }
             }
         }

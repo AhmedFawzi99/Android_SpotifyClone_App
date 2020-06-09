@@ -29,6 +29,11 @@ public class MorePageDown extends BottomSheetDialogFragment {
     public ImageButton bLike2;
     private TextView bLike3;
     private LinearLayout likeLayout;
+    private TextView songname;
+    private TextView artistname;
+    private LinearLayout Report;
+    public ImageButton Report2;
+    private TextView Report3;
 
 
 
@@ -48,10 +53,15 @@ public class MorePageDown extends BottomSheetDialogFragment {
         timer = v.findViewById(R.id.timer1);
         timer2 = v.findViewById(R.id.timer2);
         timer3 = v.findViewById(R.id.timer3);
-        musicImage=v.findViewById(R.id.music_image);
-
+        musicImage=v.findViewById(R.id.music_imagem);
+        songname=v.findViewById(R.id.name_songm);
+        artistname=v.findViewById(R.id.name_artistm);
+        Report=v.findViewById(R.id.Report);
+        Report2=v.findViewById(R.id.report2);
+        Report3=v.findViewById(R.id.report3);
         Picasso.with(getContext()).load(main.imageUrl).into(musicImage);
-
+        songname.setText(main.name_song.getText());
+        artistname.setText(main.name_artist.getText());
 
 
         updatelike();
@@ -73,50 +83,28 @@ public class MorePageDown extends BottomSheetDialogFragment {
         bShare2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = "Your Body";
-                String shareSuB = "This Message was Sent By Player App ";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareSuB);
-                startActivity(Intent.createChooser(myIntent, "Share Using"));
-
+                shareFunction();
             }
         });
         bShare3 = v.findViewById(R.id.btn_share3);
         bShare3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = "Your Body";
-                String shareSuB = "This Message was Sent By Player App ";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareSuB);
-                startActivity(Intent.createChooser(myIntent, "Share Using"));
+                shareFunction();
             }
         });
         shareLayout = v.findViewById(R.id.share_lay);
         shareLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = "Your Body";
-                String shareSuB = "This Message was Sent By Player App ";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareSuB);
-                startActivity(Intent.createChooser(myIntent, "Share Using"));
+                shareFunction();
             }
         });
         bLike3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 likefunction();
             }
-
-
         });
         bLike2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,11 +122,8 @@ public class MorePageDown extends BottomSheetDialogFragment {
         timer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 timerFunction();
             }
-
-
         });
         timer2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,6 +139,25 @@ public class MorePageDown extends BottomSheetDialogFragment {
             }
         });
 
+        Report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              sendreport();
+
+            }
+        });
+        Report2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendreport();
+            }
+        });
+        Report3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendreport();
+            }
+        });
 
         return v;
     }
@@ -174,6 +178,12 @@ public class MorePageDown extends BottomSheetDialogFragment {
         time.show(this.getFragmentManager(),"TIMER");
         dismiss();
 
+    }
+
+    private void shareFunction(){
+        ShareFragment share=new ShareFragment();
+        share.show(this.getFragmentManager(),"SHARE");
+        dismiss();
     }
     private void likefunction(){
         MusicActivity main = (MusicActivity) getActivity();
@@ -212,6 +222,15 @@ public class MorePageDown extends BottomSheetDialogFragment {
         }
     }
 
+    public void sendreport(){
+        String mail = "salmahazem310@yahoo.com";
+        String message = songname+" has been reported as explicit content" +"\n"+"We would look into it";
+        String subject = "Report Explicit COntent";
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(),mail,subject,message);
+        javaMailAPI.execute();
+        dismiss();
+
+    }
 
 
     int getLikeToggle(){

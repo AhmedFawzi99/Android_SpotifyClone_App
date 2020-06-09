@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
+    android:id="@+id/horihome"
+=======
     android:id="@+id/relativeLayout"
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 

@@ -5,18 +5,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
-public class SongsAdapter extends ArrayAdapter<Tracks> {
+public class SongsAdapter extends ArrayAdapter<Track> {
 
 
 
-    public SongsAdapter(@NonNull Context context, @NonNull ArrayList<Tracks> songs) {
+    public SongsAdapter(@NonNull Context context, @NonNull ArrayList<Track> songs) {
         super(context,0, songs);
     }
     @NonNull
@@ -29,10 +32,16 @@ public class SongsAdapter extends ArrayAdapter<Tracks> {
 
         listItemView= LayoutInflater.from(getContext()).inflate(R.layout.list_view2,parent,false);
 
-        Tracks tracks =getItem(position);
-
+        Track track =getItem(position);
+         ImageView imageView=(ImageView)  listItemView.findViewById(R.id.image2);
         TextView name =(TextView) listItemView.findViewById(R.id.namesong);
-        name.setText(tracks.getName());
+        name.setText(track.gettName());
+
+     String imageview =   track.gettPreviewUrl();
+
+        Picasso.with(getContext()).
+                load(imageview)
+                .into(imageView);
         return listItemView;
 
     }

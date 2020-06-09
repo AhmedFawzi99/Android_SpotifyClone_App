@@ -24,11 +24,6 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
 
     private Button bCreate;
     private EditText etName;
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-            .addConverterFactory(GsonConverterFactory.create());
-    Retrofit retrofit = builder.build();
-    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +37,6 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
 
         etName.addTextChangedListener(passTextWatcher);
 
-        // Adding back button
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 
@@ -56,9 +48,7 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            String passwordInput = etNewPass.getText().toString().trim();
-//
-//            bNext2.setEnabled(!passwordInput.isEmpty());
+
 
             if (etName.getText().toString().length() > 0) {
                 bCreate.setEnabled(true);
@@ -76,50 +66,20 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
     };
     private void userSignUp() {
         String name = etName.getText().toString().trim();
+        Profile_DATA.UserName=name;
+        Profile_DATA.Type="r";
+        SignUP signup=new SignUP(Profile_DATA.mail, Profile_DATA.Password,Profile_DATA.Gender, Profile_DATA.Date, Profile_DATA.UserName, Profile_DATA.Type, Profile_DATA.ID);
 
-        Call<ResponseBody> call = RetrofitClient
-                .getInstance()
-                .getApi()
-                .createUser("f2@yahoo.com","789456123000", name,"8/8/1987", "female");
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    if(response.isSuccessful()){
-                        String s = response.body().string();
-                        int d = response.code();
-                        Toast.makeText(Name.this, "Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Name.this, MainActivitysha.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-
-                    }
-                    else{
-                        Toast.makeText(Name.this, "Not Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Name.this, MainActivitysha.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(Name.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bCreate:
                 userSignUp();
-                //startActivity(new Intent(this, SearchPage.class));
+                Intent intent = new Intent(Name.this, MainActivitysha.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+
                 break;
         }
     }

@@ -10,7 +10,11 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+<<<<<<< HEAD
+        android:layout_above="@id/barcontrol"
+=======
         android:layout_above="@id/player_control1"
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         android:layout_marginBottom="1dp">
 
 
@@ -18,6 +22,22 @@
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/song_progress2"
         android:layout_width="match_parent"
+<<<<<<< HEAD
+        android:layout_height="3dp"
+        android:layout_above="@id/barcontrol"
+        android:layout_weight="1"
+        android:progress="0"
+        android:padding="0dp"
+        android:paddingEnd="0dp"
+        android:paddingStart="0dp"
+        android:progressBackgroundTint="#FFFFFF"
+        android:progressTint="#FFFFFF"
+        android:thumbTint="#FFFFFF" />
+
+    <RelativeLayout
+
+        android:id="@+id/barcontrol"
+=======
         android:layout_height="wrap_content"
         android:layout_above="@id/player_control1"
         android:layout_marginBottom="-14dp"
@@ -30,6 +50,7 @@
     <RelativeLayout
 
         android:id="@+id/player_control1"
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/bottom_navigation"
@@ -38,7 +59,11 @@
         android:orientation="horizontal">
 
         <ImageView
+<<<<<<< HEAD
+            android:id="@+id/barimage"
+=======
             android:id="@+id/music_image2"
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
             android:layout_width="55dp"
             android:layout_height="59dp"
             android:adjustViewBounds="true"
@@ -47,7 +72,11 @@
 
 
         <ImageButton
+<<<<<<< HEAD
+            android:id="@+id/barlike"
+=======
             android:id="@+id/btn_Like2"
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
             android:layout_width="52dp"
             android:layout_height="44dp"
             android:layout_marginLeft="280dp"
@@ -56,12 +85,28 @@
             android:src="@drawable/like" />
 
         <ImageButton
+<<<<<<< HEAD
+            android:id="@+id/barpausestop"
+=======
             android:id="@+id/btn_pause_stop"
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
             android:layout_width="50dp"
             android:layout_height="49dp"
 
             android:layout_marginLeft="13dp"
             android:layout_marginTop="10dp"
+<<<<<<< HEAD
+            android:layout_toRightOf="@id/barlike"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitXY"
+            android:backgroundTint="@android:color/white"
+            android:src="@drawable/barpause" />
+
+        <TextView
+            android:id="@+id/barartistname"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp"
+=======
             android:layout_toRightOf="@id/btn_Like2"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:scaleType="fitXY"
@@ -71,11 +116,16 @@
             android:id="@+id/artist_name"
             android:layout_width="wrap_content"
             android:layout_height="14dp"
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 
             android:layout_centerInParent="true"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="10dp"
+<<<<<<< HEAD
+            android:layout_toRightOf="@id/barsongname"
+=======
             android:layout_toRightOf="@id/Song_NAME"
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
             android:layout_weight="2"
             android:adjustViewBounds="true"
             android:gravity="center"
@@ -83,11 +133,19 @@
             android:textColor="#9EA2A2" />
 
         <TextView
+<<<<<<< HEAD
+            android:id="@+id/barsongname"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/barimage"
+=======
             android:id="@+id/Song_NAME"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/music_image2"
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
             android:layout_marginLeft="14dp"
             android:text="Song name"
             android:textColor="#FFFFFF" />
@@ -108,4 +166,8 @@
 
 
 
+<<<<<<< HEAD
 </RelativeLayout>
+=======
+</RelativeLayout>
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692

@@ -41,7 +41,11 @@ public class Player_Adapter_two extends RecyclerView.Adapter<Player_Adapter_two.
 
 // load images using picasso
             Picasso.with(context).
+<<<<<<< HEAD
+                    load(block.rowitem.getArtimg())
+=======
                     load(block.rowitem.getImage())
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
                     .into(holder.imageViewMovie);
             holder.card_view_home.setOnClickListener(new View.OnClickListener() {
                 @Override

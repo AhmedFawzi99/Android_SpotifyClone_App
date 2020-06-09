@@ -133,6 +133,9 @@
                 android:layout_height="wrap_content"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+<<<<<<< HEAD
+
+=======
             <TextView
 
                 android:id="@+id/textView17"
@@ -143,6 +146,7 @@
                 android:text="SEE DISCOGRAPHY"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp" />
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
             <TextView
 
                 android:id="@+id/textView18"

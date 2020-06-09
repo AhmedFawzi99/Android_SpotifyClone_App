@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+<<<<<<< HEAD
+=======
 import android.widget.Toast;
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +30,11 @@ import retrofit2.Response;
  */
 public class HomeFragment extends Fragment {
     private List<Category> dataList;
+<<<<<<< HEAD
+    private List<PlaylistResponse> dataList2;
+=======
     private List<RowItem> dataList2;
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
     private Category recentlyplayed;
     private TextView textView;
     private onClickInterface onclickInterface;

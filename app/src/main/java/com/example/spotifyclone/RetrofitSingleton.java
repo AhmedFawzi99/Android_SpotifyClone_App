@@ -14,7 +14,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitSingleton {
 
+<<<<<<< HEAD
+    private String BASE_URL = "https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/";
+=======
     private String BASE_URL = "https://my-json-server.typicode.com/ShaimaaOsama999/SHServer/";
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 
     private Retrofit retrofit;
     OkHttpClient.Builder okHttpClient;

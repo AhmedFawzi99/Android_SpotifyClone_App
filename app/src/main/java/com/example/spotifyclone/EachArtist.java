@@ -22,6 +22,28 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class EachArtist extends Fragment {
     String name;
     String image;
+<<<<<<< HEAD
+    private ArrayList<Artist> Fansalsolike;
+    ArrayList<Type> playlists = new ArrayList<>();
+    private onClickInterface onclickInterface;
+    EachArtist(String Artist_name, String imageid, String id,ArrayList<Artist>fansalsolike, ArrayList<Type> popularreleases)
+    {
+        playlists=popularreleases;
+        name=Artist_name;
+        image=imageid;
+        Fansalsolike=fansalsolike;
+
+    }
+    EachArtist(String Artist_name, String imageid, String id)
+    {
+
+        name=Artist_name;
+        image=imageid;
+
+    }
+
+    private  Fansalsolike_Adapter recentlyPlayedAdapter;
+=======
     private onClickInterface onclickInterface;
     EachArtist(String Artist_name, String imageid, String id)
     {
@@ -30,6 +52,7 @@ public class EachArtist extends Fragment {
     }
     private ArrayList<RowItem> recentlyplayed;
     private  RecentlyPlayedAdapter recentlyPlayedAdapter;
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
     private LinearLayoutManager layoutManager3;
     private RecyclerView recyclerViewrecentlyplayed;
     /////////////////////////////
@@ -40,7 +63,11 @@ public class EachArtist extends Fragment {
     private LinearLayoutManager layoutManager2;
 /////////////////////////////////////////
     private RecyclerView recyclerViewpopularreleases;
+<<<<<<< HEAD
+
+=======
     ArrayList<RowItem> playlists = new ArrayList<>();
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
     private Popular_releases_adapter myadapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,13 +75,28 @@ public class EachArtist extends Fragment {
 
 
         View s=inflater.inflate(R.layout.each_artist,container,false);
+<<<<<<< HEAD
+       ImageView imageView2=s.findViewById(R.id.btn_playerdown);
+=======
 
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         TextView textView = s.findViewById(R.id.Artistname);
         ImageView imageView= s.findViewById(R.id.music_image);
                 textView.setText(name);
         Picasso.with(getContext()).
                 load(image)
                 .into(imageView);
+<<<<<<< HEAD
+imageView2.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        if (getFragmentManager().getBackStackEntryCount() != 0) {
+            getFragmentManager().popBackStack();
+        }
+    }
+});
+=======
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         ////////////////////////////////popularReleases//////////////
         recyclerViewpopularreleases = (RecyclerView) s.findViewById(R.id.recycler_viewartist);
         GridLayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),1);
@@ -82,8 +124,13 @@ public class EachArtist extends Fragment {
         recycledViewPool = new RecyclerView.RecycledViewPool();
         recyclerViewrecentlyplayed.setLayoutManager(layoutManager3);
         //Toast.makeText(getContext(),, Toast.LENGTH_LONG).show();
+<<<<<<< HEAD
+
+        recentlyPlayedAdapter = new Fansalsolike_Adapter(this.getContext(), Fansalsolike);
+=======
         recentlyplayed=new ArrayList<>();
         recentlyPlayedAdapter = new RecentlyPlayedAdapter(this.getContext(), recentlyplayed);
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         recyclerViewrecentlyplayed.setAdapter(recentlyPlayedAdapter);
 
         recyclerViewrecentlyplayed.setRecycledViewPool(recycledViewPool);

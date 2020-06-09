@@ -17,15 +17,28 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+=======
+
+import de.hdodenhof.circleimageview.CircleImageView;
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 public class Choose_Artist extends DialogFragment  {
     TextView text;
+<<<<<<< HEAD
+    private ArrayList<Artist> list = new ArrayList<>();
+=======
     ArrayList<Artist> list = new ArrayList<>();
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
     ArrayList<Artist> selectedlist = new ArrayList<>();
     private int REQUEST_CODE=0;
     private RecyclerView recyclerView;
@@ -62,7 +75,11 @@ public class Choose_Artist extends DialogFragment  {
             for(int i=0 ; i<selectedlist.size();i++) {
                 intent.putExtra("Name"+i, selectedlist.get(i).getName());
                 intent.putExtra("image"+i, selectedlist.get(i).getImage());
+<<<<<<< HEAD
+                intent.putExtra("id"+i, selectedlist.get(i).getID());
+=======
                 intent.putExtra("id"+i, selectedlist.get(i).getId());
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
             }
 
             if(getTargetFragment()!=null){
@@ -93,7 +110,11 @@ public class Choose_Artist extends DialogFragment  {
         Artist artist2 =new Artist("1170523", "Tamer Hosny", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff");
         Artist artist3 =new Artist("1170524", " Hamza Namira", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff");
 
+<<<<<<< HEAD
+/*
+=======
 
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         list.add(artist);
         list.add(artist2);
         list.add(artist2);
@@ -108,8 +129,31 @@ public class Choose_Artist extends DialogFragment  {
         list.add(artist2);
         list.add(artist3);
         list.add(artist2);
+<<<<<<< HEAD
+3*/
+        Call<Category> responseCall = RetrofitSingleton.getInstance().getApi().getchooseartists();
+        responseCall.enqueue(new Callback<Category>() {
+            @Override
+            public void onResponse(Call<Category> call, Response<Category> response) {
+                if (response.body() != null) {
+                    List<Artist> artists = response.body().artists;
+                    for (Artist data : artists) {
+
+                        list.add(data);
+                    }
+                   // adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Category> call, Throwable t) {
+
+            }
+        });
+=======
 
 
+>>>>>>> 88ead3f730e84fb8c66fc9b0e401913e4c378692
         mAdapter = new customAdapter2(getContext(), list, onclickInterface);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addItemDecoration(new SpaceItemDecoration(2));
