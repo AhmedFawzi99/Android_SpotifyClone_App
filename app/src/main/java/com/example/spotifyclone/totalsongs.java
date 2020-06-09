@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,18 +32,30 @@ import retrofit2.Response;
 public class totalsongs extends DialogFragment {
 
 
-    ArrayList<Track> array = new ArrayList<Track>();
+    static ArrayList<Track> array = new ArrayList<Track>();
     onClickInterface onClickInterface;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView playadapt;
     playlistsongsadapter totalsongsadapter;
     private ImageButton backk3;
     TextView text;
+
+    ImageButton add;
+    static ImageButton delete;
+    static boolean deleteonoff=false;
     public totalsongs(ArrayList<Track> sentarray) {
         array = sentarray;
         Log.d(String.valueOf(array.size()), "artPlaylistFragment: ");
     }
 
+    public totalsongs(String start) {
+        Random rand = new Random(); //instance of random class
+        int upperbound = 734948535;
+        int int_random = rand.nextInt(upperbound);
+        PlaylistResponse p=new PlaylistResponse(String.valueOf(int_random),Profile_DATA.ID,cretaeartplay.GetEditText,"https://images.macrumors.com/t/MKlRm9rIBpfcGnjTpf6ZxgpFTUg=/1600x1200/smart/article-new/2018/05/apple-music-note.jpg",null);
+        array.add(p);
+
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,12 +73,12 @@ public class totalsongs extends DialogFragment {
         backk3=v.findViewById(R.id.backk2);
         text=v.findViewById(R.id.songssnames);
         text.setText("Songs");
-        backk3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+//        backk3.setOnClickListener(lnew View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dismiss();
+//            }
+//        });
 
         GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
         recycledViewPool = new RecyclerView.RecycledViewPool();
@@ -76,7 +89,29 @@ public class totalsongs extends DialogFragment {
         totalsongsadapter = new playlistsongsadapter(getContext(), array, onClickInterface);
         playadapt.setAdapter(totalsongsadapter);
         playadapt.setRecycledViewPool(recycledViewPool);
-
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cretaeartplay a=new cretaeartplay();
+                a.show(getFragmentManager(),"hii");
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if(deleteonoff==false) {
+//                    deleteonoff = true;
+//                    artplaylistAdapter.notifyDataSetChanged();
+//                    delete.setImageResource(R.drawable.baseline_check_24);
+//
+//                }else{
+//                    deleteonoff = false;
+//                    artplaylistAdapter.notifyDataSetChanged();
+//                    delete.setImageResource(R.drawable.outline_delete_24);
+//
+//                }
+            }
+        });
         return v;
     }
 }

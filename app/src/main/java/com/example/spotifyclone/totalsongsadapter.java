@@ -42,7 +42,7 @@ public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.Pl
         holder.textViewTitle.setText(block.gettName());
         /// holder.textViewGenre.setText(playlist.getDescription());
 
-
+        holder.check.setVisibility(View.GONE);
 
 // load images using picasso
         Picasso.with(context).
@@ -60,10 +60,12 @@ public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.Pl
         private TextView textViewTitle;
         private ImageView imageViewMovie;
         private RelativeLayout layout;
+        private CheckBox check;
 
 
         public PlaylistsView (View itemView) {
             super(itemView);
+            check=itemView.findViewById(R.id.checkbox);
             textViewTitle = itemView.findViewById(R.id.name);
             imageViewMovie = itemView.findViewById(R.id.image);
             layout = itemView.findViewById(R.id.relatart);
