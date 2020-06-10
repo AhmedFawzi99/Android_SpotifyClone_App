@@ -62,7 +62,8 @@ public class Choose_Artist extends DialogFragment  {
             for(int i=0 ; i<selectedlist.size();i++) {
                 intent.putExtra("Name"+i, selectedlist.get(i).getName());
                 intent.putExtra("image"+i, selectedlist.get(i).getImage());
-                intent.putExtra("id"+i, selectedlist.get(i).getId());
+                intent.putExtra("id"+i, selectedlist.get(i).getID());
+                intent.putExtra("follow"+i,selectedlist.get(i).isFollowing());
             }
 
             if(getTargetFragment()!=null){
@@ -78,7 +79,7 @@ public class Choose_Artist extends DialogFragment  {
             @Override
             public void setClick(int abc) {
                // list.remove(abc);
-                Toast.makeText(getContext(),"Position is"+abc, Toast.LENGTH_LONG).show();
+               // Toast.makeText(getContext(),"Position is"+abc, Toast.LENGTH_LONG).show();
                 mAdapter.notifyDataSetChanged();
                 selectedlist.add(list.get(abc));
             }
@@ -89,9 +90,9 @@ public class Choose_Artist extends DialogFragment  {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        Artist artist =new Artist("1170522", "Amr Diab", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff");
-        Artist artist2 =new Artist("1170523", "Tamer Hosny", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff");
-        Artist artist3 =new Artist("1170524", " Hamza Namira", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff");
+        Artist artist =new Artist("1170522", "Amr Diab", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff",true);
+        Artist artist2 =new Artist("1170523", "Tamer Hosny", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff",true);
+        Artist artist3 =new Artist("1170524", " Hamza Namira", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff",true);
 
 
         list.add(artist);

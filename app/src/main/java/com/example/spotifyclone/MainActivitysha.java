@@ -45,7 +45,7 @@ public class MainActivitysha extends AppCompatActivity {
     ArrayList<RowItem> Rowitems=new ArrayList<RowItem>();
     private TextView textViewResult;
     private NotificationManagerCompat notificationManager;
-
+    public static int checker=0;
     public String sName,aName,pName,hName,iURL,mURL;
     Fragment selectedFragment=null;
 
@@ -271,31 +271,36 @@ public class MainActivitysha extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
+            Fragment selectedFragment = null;
             switch (menuItem.getItemId()) {
                 case R.id.home_item:
-                    fm.beginTransaction().hide(active).show(fragment1).commit();
-                    active = fragment1;
-                    return true;
-
+                    selectedFragment = new HomeFragment();
+                    break;
                 case R.id.search_item:
-                    fm.beginTransaction().hide(active).show(fragment2).commit();
-                    active = fragment2;
-                    return true;
-
+                    selectedFragment = new SearchFragment();
+                    break;
                 case R.id.Library_item:
-                    fm.beginTransaction().hide(active).show(fragment3).commit();
-                    active = fragment3;
-                    return true;
-                case R.id.Premium_item:
-                    fm.beginTransaction().hide(active).show(fragment4).commit();
-                    active = fragment4;
-                    return true;
-            }
-            return false;
-        }
 
-    };
+
+                    selectedFragment = new LibraryFragment();
+
+                    break;
+                case R.id.Premium_item:
+                    selectedFragment = new PermiumFragment();
+                    break;
+
+
+            }
+            return loadfragment(selectedFragment);
+        }   };
+
+    private boolean loadfragment(Fragment fragment) {
+        //switching fragment
+        if(fragment!=null)
+        { getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,fragment).commit();
+            return true;}
+        return false;
+    }
 
     @Override
     protected void onDestroy(){

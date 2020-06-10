@@ -27,6 +27,25 @@ public class RowItem {
      * each playlist contains of an array of songs
      */
     private ArrayList<Tracks> songs;
+    private boolean isliked=true;
+
+    public boolean isIsliked() {
+        return isliked;
+    }
+
+    public void setIsliked(boolean isliked) {
+        this.isliked = isliked;
+    }
+
+    public String getUserassociated() {
+        return userassociated;
+    }
+
+    public void setUserassociated(String userassociated) {
+        this.userassociated = userassociated;
+    }
+
+    private String userassociated;
 
     public String getId() {
         return id;
@@ -38,6 +57,14 @@ public class RowItem {
 
     public String getDescription() {
         return description;
+    }
+
+    public RowItem(String image, String name, String id, ArrayList<Tracks> songs, String userassociated) {
+        this.image = image;
+        this.name = name;
+        this.id = id;
+        this.songs = songs;
+        this.userassociated = userassociated;
     }
 
     public ArrayList<Tracks> getSongs() {

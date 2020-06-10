@@ -53,7 +53,6 @@ public class TimerClass extends BottomSheetDialogFragment {
         hour2=t.findViewById(R.id.hour2);
         turnoff1=t.findViewById(R.id.turnoff1);
         turnoff2=t.findViewById(R.id.turnoff2);
-        endOF=t.findViewById(R.id.endOF);
         layoutti=t.findViewById(R.id.timerpage);
 
         if(check==0){
@@ -141,19 +140,7 @@ public class TimerClass extends BottomSheetDialogFragment {
             }
         });
 
-        endOF.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final MusicActivity main = (MusicActivity) getActivity();
-                long remaining=main.getRemaining();
-                stopTimer(0);
-                mTimeLeftInMillis=remaining;
-                endstartTimer();
-                check=1;
-                dismiss();
 
-            }
-        });
 
         layoutti.setOnClickListener(new View.OnClickListener() {
             @Override

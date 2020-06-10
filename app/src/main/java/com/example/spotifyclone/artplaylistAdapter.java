@@ -39,20 +39,20 @@ public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.
     public void onBindViewHolder(@NonNull PlaylistsView holder, final int position) {
         PlaylistResponse block = Playlists.get(position);
 
-            holder.textViewTitle.setText(block.getPlayname());
-            /// holder.textViewGenre.setText(playlist.getDescription());
+        holder.textViewTitle.setText(block.getPlayname());
+        /// holder.textViewGenre.setText(playlist.getDescription());
 
 // load images using picasso
-            Picasso.with(context).
-                    load(block.getArtimg())
-                    .into(holder.imageViewMovie);
-            holder.checkbox.setVisibility(View.GONE);
+        Picasso.with(context).
+                load(block.getArtimg())
+                .into(holder.imageViewMovie);
+        holder.checkbox.setVisibility(View.GONE);
 
-            if(artPlaylistFragment.deleteonoff){
-                holder.checkbox.setVisibility(View.VISIBLE);
-            }else{
-                holder.checkbox.setVisibility(View.GONE);
-            }
+        if(artPlaylistFragment.deleteonoff){
+            holder.checkbox.setVisibility(View.VISIBLE);
+        }else{
+            holder.checkbox.setVisibility(View.GONE);
+        }
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +64,7 @@ public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.
                         for (int j = 0; j < artPlaylistFragment.array.get(position).getTracks().size(); j++)
                         {
                             Artist_DATA.TotalSongs--;
-                            ArtistManagment.sentsongarray.remove(artPlaylistFragment.array.get(position).getTracks().get(j));
+                            totalsongs.array.remove(artPlaylistFragment.array.get(position).getTracks().get(j));
                         }
                     }
                     ArtistManagment.artsongs.setText(String.valueOf(Artist_DATA.TotalSongs));
@@ -75,13 +75,17 @@ public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.
                     Artist_DATA.APlaylists--;
                     ArtistManagment.artplay.setText(String.valueOf(Artist_DATA.APlaylists));
 
-                    }
                 }
+            }
         });
         holder.imageViewMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(! (artPlaylistFragment.array.get(position).getTracks()==null)){
+                    artPlaylistFragment.valuecheck=0;
+                    onClickInterface.setClick(position);
+                }else{
+                    artPlaylistFragment.valuecheck=1;
                     onClickInterface.setClick(position);
                 }
 
@@ -91,6 +95,10 @@ public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.
             @Override
             public void onClick(View view) {
                 if(! (artPlaylistFragment.array.get(position).getTracks()==null)){
+                    artPlaylistFragment.valuecheck=0;
+                    onClickInterface.setClick(position);
+                }else{
+                    artPlaylistFragment.valuecheck=1;
                     onClickInterface.setClick(position);
                 }
             }
@@ -99,7 +107,7 @@ public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.
 
 
 
-}
+    }
 
     @Override
     public int getItemCount() {

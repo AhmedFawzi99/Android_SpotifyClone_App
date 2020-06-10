@@ -17,12 +17,12 @@
             >
 
             <ImageButton
-                android:id="@+id/btn_playerdown"
+                android:id="@+id/backbuttonartist"
                 android:layout_width="38dp"
                 android:layout_height="38dp"
                 android:layout_marginLeft="10dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/back_button_foreground"
+                android:src="@drawable/back_button1"
                 android:scaleType="fitXY"
                 android:tint="@android:color/white" />
 
@@ -38,7 +38,7 @@
 
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/followbut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/border"
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
             <ImageView
-                android:id="@+id/music_image"
+                android:id="@+id/artistimage"
                 android:layout_width="match_parent"
                 android:layout_height="336dp"
                 android:adjustViewBounds="true"
@@ -133,33 +133,8 @@
                 android:layout_height="wrap_content"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <TextView
 
-                android:id="@+id/textView17"
-                android:layout_width="224dp"
-                android:layout_height="34dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/oval_with_transparent_background"
-                android:text="SEE DISCOGRAPHY"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-            <TextView
 
-                android:id="@+id/textView18"
-                android:layout_gravity="center_horizontal"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Feasuring" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/home_recycler_view_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="15dp"
-                android:background="#000000"
-                android:orientation="horizontal" />
 
             <View
                 android:id="@+id/activityMainDivider"

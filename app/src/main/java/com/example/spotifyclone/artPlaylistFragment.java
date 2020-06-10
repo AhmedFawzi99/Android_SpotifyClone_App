@@ -2,6 +2,8 @@ package com.example.spotifyclone;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -32,19 +35,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.spotifyclone.App.CHANNEL_1_ID;
+
 public class artPlaylistFragment extends DialogFragment {
 
 
-    static ArrayList<PlaylistResponse> array=new ArrayList<PlaylistResponse>();
+    public static ArrayList<PlaylistResponse> array=new ArrayList<PlaylistResponse>();
     onClickInterface onClickInterface2;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView  playadapt;
     artplaylistAdapter artplaylistAdapter;
     private ImageButton back;
-    TextView text;
 
+    TextView text;
+    static int valuecheck=0;
     ImageButton add;
     static ImageButton delete;
+    static int pos=0;
     static boolean deleteonoff=false;
     public artPlaylistFragment(ArrayList<PlaylistResponse> sentarray) {
         array=sentarray;
@@ -52,15 +59,14 @@ public class artPlaylistFragment extends DialogFragment {
     }
 
     public artPlaylistFragment(String start) {
-
         Random rand = new Random(); //instance of random class
         int upperbound = 734948535;
         int int_random = rand.nextInt(upperbound);
         PlaylistResponse p=new PlaylistResponse(String.valueOf(int_random),Profile_DATA.ID,cretaeartplay.GetEditText,"https://images.macrumors.com/t/MKlRm9rIBpfcGnjTpf6ZxgpFTUg=/1600x1200/smart/article-new/2018/05/apple-music-note.jpg",null);
         array.add(p);
-        ArtistManagment art = new ArtistManagment();
         Artist_DATA.APlaylists++;
         ArtistManagment.artplay.setText(String.valueOf(Artist_DATA.APlaylists));
+
     }
 
 
@@ -68,8 +74,6 @@ public class artPlaylistFragment extends DialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL,R.style.FullscreenDialogTheme);
-
-
     }
 
 
@@ -81,7 +85,8 @@ public class artPlaylistFragment extends DialogFragment {
         text=v.findViewById(R.id.artplaylists_name);
         add=v.findViewById(R.id.add);
         delete=v.findViewById(R.id.delete);
-        text.setText("Playlists");
+
+        text.setText("Albums");
         GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
         recycledViewPool = new RecyclerView.RecycledViewPool();
         playadapt.setLayoutManager(mLayoutManager);
@@ -123,21 +128,25 @@ public class artPlaylistFragment extends DialogFragment {
         onClickInterface2 =new onClickInterface() {
             @Override
             public void setClick(int abc) {
-                StyleableToast.makeText(getContext(), "sdddddddsafdsg", R.style.exampleToast).show();
-                Log.d("gfdswert", "setClick: ");
-                PlaylistResponse BLOCK = array.get(abc);
-                ArrayList<Track> trs= new ArrayList<Track>();
-                trs=BLOCK.getTracks();
-                EachplaylistSongs art = new EachplaylistSongs(trs,BLOCK.getPlayname());
-                art.show(getFragmentManager(), "Playlist");
-
+                if(valuecheck==0) {
+                    pos=abc;
+                    Log.d("gfdswert", "setClick: ");
+                    PlaylistResponse BLOCK = array.get(abc);
+                    ArrayList<Track> trs = new ArrayList<Track>();
+                    trs = BLOCK.getTracks();
+                    EachplaylistSongs art = new EachplaylistSongs(trs, BLOCK.getPlayname());
+                    art.show(getFragmentManager(), "Playlist");
+                }else{
+                    pos=abc;
+                    addsongscreate arto = new addsongscreate();
+                    arto.show(getFragmentManager(), "Playlist");
+                }
             }
         };
         artplaylistAdapter = new artplaylistAdapter(getContext(), array, onClickInterface2);
         playadapt.setAdapter(artplaylistAdapter);
         playadapt.setRecycledViewPool(recycledViewPool);
         return v;
-
     }
 
 

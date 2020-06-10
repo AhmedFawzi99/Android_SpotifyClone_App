@@ -1,10 +1,13 @@
 package com.example.spotifyclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,6 +53,7 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
 
         // Generate sample data
 
+
         Call<List<SearchResponse>> call = RetrofitSingleton.getInstance().getApi().searchList();
         call.enqueue(new Callback<List<SearchResponse>>() {
             @Override
@@ -63,7 +67,6 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
                     songNameList.add(songName);
 //                    Log.d("SONG NAMES" , String.valueOf(songNameList));
                 }
-                Log.d("SONG NAMES", String.valueOf(songNameList));
                 accessArrayList(songNameList);
             }
 
@@ -72,38 +75,43 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
                 Log.d("SONG NAMES FAILED", String.valueOf(songNameList));
             }
         });
-        Log.d("songNameListSize ", String.valueOf(songNameList.size()));
 
     }
     void accessArrayList(ArrayList<String> danceSchool){
         list = (ListView) findViewById(R.id.listview);
-
-        Log.d("songNameListSize ", String.valueOf(songNameList.size()));
         for (int i = 0; i < songNameList.size(); i++) {
-            Log.d("FOR LOOP ", "I ENTERED FOR LOOP");
             SongNames songNames = new SongNames(songNameList.get(i));
-            Log.d("THE SONG IS: ", String.valueOf(songNameList));
 
             // Binds all strings into an array
             arraylist.add(songNames);
         }
-        Log.d("FOR LOOP ", "I DID NOT ENTER FOR LOOP");
-        Log.d("ARRAY LIST", String.valueOf(arraylist));
         // Pass results to ListViewAdapter Class
         adapter = new ListViewAdapter(this, arraylist);
 
         // Binds the Adapter to the ListView
         list.setAdapter(adapter);
         list.setVisibility(View.GONE);
-        Log.d("LIST", String.valueOf(list));
         // Locate the EditText in listview_main.xml
         editsearch = (SearchView) findViewById(R.id.search);
         editsearch.setOnQueryTextListener(this);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int actualPosition = position;
+                String searched_song = ((SongNames)parent.getItemAtPosition(position)).getSongName();
+                Toast.makeText(Search.this,"The song is: "+searched_song, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(Search.this, SearchedSong.class);
+                intent.putExtra("SearchedSong", searched_song);
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override
     public boolean onQueryTextSubmit (String query){
-        list.setVisibility(View.VISIBLE);
         return false;
     }
 
@@ -112,6 +120,7 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         list.setVisibility(View.VISIBLE);
         String text = newText;
         adapter.filter(text);
+//        list.setVisibility(View.GONE);
         return false;
 
     }

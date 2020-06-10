@@ -50,6 +50,9 @@ public interface JsonPlaceHolderApi {
     @GET("Playlist")
     Call<List<PlaylistResponse>> getplaylist(@Query("userassociated") String ID);
 
+    @GET("Data")
+    Call<List<RowItem>> getplaylist2(@Query("userassociated") String ID);
+
     @GET("ArtistD")
     Call<List<ArtistResponse>> artistdata(@Query("ID") String ID);
 
@@ -57,11 +60,17 @@ public interface JsonPlaceHolderApi {
     @PUT("likedislike")
     Call<likeDislike> putlike(@Header("Authorization") String token, @Body likeDislike a);
 
+    @GET("likes")
+    Call<List<Likes>> getLikesInfo(@Query("id") String id);
+
+    @GET("listeners")
+    Call<List<Listeners>> getListenersInfo(@Query("id") String id);
 
     @HTTP(method = "DELETE", path = "likedislike", hasBody = true)
     Call<getmessage> deletelike(@Header("Authorization") String token,@Body likeDislike a);
 
-
+    @GET("unrealeased")
+    Call<List<Track>> unrealeased(@Query("aid") String ID);
 
     @FormUrlEncoded
     @POST("login")

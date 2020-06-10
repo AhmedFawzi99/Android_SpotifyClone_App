@@ -3,15 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
     <TextView
         android:id="@+id/namesong"
-        android:layout_width="267dp"
-        android:layout_height="51dp"
-        android:layout_marginLeft="15dp"
+        android:layout_width="161dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="90dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="-295dp"
         android:text="txt"
         android:textColor="#FFFFFF"
         android:textSize="18sp" />
-
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:contentDescription="desc"
+        android:layout_marginTop="10dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp" />
 </RelativeLayout>

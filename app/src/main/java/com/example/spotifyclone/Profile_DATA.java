@@ -8,6 +8,10 @@ public class Profile_DATA {
     public static String Date;
     public static String Gender;
     public static String Type;
+    public static String UImage ;
+    public static String Following ;
+    public static String Followers ;
+
 
 
 }

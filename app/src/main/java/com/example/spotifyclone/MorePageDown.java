@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
+import java.security.PublicKey;
+
 public class MorePageDown extends BottomSheetDialogFragment {
     private static MorePageDown instance;
     private TextView bShare2;
@@ -34,7 +36,12 @@ public class MorePageDown extends BottomSheetDialogFragment {
     private LinearLayout Report;
     public ImageButton Report2;
     private TextView Report3;
-
+    public ImageButton hide;
+    public LinearLayout hidelay;
+    public TextView hide2;
+    public LinearLayout artview;
+    public ImageButton account_music;
+    public TextView art2;
 
 
     public static MorePageDown getInstance(){
@@ -45,6 +52,7 @@ public class MorePageDown extends BottomSheetDialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_more_page, container, false);
         MusicActivity main = (MusicActivity) getActivity();
+
 
 
         bLike2 = v.findViewById(R.id.btn_like2);
@@ -62,7 +70,30 @@ public class MorePageDown extends BottomSheetDialogFragment {
         Picasso.with(getContext()).load(main.imageUrl).into(musicImage);
         songname.setText(main.name_song.getText());
         artistname.setText(main.name_artist.getText());
-
+        hide=v.findViewById(R.id.hide1);
+        hide2=v.findViewById(R.id.hide2);
+        hidelay=v.findViewById(R.id.hidelay);
+        artview=v.findViewById(R.id.artview);
+        account_music=v.findViewById(R.id.art);
+        art2=v.findViewById(R.id.art2);
+        art2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewart();
+            }
+        });
+        account_music.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewart();
+            }
+        });
+        artview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewart();
+            }
+        });
 
         updatelike();
         smallLayout = v.findViewById(R.id.layout_small);
@@ -158,6 +189,35 @@ public class MorePageDown extends BottomSheetDialogFragment {
                 sendreport();
             }
         });
+        hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicActivity main = (MusicActivity) getActivity();
+                main.next();
+            }
+        });
+        hidelay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicActivity main = (MusicActivity) getActivity();
+                main.next();
+            }
+        });
+        hide2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicActivity main = (MusicActivity) getActivity();
+                main.next();
+            }
+        });
+
+        artview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
         return v;
     }
@@ -232,7 +292,11 @@ public class MorePageDown extends BottomSheetDialogFragment {
 
     }
 
-
+    public void viewart() {
+        viewart time = new viewart();
+        time.show(this.getFragmentManager(), "vieart");
+        dismiss();
+    }
     int getLikeToggle(){
         return likeToggle;
     }

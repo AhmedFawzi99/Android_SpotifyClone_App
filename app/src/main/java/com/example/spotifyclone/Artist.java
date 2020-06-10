@@ -1,50 +1,88 @@
 package com.example.spotifyclone;
 
+import java.util.ArrayList;
+
 public class Artist {
     /**
      * String id of the Artist
      */
-    private String id;
+    private String ID;
     /**
      * Name of the artist
      */
-    private  String name;
+    private  String Name;
     /**
      * image of the artist
      */
-    private  String image;
+    private  String Image;
+    /**
+     array of popular releases
+     */
+    ArrayList<Type> popular_releases =null;
+    /**
+     array of fans also like
+     */
+    ArrayList<Artist> FANSALSOLIKE =null;
+    boolean following =true;
+
+    public boolean isFollowing() {
+        return following;
+    }
+
+    public void setFollowing(boolean following) {
+        this.following = following;
+    }
+
+    public ArrayList<Type> getPopular_releases() {
+        return popular_releases;
+    }
+
+    public void setPopular_releases(ArrayList<Type> popular_releases) {
+        this.popular_releases = popular_releases;
+    }
+
+    public ArrayList<Artist> getFANSALSOLIKE() {
+        return FANSALSOLIKE;
+    }
+
+    public void setFANSALSOLIKE(ArrayList<Artist> FANSALSOLIKE) {
+        this.FANSALSOLIKE = FANSALSOLIKE;
+    }
+
+
 
     public String getImage() {
-        return image;
+        return Image;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.Image = image;
     }
 
 
 
 
-    public String getId() {
-        return id;
+    public String getID() {
+        return ID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
-    public Artist(String Id, String Name, String Image)
+    public Artist(String Id, String Name, String Image,boolean following)
     {
-        id=Id;
-        name=Name;
-        image=Image;
+        ID =Id;
+        this.Name =Name;
+        this.Image =Image;
+        this.following=following;
     }
 }

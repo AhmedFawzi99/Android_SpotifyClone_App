@@ -1,19 +1,25 @@
 package com.example.spotifyclone;
 
 import android.animation.ArgbEvaluator;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.spotifyclone.App.CHANNEL_1_ID;
 
 /**
  * Premium Fragment in Home Layout
@@ -28,6 +34,7 @@ public class PermiumFragment extends Fragment {
     List<Model> models;
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+    static String message = "No Recent Activities Yet";
 
 
     @Override
@@ -54,13 +61,29 @@ public class PermiumFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 sendMail();
+                message = "You are Premium Now";
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),CHANNEL_1_ID)
+                        .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                        .setContentTitle("Activity Notification")
+                        .setContentText(message)
+                        .setAutoCancel(true);
+                Intent i = new Intent(getContext(), PermiumFragment.class);
+//                startActivity(i);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                i.putExtra("message", message);
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                builder.setContentIntent(pendingIntent);
+
+                NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(0, builder.build());
             }
         });
         return f;
     }
     private void sendMail() {
         // This should be the email saved in the server
-        String mail = "salmahazem310@yahoo.com";
+        String mail = Profile_DATA.mail;
         String message = "You are upgraded to Maestro";
         String subject = "Getting Premium";
 
@@ -68,8 +91,7 @@ public class PermiumFragment extends Fragment {
         JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(),mail,subject,message);
 
         javaMailAPI.execute();
-
-
+        Profile_DATA.Type="pr";
 
     }
 

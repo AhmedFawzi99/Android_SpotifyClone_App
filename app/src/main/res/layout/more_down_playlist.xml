@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/more_layout3"
+
+    android:background="@drawable/gradient"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/layout_small"
+        android:layout_width="match_parent"
+        android:layout_height="582dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical"
+
+        >
+
+        <LinearLayout
+            android:layout_width="182dp"
+            android:layout_height="223dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="23dp"
+            android:orientation="vertical"
+
+            >
+
+            <ImageView
+                android:id="@+id/Playlistimage_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dec110" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/name_playlist_"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Playlist Name "
+                    android:textColor="#FFFFFF"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="110dp"
+            android:id="@+id/like_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="19dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_like2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_favorite_24" />
+
+            <TextView
+                android:id="@+id/btn_like3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="fill_vertical"
+                android:text="Like"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/search_foreground"
+                android:tint="@android:color/darker_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="fill_vertical"
+                android:text="Find in playlist "
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <View
+            style="@style/Divider"
+            android:layout_height="3dp"
+            android:layout_marginBottom="10dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="19dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/account_music"
+                android:tint="@android:color/darker_gray" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="fill_vertical"
+                android:text="Sort Playlist"
+                android:textColor="#FFFFFF"
+
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/share_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="19dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_share3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_share_24"
+                android:tint="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/btn_share2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="fill_vertical"
+                android:text="Share "
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/public_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="19dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_public"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:backgroundTint="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/public_foreground"
+                android:tint="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/btn_public_t"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="fill_vertical"
+                android:text="Make Public "
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>

@@ -35,16 +35,17 @@ public class EachplaylistSongs extends DialogFragment {
     onClickInterface onClickInterface;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView playadapt;
-    playlistsongsadapter playlistsongsadapter;
+    static playlistsongsadapter playlistsongsadapter;
     private ImageButton backk2;
     private String data;
     TextView text;
+    ImageButton add;
+
     public EachplaylistSongs(ArrayList<Track> sentarray,String a) {
         array = sentarray;
         data=a;
         Log.d(String.valueOf(array.size()), "artPlaylistFragment: ");
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class EachplaylistSongs extends DialogFragment {
                 dismiss();
             }
         });
+        add=v.findViewById(R.id.add4);
 
         GridLayoutManager mLayoutManager = new GridLayoutManager(getContext(), 1);
         recycledViewPool = new RecyclerView.RecycledViewPool();
@@ -75,6 +77,16 @@ public class EachplaylistSongs extends DialogFragment {
         playlistsongsadapter = new playlistsongsadapter(getContext(), array, onClickInterface);
         playadapt.setAdapter(playlistsongsadapter);
         playadapt.setRecycledViewPool(recycledViewPool);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addsongscreate arto = new addsongscreate();
+                arto.show(getFragmentManager(), "Playlist");
+
+            }
+        });
+
 
 //        onClickInterface = new onClickInterface() {
 //            @Override

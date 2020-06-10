@@ -1,15 +1,12 @@
 package com.example.spotifyclone;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,13 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -39,7 +29,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 public class ArtistFragment extends Fragment {
     private RecyclerView recyclerView;
-    ArrayList<Artist> artistslist = new ArrayList<>();
+  public static   ArrayList<Artist> artistslist = new ArrayList<>();
     private Artist_Adapter myadapter;
     private int REQUEST_CODE = 0;
     private onClickInterface onclickInterface;
@@ -72,7 +62,7 @@ public class ArtistFragment extends Fragment {
             public void onClick(View view) {
                 DialogFragment builder= Choose_Artist.newInstance();
                 hey(builder);
-                builder.show(getFragmentManager(), "tag");
+                builder.show(getFragmentManager(), "z");
                 Toast.makeText(getContext(), " shaimaa ", Toast.LENGTH_LONG).show();
             }
         });
@@ -109,12 +99,14 @@ public class ArtistFragment extends Fragment {
                 // list.remove(abc);
                 Toast.makeText(getContext(),"Position is"+abc, Toast.LENGTH_LONG).show();
                 Artist r1 = artistslist.get(abc);
-                Fragment selectedFragment=new EachArtist(r1.getName(),r1.getImage(),r1.getId());
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+                Fragment selectedFragment=new EachArtist(r1);
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).addToBackStack(null).commit();
             }
         };
         myadapter = new Artist_Adapter(getContext(), artistslist,onclickInterface);
+        checkfollow();
         recyclerView.setAdapter(myadapter);
+
         recyclerView.addItemDecoration(new SpaceItemDecoration(2));
         recyclerView.setClickable(true);
      /*   recyclerView.setOnClickListener(new AdapterView.OnItemClickListener() {
@@ -142,7 +134,7 @@ public class ArtistFragment extends Fragment {
               //  builder2.setTargetFragment(getParentFragment(), REQUEST_CODE);
                 builder2.show(getFragmentManager(), "tag");
             }});
-        // Inflate the layout for this fragment
+        // I3nflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_artist, container, false);
     }/*
 
@@ -152,13 +144,36 @@ public class ArtistFragment extends Fragment {
 
 
     }
+    void checkfollow()
+    {
+        if (artistslist!=null)
+        {
+            for(int i=0;i<artistslist.size();i++)
+            {
+                if(!artistslist.get(i).isFollowing())
+                {
+                    artistslist.remove(i);
+                  //  Toast.makeText(this.getContext(),"removed" , Toast.LENGTH_LONG).show();
+
+                }
+//                myadapter.notifyItemRemoved(i);
+          //      myadapter.notifyItemRangeChanged(i, artistslist.size());
+            }
+
+        }
+    }
+    void checkfollowadd(Artist a)
+    {
+        artistslist.add(a);
+//        myadapter.notifyDataSetChanged();
+    }
     public void hey(DialogFragment builder2)
     {
         builder2.setTargetFragment(this, REQUEST_CODE);
     }
     public void onActivityResult( int requestCode, int resultCode, Intent data) {
         String editTextString = "shread";
-        Toast.makeText(this.getContext(), editTextString, Toast.LENGTH_LONG).show();
+       // Toast.makeText(this.getContext(), editTextString, Toast.LENGTH_LONG).show();
         // Make sure fragment codes match up
         int listsize = data.getIntExtra("size", 0);
         for (int i = 0; i < listsize; i++) {
@@ -168,7 +183,8 @@ public class ArtistFragment extends Fragment {
                     "image" + i);
             String id = data.getStringExtra(
                     "id" + i);
-            artistslist.add(new Artist(id,name,imageid));
+            boolean follow=data.getBooleanExtra("follow+i",true);
+            artistslist.add(new Artist(id,name,imageid,follow));
 
         }
         getFragmentManager().beginTransaction().detach(this).attach(this).commit();

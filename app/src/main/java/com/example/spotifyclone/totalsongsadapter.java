@@ -1,6 +1,7 @@
 package com.example.spotifyclone;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,43 @@ public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.Pl
         /// holder.textViewGenre.setText(playlist.getDescription());
 
         holder.check.setVisibility(View.GONE);
+        if(totalsongs.deleteonoff){
+            holder.check.setVisibility(View.VISIBLE);
+        }else{
+            holder.check.setVisibility(View.GONE);
+        }
 
+        holder.check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (totalsongs.deleteonoff == true) {
+                    Log.d(String.valueOf(artPlaylistFragment.array.size()), "Sizee: ");
+                    for (int i = 0; i < artPlaylistFragment.array.size(); i++){
+                        Log.d("checker", "onClick: ");
+                        Log.d(String.valueOf(artPlaylistFragment.array.size()), "onClick: ");
+                        if(! (artPlaylistFragment.array.get(i).getTracks()==null)){
+                            Log.d(String.valueOf(artPlaylistFragment.array.size()), "munuletshhhhhhhhhh: ");
+                            for (int j = 0; j < artPlaylistFragment.array.get(i).getTracks().size(); j++){
+                                Log.d("gowa el loop", "onClick: ");
+                                if (artPlaylistFragment.array.get(i).getTracks().get(j).equals(totalsongs.array.get(position))){
+                                    Log.d("gowa el if", "onClick: ");
+                                    artPlaylistFragment.array.get(i).getTracks().remove(j);
+
+                                    Log.d(String.valueOf(artPlaylistFragment.array.get(i).getTracks().size()), "onClick: ");
+                                }
+                            }
+                        }
+
+                    }
+                    Artist_DATA.TotalSongs--;
+                    ArtistManagment.artsongs.setText(String.valueOf(Artist_DATA.TotalSongs));
+                    totalsongs.array.remove(position);
+                    notifyItemRemoved(position);
+                    notifyItemRangeChanged(position, totalsongs.array.size());
+                }
+
+            }
+        });
 // load images using picasso
         Picasso.with(context).
                 load(block.gettPreviewUrl())
@@ -75,4 +112,3 @@ public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.Pl
 
     }
 }
-

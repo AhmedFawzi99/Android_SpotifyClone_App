@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -52,7 +53,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     public long remaining_duration;
     private ImageView music_image;
     private String sID;
-    private MediaPlayer media_player;
+    public MediaPlayer media_player;
     private Handler mHandler = new Handler();
     private MusicControl control;
     public TextView name_song;
@@ -73,6 +74,8 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     public int likeToggle;
     public ImageButton btn_like;
     public int addcount=0;
+    public int skipscount=0;
+    public ImageButton btn_hide;
     public String imageUrl;
     public String musicUrl;
     private int likeDrawable=R.drawable.baseline_favorite_24;
@@ -129,6 +132,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         btn_share2=findViewById(R.id.btn_share2);
         btn_share3=findViewById(R.id.btn_share3);
         volume=findViewById(R.id.volume);
+        btn_hide=findViewById(R.id.btn_hide);
         volumebut=findViewById(R.id.volumebut);
         volumeinit();
         btn_more= findViewById(R.id.btn_more);
@@ -188,6 +192,12 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         });
 
         next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                next();
+            }
+        });
+        btn_hide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 next();
@@ -324,14 +334,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         song_progress.setMax(media_player.getDuration());
         MainActivitysha.song_progress2.setMax(media_player.getDuration());
 
-//        song_progress.getThumb().mutate().setAlpha(0);
-//        song_progress.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//                return true;
-//            }
-//        });
+
+        Log.d(Profile_DATA.Type, "setMusicPlayerComponents: ");
+
         song_progress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -367,7 +372,6 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         });
         mHandler.postDelayed(mUpdateSeekbar, 0);
         mHandler.post(mUpdateTimeTask);
-
     }
 
     public void buttonPlayerAction(){
@@ -395,33 +399,41 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     }
     public void next()
     {
-        addcount=addcount+1;
-        if(addcount==6)
-        {
-            startActivity(new Intent(MusicActivity.this,Pop.class));
-            addcount=0;
+        skipscount++;
+        if(Profile_DATA.Type.equals("r")) {
+            addcount = addcount + 1;
+            if (addcount == 4 && skipscount<6) {
+                startActivity(new Intent(MusicActivity.this, Pop.class));
+                addcount = 0;
+            }
         }
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancelAll();
         media_player.reset();
-        song_index=song_index+1;
-        playlist.check();
-        if(song_index>EachPlaylist.Songs.size()-1){
-            song_index=0;
+        if(!(skipscount>6 && Profile_DATA.Type.equals("r"))) {
+            song_index = song_index + 1;
+            playlist.check();
+            if (song_index > EachPlaylist.Songs.size() - 1) {
+                song_index = 0;
+            }
+            Tracks track = playlist.getSONG(song_index);
+            setMusicPlayerComponents(song_index, track.getName(), "salmaaa", "Playing from Playlist", "salmaaaaa", track.getImageid(), track.getURL(), track.getIsliked(), track.getId());
+            pauseplayDrawable = R.drawable.pause;
+            sendOnChannel2(parent_view, pauseplayDrawable, likeDrawable);
         }
-        Tracks track= playlist.getSONG(song_index);
-        setMusicPlayerComponents(song_index,track.getName(),"salmaaa","Playing from Playlist","salmaaaaa",track.getImageid(),track.getURL(),track.getIsliked(),track.getId());
-        pauseplayDrawable=R.drawable.pause;
-        sendOnChannel2(parent_view,pauseplayDrawable,likeDrawable);
+        if(skipscount>6 && Profile_DATA.Type.equals("r")){
+            startActivity(new Intent(MusicActivity.this, Pop.class));
+        }
     }
 
     public void prev()
     {
-        addcount=addcount+1;
-        if(addcount==6)
-        {
-            startActivity(new Intent(MusicActivity.this,Pop.class));
-            addcount=0;
+        if(Profile_DATA.Type.equals("r")) {
+            addcount = addcount + 1;
+            if (addcount == 4) {
+                startActivity(new Intent(MusicActivity.this, Pop.class));
+                addcount = 0;
+            }
         }
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.cancelAll();
@@ -528,7 +540,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
                 .addAction(R.drawable.minus_circle_outline, "Dislike", null)
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
                         .setShowActionsInCompactView(1, 2, 3)
-                        .setMediaSession(mediaSession.getSessionToken()))
+                )
                 .setSubText(name_playlist.getText())
                 .setPriority(NotificationCompat.PRIORITY_LOW)
                 .setOngoing(true)

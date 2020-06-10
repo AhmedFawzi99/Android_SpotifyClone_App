@@ -6,9 +6,18 @@ public class Album {
     String ID;
     String Album_name;
     String Image_id;
+
+    public boolean isIsliked() {
+        return isliked;
+    }
+
+    public void setIsliked(boolean isliked) {
+        this.isliked = isliked;
+    }
+
     ArrayList<Artist> artists ;
     ArrayList<Tracks> Songs;
-
+    boolean isliked=false;
     public String getDescription() {
         return description;
     }
@@ -19,7 +28,7 @@ public class Album {
 
     String description;
     /**
-     * each playlist contains of a type
+     * Each playlist contains of a type
      */
     private String type;
 

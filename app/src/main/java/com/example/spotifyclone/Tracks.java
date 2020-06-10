@@ -9,7 +9,24 @@ public class Tracks {
     private String url;
     private  String id;
     private boolean isliked;
+    private String pname;
+    private String aname;
 
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public String getAname() {
+        return aname;
+    }
+
+    public void setAname(String aname) {
+        this.aname = aname;
+    }
 
     private ArrayList<Artist> artists;
 

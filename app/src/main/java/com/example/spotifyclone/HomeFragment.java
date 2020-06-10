@@ -1,9 +1,11 @@
 package com.example.spotifyclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,9 @@ public class HomeFragment extends Fragment {
     private RecyclerView.Adapter adapter2;
     private RecyclerView.LayoutManager layoutManager;
     private LinearLayoutManager layoutManager2;
+    ImageButton imageButton;
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.new_home, container, false);
@@ -50,6 +55,18 @@ public class HomeFragment extends Fragment {
         dataList2=new ArrayList<>();
         // initialize the home adapter passing the list and the context
         adapter = new CategoryAdapter(dataList, this.getContext(), onclickInterface, getFragmentManager());
+        imageButton = (ImageButton) v.findViewById(R.id.img_btn);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), Profile.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);;
+                startActivityForResult(i,0);
+
+//                showPopup(v);
+            }
+        });
+
 
         // defining the layout manager for the recycler view
         layoutManager = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);

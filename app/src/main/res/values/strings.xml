@@ -13,4 +13,9 @@
     <!--    </string-array>-->
     <string name="hint_search">Searching for…</string>
     <string name="search_description">City, Cities</string>
+    <string-array name="spinner">
+        <item>Day</item>
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
 </resources>

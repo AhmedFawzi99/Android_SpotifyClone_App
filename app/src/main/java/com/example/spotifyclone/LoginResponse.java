@@ -26,7 +26,23 @@ public class LoginResponse {
     @SerializedName("gender")
     @Expose
     private String gender;
+    @SerializedName("image")
+    @Expose
+    private String image;
+    @SerializedName("followers")
+    @Expose
+    private String followers;
+    @SerializedName("following")
+    @Expose
+    private String following;
 
+    public String getlEmail() {
+        return email;
+    }
+
+    public void setlEmail(String email) {
+        this.email = email;
+    }
 
     public String getlID() {
         return iD;
@@ -36,12 +52,12 @@ public class LoginResponse {
         this.iD = iD;
     }
 
-    public String getlEmail() {
-        return email;
+    public String getlUsertype() {
+        return usertype;
     }
 
-    public void setlEmail(String email) {
-        this.email = email;
+    public void setlUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
     public String getlPassword() {
@@ -64,7 +80,7 @@ public class LoginResponse {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setlBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -76,12 +92,27 @@ public class LoginResponse {
         this.gender = gender;
     }
 
-    public String getlUsertype() {
-        return usertype;
+    public String getlImage() {
+        return image;
     }
 
-    public void setlUsertype(String usertype) {
-        this.usertype = usertype;
+    public void setlImage(String image) {
+        this.image = image;
     }
 
+    public String getlFollowers() {
+        return followers;
+    }
+
+    public void setlFollowers(String followers) {
+        this.followers = followers;
+    }
+
+    public String getlFollowing() {
+        return following;
+    }
+
+    public void setlFollowing(String following) {
+        this.following = following;
+    }
 }

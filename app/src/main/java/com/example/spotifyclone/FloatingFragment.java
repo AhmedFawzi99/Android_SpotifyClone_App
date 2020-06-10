@@ -1,5 +1,6 @@
 package com.example.spotifyclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,7 +17,11 @@ public class FloatingFragment extends DialogFragment implements View.OnClickList
     static FloatingFragment newInstance() {
         return new FloatingFragment();
     }
-
+    private   EditText editText;
+    private   TextView skip;
+    private   TextView cancel;
+    private  String GetEditText;
+    private int REQUEST_CODE=0;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +33,14 @@ public class FloatingFragment extends DialogFragment implements View.OnClickList
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.floating, container, false);
-        TextView cancel = (TextView) view.findViewById(R.id.cancel);
-        TextView skip = (TextView) view.findViewById(R.id.skip);
-        EditText editText = (EditText) view.findViewById(R.id.editText22);
-        String GetEditText = editText.getText().toString();
+         cancel = (TextView) view.findViewById(R.id.cancel);
+      skip = (TextView) view.findViewById(R.id.skip);
+      editText = (EditText) view.findViewById(R.id.editText22);
+         GetEditText = editText.getText().toString();
         cancel.setOnClickListener(this);
         skip.setOnClickListener(this);
-        if (!TextUtils.isEmpty(GetEditText)) {
             skip.setText("Create");
-        }
+
         return view;
     }
 
@@ -49,11 +53,15 @@ public class FloatingFragment extends DialogFragment implements View.OnClickList
                 case R.id.cancel:
                     dismiss();
                     break;
-                case R.id.skip:
+                case R.id.skip: {
+                    GetEditText = editText.getText().toString();
+                    Intent intent = new Intent();
+                    intent.putExtra("STRING_RESULT", GetEditText);
+                    getTargetFragment().onActivityResult(getTargetRequestCode(), REQUEST_CODE, intent);
                     dismiss();
                     break;
-            }
+                }
 
+            }
         }
-    }
-}
+    }}

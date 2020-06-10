@@ -65,14 +65,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.HomeVi
                     String image = BLOCK.rowitem.getImage();
                     String name = BLOCK.rowitem.getName();
                     String id=BLOCK.rowitem.getId();
-                    Fragment selectedFragment=new EachPlaylist(name,image,id);
+                    Fragment selectedFragment=new EachPlaylist(BLOCK.rowitem);
                     fragmentmanager.beginTransaction().replace(R.id.fragment_container,selectedFragment).addToBackStack(null).commit();
                 }
                 else if(BLOCK.getType().equals("album")) {
                     String image = BLOCK.getAlbum().getImage_id();
                     String name = BLOCK.getAlbum().getAlbum_name();
                     String id=BLOCK.getAlbum().getID();
-                    Fragment selectedFragment=new Each_album(name,image,id);
+                    Fragment selectedFragment=new Each_album(BLOCK.getAlbum());
                     fragmentmanager.beginTransaction().replace(R.id.fragment_container,selectedFragment).addToBackStack(null).commit();
                 }
 

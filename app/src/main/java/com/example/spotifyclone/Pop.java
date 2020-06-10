@@ -30,6 +30,7 @@ public class Pop extends Activity {
                 String subject = "Getting Premium";
                 JavaMailAPI javaMailAPI = new JavaMailAPI(Pop.this,mail,subject,message);
                 javaMailAPI.execute();
+                Profile_DATA.Type="pr";
             }
         });
     }
