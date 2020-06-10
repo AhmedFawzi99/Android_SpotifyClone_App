@@ -13,8 +13,21 @@ import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Query;
 
 public interface JsonPlaceHolderApi {
+    @GET("home")
+    Call<HomeBodyResponse> getPlaylistsByCategory();
+    @GET("home")
+    Call<HomeBodyResponse> getrecentlyplayed();
+
+    @GET("Category")
+    Call<Category> getplaylistsdetails(@Query("id") String ID);
+    @GET("Category")
+    Call<Category> getalbumsdetails(@Query("ID") String ID);
+
+    @GET("login")
+    Call<List<LoginResponse>> userLogin();
 
     @GET("posts")
     Call<List<post>> getPosts();
@@ -28,56 +41,49 @@ public interface JsonPlaceHolderApi {
     @GET ("tracks")
     Call<ArrayList<Tracks>> gettracks();
 
+    @GET("search")
+    Call<List<SearchResponse>> searchList();
+
+    @GET("get_growth_info")
+    Call<List<Growth>> getGrowthInfo();
+
+    @GET("Playlist")
+    Call<List<PlaylistResponse>> getplaylist(@Query("userassociated") String ID);
+
+    @GET("Data")
+    Call<List<RowItem>> getplaylist2(@Query("userassociated") String ID);
+
+    @GET("ArtistD")
+    Call<List<ArtistResponse>> artistdata(@Query("ID") String ID);
+
 
     @PUT("likedislike")
-    Call<getmessage> putlike(@Header("Authorization") String token, @Body likeDislike a);
+    Call<likeDislike> putlike(@Header("Authorization") String token, @Body likeDislike a);
 
+    @GET("likes")
+    Call<List<Likes>> getLikesInfo(@Query("id") String id);
+
+    @GET("listeners")
+    Call<List<Listeners>> getListenersInfo(@Query("id") String id);
 
     @HTTP(method = "DELETE", path = "likedislike", hasBody = true)
     Call<getmessage> deletelike(@Header("Authorization") String token,@Body likeDislike a);
 
+    @GET("unrealeased")
+    Call<List<Track>> unrealeased(@Query("aid") String ID);
+
     @FormUrlEncoded
-    @POST("signup")
-    Call<ResponseBody> createUser(
-            @Field("email") String email,
-            @Field("password") String password,
-            @Field("name") String name,
-            @Field("birthdate") String birthDate,
-            @Field("gender") String gender
+    @POST("login")
+    Call<SignUP> createuser(
+             @Field("email") String Email,
+             @Field("password") String Password,
+             @Field("birthDate") String Date,
+             @Field("gender") String Gender,
+             @Field("name") String Name,
+             @Field("usertype") String Type,
+             @Field("ID") String ID
+
     );
-
-
-    @FormUrlEncoded
-    @POST("userlogin")
-    Call<LoginResponse> userLogin(
-            @Field("email") String email,
-            @Field("password") String password
-    );
-
-    @FormUrlEncoded
-    @POST("createEmail")
-    Call<ResponseBody> createEmail(@Field("email") String email);
-
-    @FormUrlEncoded
-    @POST("createPassword")
-    Call<ResponseBody> createPassword(@Field("password") String password);
-
-    @FormUrlEncoded
-    @POST("createBirthdate")
-    Call<ResponseBody> createbirthDate(
-            @Field("year") int year,
-            @Field("month") int month,
-            @Field("day") int day);
-
-    @FormUrlEncoded
-    @POST("createGender")
-    Call<ResponseBody> createGender(@Field("gender") String gender);
-
-    @FormUrlEncoded
-    @POST("createName")
-    Call<ResponseBody> createName( @Field("name") String name);
-
-
 
 
 }

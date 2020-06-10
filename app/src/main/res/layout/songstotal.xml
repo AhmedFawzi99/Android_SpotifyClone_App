@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/songstotal"
+    android:background="@drawable/gradient"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentTop="true"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+
+                >
+
+                <ImageButton
+                    android:id="@+id/backk2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/back_button_foreground"
+                    android:scaleType="fitXY"
+                    android:tint="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/songssnames"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:text="Playlist Name "
+                    android:textSize="12dp"
+                    android:gravity="center"
+                    android:textColor="#FFFFFF"
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/edit2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/baseline_create_24"
+                    android:scaleType="fitXY"
+                    android:tint="@android:color/white" />
+                <ImageButton
+                    android:id="@+id/add2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/outline_playlist_add_24"
+                    android:scaleType="fitXY"
+                    android:tint="@android:color/white" />
+                <ImageButton
+                    android:id="@+id/delete2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/outline_delete_24"
+                    android:scaleType="fitXY"
+                    android:tint="@android:color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/songstotal2"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+</LinearLayout>

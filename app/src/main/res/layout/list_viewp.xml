@@ -5,43 +5,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/eachplaylist"
     android:background="#000000">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:id="@+id/toolbarplaylist"
+        android:layout_height="wrap_content">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+
+            >
+
+            <ImageButton
+                android:id="@+id/backplayer"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginLeft="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/back_button1"
+                android:scaleType="fitXY"
+                android:tint="@android:color/white" />
+
+            <TextView
+                android:id="@+id/playlist_name"
+                android:layout_width="279dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text=" "
+                android:textColor="#FFFFFF"
+                android:textSize="12dp" />
+            <ImageButton
+                android:id="@+id/btn_Likeplaylist"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/like" />
+
+            <ImageButton
+                android:id="@+id/btn_moreplaylist"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/baseline_more_vert_24"
+                android:scaleType="fitXY"
+                android:tint="@android:color/white" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
     <ImageView
         android:id="@+id/image2"
-        android:layout_width="127dp"
-        android:layout_height="110dp"
-
+        android:layout_width="168dp"
+        android:layout_height="165dp"
         android:layout_centerInParent="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+
+        android:layout_below="@id/toolbarplaylist"
         android:contentDescription="desc"
         android:paddingRight="2dp"
         android:paddingBottom="2dp" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="169dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="66dp"
-        android:layout_marginTop="150dp"
+        android:layout_below="@id/textView9"
+        android:adjustViewBounds="true"
         android:background="@drawable/oval_buttom2"
-        android:text="play"
+        android:text="PLAY"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="24sp" />
+
+
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:layout_below="@id/image2"
+        android:layout_centerHorizontal="true"
+
+        android:text="Playlist Name"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+       android:layout_below="@+id/textView3"
+        android:orientation="vertical">
 
 
         <ListView
             android:id="@+id/listview500"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="190dp" />
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

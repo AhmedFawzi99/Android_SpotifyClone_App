@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
 
     private static final String AUTH = "Basic" + Base64.encodeToString(("").getBytes(), Base64.NO_WRAP);
-    private static final String BASE_URL = "http://3.137.69.49:3000/user/";
+    private static final String BASE_URL = "http://www.amock.io/api/AhmedFawzi/";
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     private static RetrofitClient mInstance;
     private static Retrofit retrofit = null;

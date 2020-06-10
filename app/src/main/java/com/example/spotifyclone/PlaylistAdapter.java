@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +33,10 @@ public class PlaylistAdapter extends ArrayAdapter<RowItem> {
         TextView name =(TextView) listItemView.findViewById(R.id.name);
         name.setText(rowItem.getName());
         ImageView image =(ImageView) listItemView.findViewById(R.id.image);
-        image.setImageResource(Integer.parseInt(rowItem.getImageid()));
-
+        //image.setImageResource(Integer.parseInt(rowItem.getImage()));
+        Picasso.with(getContext()).
+                load(rowItem.getImage())
+                .into(image);
         return listItemView;
     }
 }

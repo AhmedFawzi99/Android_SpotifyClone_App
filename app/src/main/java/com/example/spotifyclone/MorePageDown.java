@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
+import java.security.PublicKey;
+
 public class MorePageDown extends BottomSheetDialogFragment {
     private static MorePageDown instance;
     private TextView bShare2;
@@ -29,7 +31,17 @@ public class MorePageDown extends BottomSheetDialogFragment {
     public ImageButton bLike2;
     private TextView bLike3;
     private LinearLayout likeLayout;
-
+    private TextView songname;
+    private TextView artistname;
+    private LinearLayout Report;
+    public ImageButton Report2;
+    private TextView Report3;
+    public ImageButton hide;
+    public LinearLayout hidelay;
+    public TextView hide2;
+    public LinearLayout artview;
+    public ImageButton account_music;
+    public TextView art2;
 
 
     public static MorePageDown getInstance(){
@@ -42,17 +54,46 @@ public class MorePageDown extends BottomSheetDialogFragment {
         MusicActivity main = (MusicActivity) getActivity();
 
 
+
         bLike2 = v.findViewById(R.id.btn_like2);
         bLike3 = v.findViewById(R.id.btn_like3);
         likeLayout = v.findViewById(R.id.like_lay);
         timer = v.findViewById(R.id.timer1);
         timer2 = v.findViewById(R.id.timer2);
         timer3 = v.findViewById(R.id.timer3);
-        musicImage=v.findViewById(R.id.music_image);
-
+        musicImage=v.findViewById(R.id.music_imagem);
+        songname=v.findViewById(R.id.name_songm);
+        artistname=v.findViewById(R.id.name_artistm);
+        Report=v.findViewById(R.id.Report);
+        Report2=v.findViewById(R.id.report2);
+        Report3=v.findViewById(R.id.report3);
         Picasso.with(getContext()).load(main.imageUrl).into(musicImage);
-
-
+        songname.setText(main.name_song.getText());
+        artistname.setText(main.name_artist.getText());
+        hide=v.findViewById(R.id.hide1);
+        hide2=v.findViewById(R.id.hide2);
+        hidelay=v.findViewById(R.id.hidelay);
+        artview=v.findViewById(R.id.artview);
+        account_music=v.findViewById(R.id.art);
+        art2=v.findViewById(R.id.art2);
+        art2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewart();
+            }
+        });
+        account_music.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewart();
+            }
+        });
+        artview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewart();
+            }
+        });
 
         updatelike();
         smallLayout = v.findViewById(R.id.layout_small);
@@ -73,50 +114,28 @@ public class MorePageDown extends BottomSheetDialogFragment {
         bShare2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = "Your Body";
-                String shareSuB = "This Message was Sent By Player App ";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareSuB);
-                startActivity(Intent.createChooser(myIntent, "Share Using"));
-
+                shareFunction();
             }
         });
         bShare3 = v.findViewById(R.id.btn_share3);
         bShare3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = "Your Body";
-                String shareSuB = "This Message was Sent By Player App ";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareSuB);
-                startActivity(Intent.createChooser(myIntent, "Share Using"));
+                shareFunction();
             }
         });
         shareLayout = v.findViewById(R.id.share_lay);
         shareLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                myIntent.setType("text/plain");
-                String shareBody = "Your Body";
-                String shareSuB = "This Message was Sent By Player App ";
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareBody);
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareSuB);
-                startActivity(Intent.createChooser(myIntent, "Share Using"));
+                shareFunction();
             }
         });
         bLike3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 likefunction();
             }
-
-
         });
         bLike2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,11 +153,8 @@ public class MorePageDown extends BottomSheetDialogFragment {
         timer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 timerFunction();
             }
-
-
         });
         timer2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +166,54 @@ public class MorePageDown extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 timerFunction();
+
+            }
+        });
+
+        Report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              sendreport();
+
+            }
+        });
+        Report2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendreport();
+            }
+        });
+        Report3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendreport();
+            }
+        });
+        hide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicActivity main = (MusicActivity) getActivity();
+                main.next();
+            }
+        });
+        hidelay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicActivity main = (MusicActivity) getActivity();
+                main.next();
+            }
+        });
+        hide2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MusicActivity main = (MusicActivity) getActivity();
+                main.next();
+            }
+        });
+
+        artview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
@@ -174,6 +238,12 @@ public class MorePageDown extends BottomSheetDialogFragment {
         time.show(this.getFragmentManager(),"TIMER");
         dismiss();
 
+    }
+
+    private void shareFunction(){
+        ShareFragment share=new ShareFragment();
+        share.show(this.getFragmentManager(),"SHARE");
+        dismiss();
     }
     private void likefunction(){
         MusicActivity main = (MusicActivity) getActivity();
@@ -212,8 +282,21 @@ public class MorePageDown extends BottomSheetDialogFragment {
         }
     }
 
+    public void sendreport(){
+        String mail = "salmahazem310@yahoo.com";
+        String message = songname+" has been reported as explicit content" +"\n"+"We would look into it";
+        String subject = "Report Explicit COntent";
+        JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(),mail,subject,message);
+        javaMailAPI.execute();
+        dismiss();
 
+    }
 
+    public void viewart() {
+        viewart time = new viewart();
+        time.show(this.getFragmentManager(), "vieart");
+        dismiss();
+    }
     int getLikeToggle(){
         return likeToggle;
     }

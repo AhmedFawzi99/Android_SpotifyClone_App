@@ -24,11 +24,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     Button bNext;
     EditText etNewEmail;
-    Retrofit.Builder builder = new Retrofit.Builder()
-            .baseUrl("https://my-json-server.typicode.com/AhmedFawzi99/jasonfakeAPI/")
-            .addConverterFactory(GsonConverterFactory.create());
-    Retrofit retrofit = builder.build();
-    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
 
     @Override
@@ -42,9 +37,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         bNext.setOnClickListener(this);
         etNewEmail.addTextChangedListener(registerTextWatcher);
 
-        // Adding back button
-//        this.getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private TextWatcher registerTextWatcher = new TextWatcher() {
@@ -55,70 +47,22 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            String passwordInput = etNewPass.getText().toString().trim();
-//
-//            bNext2.setEnabled(!passwordInput.isEmpty());
 
             if (etNewEmail.getText().toString().trim().contains("@") && etNewEmail.getText().toString().trim().endsWith(".com")) {
                 bNext.setEnabled(true);
             }
 
         }
-
         @Override
         public void afterTextChanged(Editable s) {
 
         }
     };
-    protected void onStart() {
-        super.onStart();
-        if(SharedPrefManager.getInstance(this).isLoggedIn()){
-            Intent intent= new Intent(this, Register.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }
-    }
+
     private void userSignUp() {
         String email = etNewEmail.getText().toString().trim();
+        Profile_DATA.mail=email;
 
-        Call<ResponseBody> call= jsonPlaceHolderApi.
-                createUser(email,"1234567895","salma","1/1/1999", "female");
-
-//            Call<ResponseBody> call = RetrofitClient
-//                    .getInstance()
-//                    .getApi()
-//                    .createEmail(email);
-
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    if(response.isSuccessful()){
-                        String s = response.body().string();
-                        int d = response.code();
-                        Toast.makeText(Register.this, "Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Register.this, createPassword.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-
-                    }
-                    else {
-                        Toast.makeText(Register.this, "Not Created", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Register.this, createPassword.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(Register.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
 
     @Override
@@ -126,6 +70,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.bNext:
                 userSignUp();
+                Intent intent = new Intent(Register.this, createPassword.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
                 // startActivity(new Intent(this, createPassword.class));
 
 
@@ -133,14 +80,4 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if(id==android.R.id.home) {
-//            this.finish();
-//
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

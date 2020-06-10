@@ -20,6 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginRight="15dp"
                 android:layout_alignParentTop="true"
                 >
                 <LinearLayout
@@ -34,7 +35,6 @@
                         android:id="@+id/btn_playerdown"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginLeft="10dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/baseline_expand_more_24"
                         android:scaleType="fitXY"
@@ -55,7 +55,7 @@
                         android:id="@+id/btn_more"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginRight="10dp"
+
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:src="@drawable/baseline_more_vert_24"
                         android:scaleType="fitXY"
@@ -268,13 +268,22 @@
                     >
 
                     <ImageButton
-                        android:id="@+id/btn_library"
+                        android:id="@+id/volumebut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/baseline_library_music_24"
-                        android:tint="@android:color/white" />
+                        android:src="@drawable/outline_volume_up_24"
+                         />
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:id="@+id/volume"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:progress="0"
+                        android:progressBackgroundTint="#DCDCDC"
+                        android:progressTint="#FFFFFF"
+                        android:thumbTint="#FFFFFF" />
 
                     <View
                         android:layout_width="0dp"

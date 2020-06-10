@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_artist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:elevation="5dp"
+        app:cardUseCompatPadding="true">
+
+
+        <RelativeLayout
+            android:layout_width="411dp"
+            android:layout_height="57dp"
+            android:background="#000000">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleimageartist"
+                android:layout_width="83dp"
+                android:layout_height="76dp"
+                android:src="@drawable/flower"></de.hdodenhof.circleimageview.CircleImageView>
+
+            <LinearLayout
+                android:id="@+id/layout_mov2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_toEndOf="@id/circleimageartist"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/artistname"
+                    android:layout_width="226dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="5dp"
+                    android:text="hey"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

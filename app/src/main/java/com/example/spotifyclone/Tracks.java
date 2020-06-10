@@ -8,7 +8,27 @@ public class Tracks {
     private String image;
     private String url;
     private  String id;
-private ArrayList<Artist> artists;
+    private boolean isliked;
+    private String pname;
+    private String aname;
+
+    public String getPname() {
+        return pname;
+    }
+
+    public void setPname(String pname) {
+        this.pname = pname;
+    }
+
+    public String getAname() {
+        return aname;
+    }
+
+    public void setAname(String aname) {
+        this.aname = aname;
+    }
+
+    private ArrayList<Artist> artists;
 
     public ArrayList<Artist> getArtists() {
         return artists;
@@ -55,7 +75,13 @@ private ArrayList<Artist> artists;
         this.image = imageid;
     }
 
+    public boolean getIsliked() {
+        return isliked;
+    }
 
+    public void setIsliked(boolean isliked) {
+        this.isliked = isliked;
+    }
 
 
 

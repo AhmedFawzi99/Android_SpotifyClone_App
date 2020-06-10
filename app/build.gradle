@@ -53,4 +53,7 @@ dependencies {
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
     implementation 'com.squareup.okhttp3:okhttp:3.0.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

@@ -1,27 +1,24 @@
 package com.example.spotifyclone;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class likeDislike {
 
+    @SerializedName("id")
+    @Expose
+    private String id;
 
+    public String getId() {
+        return id;
+    }
 
-        public likeDislike(String id) {
-            this.id = id;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        private String id;
-
-        public likeDislike withId(String id) {
-            this.id = id;
-            return this;
-        }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public likeDislike(String id) {
+        this.id = id;
+    }
 
 
     }

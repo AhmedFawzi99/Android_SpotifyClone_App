@@ -27,13 +27,13 @@
             android:layout_gravity="center"
 
             >
-                <ImageView
-                    android:id="@+id/music_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/dec110" />
+            <ImageView
+                android:id="@+id/music_imagem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dec110" />
 
 
 
@@ -45,7 +45,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/name_song"
+                    android:id="@+id/name_songm"
                     android:gravity="center"
                     android:layout_weight="1"
                     android:text="SONG NAME "
@@ -60,8 +60,8 @@
                 android:layout_gravity="center">
 
 
-            <TextView
-                    android:id="@+id/name_artist"
+                <TextView
+                    android:id="@+id/name_artistm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -91,7 +91,7 @@
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/baseline_favorite_24"
                 android:scaleType="fitXY"
-                 />
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -110,6 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:id="@+id/hidelay"
             android:orientation="horizontal">
 
             <ImageButton
@@ -118,6 +119,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:backgroundTint="@android:color/transparent"
                 android:layout_marginLeft="10dp"
+                android:id="@+id/hide1"
                 android:src="@drawable/minus_circle_outline"
                 android:scaleType="fitXY"
                 android:tint="@android:color/darker_gray" />
@@ -126,6 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:id="@+id/hide2"
                 android:gravity="fill_vertical"
                 android:text="Hide This Song "
                 android:layout_marginLeft="20dp"
@@ -140,38 +143,12 @@
             android:layout_height="3dp"
             android:layout_marginBottom="10dp"/>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="19dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:backgroundTint="@android:color/transparent"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/musicadd"
-                android:scaleType="fitXY"
-                android:tint="@android:color/darker_gray" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="fill_vertical"
-                android:text="Add to Playlist "
-                android:layout_marginLeft="20dp"
-                android:textColor="#FFFFFF"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="20dp" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="19dp"
+            android:id="@+id/artview"
             android:orientation="horizontal">
 
             <ImageButton
@@ -182,6 +159,7 @@
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/account_music"
                 android:scaleType="fitXY"
+                android:id="@+id/art"
                 android:tint="@android:color/darker_gray" />
 
             <TextView
@@ -189,6 +167,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="fill_vertical"
+                android:id="@+id/art2"
                 android:text="View Artist "
                 android:layout_marginLeft="20dp"
                 android:textColor="#FFFFFF"
@@ -244,7 +223,7 @@
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/moon_waning_crescent"
                 android:scaleType="fitXY"
-                 />
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -265,7 +244,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="19dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/Report">
 
             <ImageButton
                 android:layout_width="25dp"
@@ -275,6 +255,7 @@
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/flag_variant_outline"
                 android:scaleType="fitXY"
+                android:id="@+id/report2"
                 android:tint="@android:color/darker_gray" />
 
             <TextView
@@ -285,6 +266,7 @@
                 android:text="Report Explicit Content "
                 android:layout_marginLeft="20dp"
                 android:textColor="#FFFFFF"
+                android:id="@+id/report3"
                 android:fontFamily="sans-serif-medium"
                 android:textSize="20dp" />
 

@@ -3,12 +3,49 @@ package com.example.spotifyclone;
 import java.util.ArrayList;
 
 public class RowItem {
-    private String imageid;
+    /**
+     * each playlist contains of an image
+     */
+    private String image;
+    /**
+     * each playlist contains of a name
+     */
     private String name;
+    /**
+     * each playlist contains of an id
+     */
     private String id;
+    /**
+     * each playlist contains of a description
+     */
     private String description;
+    /**
+     * each playlist contains of a type
+     */
     private String type;
+    /**
+     * each playlist contains of an array of songs
+     */
     private ArrayList<Tracks> songs;
+    private boolean isliked=true;
+
+    public boolean isIsliked() {
+        return isliked;
+    }
+
+    public void setIsliked(boolean isliked) {
+        this.isliked = isliked;
+    }
+
+    public String getUserassociated() {
+        return userassociated;
+    }
+
+    public void setUserassociated(String userassociated) {
+        this.userassociated = userassociated;
+    }
+
+    private String userassociated;
 
     public String getId() {
         return id;
@@ -20,6 +57,14 @@ public class RowItem {
 
     public String getDescription() {
         return description;
+    }
+
+    public RowItem(String image, String name, String id, ArrayList<Tracks> songs, String userassociated) {
+        this.image = image;
+        this.name = name;
+        this.id = id;
+        this.songs = songs;
+        this.userassociated = userassociated;
     }
 
     public ArrayList<Tracks> getSongs() {
@@ -45,7 +90,7 @@ public class RowItem {
     public RowItem(String Name, String Imageid)
     {
         this.name=Name;
-        this.imageid=Imageid;
+        this.image =Imageid;
     }
     public String getName()
     {
@@ -53,16 +98,16 @@ public class RowItem {
         return name;
     }
 
-    public void setImageid(String imageid) {
-        this.imageid = imageid;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getImageid()
+    public String getImage()
     {
-        return imageid;
+        return image;
     }
 }
