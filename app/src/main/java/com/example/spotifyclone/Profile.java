@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
     Button logout_button;
     private TextView user_play;
     TextView recent_activity;
+    ImageButton help;
+
 
 
     @Override
@@ -44,6 +47,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
         user_profile_image = findViewById(R.id.user_profile_image);
         pFollower = findViewById(R.id.pFollower);
         pFollowing = findViewById(R.id.pFollowing);
+        help=findViewById(R.id.help_btn);
         recent_activity = (TextView)findViewById(R.id.recent_activity);
 
         if(PermiumFragment.message == "You are Premium Now") {
@@ -54,7 +58,13 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
 
         Log.d("Message", PermiumFragment.message);
 
-
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Help moreDown=new Help();
+                moreDown.show(getSupportFragmentManager(),"More");
+            }
+        });
 
 
         Call<List<LoginResponse>> call =RetrofitSingleton.getInstance().getApi().userLogin();
