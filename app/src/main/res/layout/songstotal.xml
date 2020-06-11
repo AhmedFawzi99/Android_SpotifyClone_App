@@ -49,14 +49,7 @@
                     android:orientation="vertical">
 
                 </LinearLayout>
-                <ImageButton
-                    android:id="@+id/edit2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/baseline_create_24"
-                    android:scaleType="fitXY"
-                    android:tint="@android:color/white" />
+
                 <ImageButton
                     android:id="@+id/add2"
                     android:layout_width="30dp"
