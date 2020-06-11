@@ -8,12 +8,6 @@ import android.widget.ScrollView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * Search pge to redirect the user to the search page to search songs
- * @author Salma Hazem
- * @version 1.0
- */
-
 public class SearchPage extends AppCompatActivity implements View.OnClickListener {
 
     private Button bSearch;
@@ -37,5 +31,16 @@ public class SearchPage extends AppCompatActivity implements View.OnClickListene
                 break;
         }
     }
-
+//
+//    @Override
+//    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+//        super.onCreate(savedInstanceState, persistentState);
+//
+//        mainScrollView = (ScrollView)findViewById(R.id.scrollView);
+//
+//        mainScrollView.smoothScrollTo(1,1);
+//
+//    }
 }
+
+

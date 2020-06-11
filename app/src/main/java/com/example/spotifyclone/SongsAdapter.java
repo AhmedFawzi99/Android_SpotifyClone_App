@@ -15,24 +15,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-/**
- * @author shaimaa
- * the adapter in which fills the songs
- */
 public class SongsAdapter extends ArrayAdapter<Tracks> {
 
 
-    /**
-     * constructor
-     * @param context
-     * @param songs
-     */
+
     public SongsAdapter(@NonNull Context context, @NonNull ArrayList<Tracks> songs) {
         super(context,0, songs);
     }
-    /**
-     * main functions of each adapter
-     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

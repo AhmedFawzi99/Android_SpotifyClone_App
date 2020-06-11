@@ -30,12 +30,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.spotifyclone.App.CHANNEL_1_ID;
 
-/**
- * Allow the user to login
- * @author Salma Hazem
- * @version 1.0
- */
-
 public class Login extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -57,7 +51,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         etUsername.addTextChangedListener(emailTextWatcher);
         etPassword.addTextChangedListener(emailTextWatcher);
 
+        // Adding back button
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+    private static String token;
 
     @Override
     protected void onStart() {
@@ -69,10 +67,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
-    /**
-     * Checks for the patterns of the email and password
-     * Sets the data from the server to the Profile_DATA data
-     */
+
     private void userLogin(){
         final String email = etUsername.getText().toString().trim();
         final String password = etPassword.getText().toString().trim();
@@ -235,9 +230,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
     };
 
-    /**
-     * Sends email to aaaa@gmail.com in case of forgot password
-     */
     private void sendMail() {
         // This should be the email saved in the server
         String mail = "aaaa@gmail.com";
@@ -251,10 +243,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    /**
-     * Calls the fuvtion depending on the button ID
-     * @param v
-     */
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){

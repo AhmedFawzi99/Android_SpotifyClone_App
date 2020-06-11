@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="Give your Album a name."
+        android:text="Give your playlist a name."
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="30sp"

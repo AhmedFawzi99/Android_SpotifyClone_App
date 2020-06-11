@@ -11,22 +11,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * The Adapter for the total songs of the Artist
- *  * @author Ahmed Mahmoud Fawzi <br>
- */
-public class TotalSongsAdapter extends RecyclerView.Adapter<TotalSongsAdapter.PlaylistsView> {
+public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.PlaylistsView> {
 
     private List<Track> Tracks;
     private Context context;
     onClickInterface onClickInterface;
-    public TotalSongsAdapter(Context context, List<Track> list, onClickInterface onClickInterface) {
+    public totalsongsadapter(Context context, List<Track> list, onClickInterface onClickInterface) {
         this.Tracks = list;
         this.context = context;
         this.onClickInterface = onClickInterface;
@@ -39,11 +36,6 @@ public class TotalSongsAdapter extends RecyclerView.Adapter<TotalSongsAdapter.Pl
 
     }
 
-    /**
-     * on the onBindViewHolder the delete happens when the user checks songs deleting them from the array and also from the albums as artist removed it from the songs list so no need to keep them in the album as they are deleted
-     * @param holder
-     * @param position
-     */
     @Override
     public void onBindViewHolder(@NonNull PlaylistsView holder, final int position) {
         Track block = Tracks.get(position);
@@ -52,29 +44,29 @@ public class TotalSongsAdapter extends RecyclerView.Adapter<TotalSongsAdapter.Pl
         /// holder.textViewGenre.setText(playlist.getDescription());
 
         holder.check.setVisibility(View.GONE);
-        if(TotalSongs.deleteonoff){
+        if(totalsongs.deleteonoff){
             holder.check.setVisibility(View.VISIBLE);
         }else{
             holder.check.setVisibility(View.GONE);
         }
 
-        /**
-         * deleing the songs and removing them from the albums also
-         */
         holder.check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TotalSongs.deleteonoff == true) {
-                    Log.d(String.valueOf(ArtPlaylistFragment.array.size()), "Sizee: ");
-                    for (int i = 0; i < ArtPlaylistFragment.array.size(); i++){
+                if (totalsongs.deleteonoff == true) {
+                    Log.d(String.valueOf(artPlaylistFragment.array.size()), "Sizee: ");
+                    for (int i = 0; i < artPlaylistFragment.array.size(); i++){
                         Log.d("checker", "onClick: ");
-                        Log.d(String.valueOf(ArtPlaylistFragment.array.size()), "onClick: ");
-                        if(! (ArtPlaylistFragment.array.get(i).getTracks()==null)){
-                            for (int j = 0; j < ArtPlaylistFragment.array.get(i).getTracks().size(); j++){
-                                if (ArtPlaylistFragment.array.get(i).getTracks().get(j).equals(TotalSongs.array.get(position))){
-                                    ArtPlaylistFragment.array.get(i).getTracks().remove(j);
+                        Log.d(String.valueOf(artPlaylistFragment.array.size()), "onClick: ");
+                        if(! (artPlaylistFragment.array.get(i).getTracks()==null)){
+                            Log.d(String.valueOf(artPlaylistFragment.array.size()), "munuletshhhhhhhhhh: ");
+                            for (int j = 0; j < artPlaylistFragment.array.get(i).getTracks().size(); j++){
+                                Log.d("gowa el loop", "onClick: ");
+                                if (artPlaylistFragment.array.get(i).getTracks().get(j).equals(totalsongs.array.get(position))){
+                                    Log.d("gowa el if", "onClick: ");
+                                    artPlaylistFragment.array.get(i).getTracks().remove(j);
 
-                                    Log.d(String.valueOf(ArtPlaylistFragment.array.get(i).getTracks().size()), "onClick: ");
+                                    Log.d(String.valueOf(artPlaylistFragment.array.get(i).getTracks().size()), "onClick: ");
                                 }
                             }
                         }
@@ -82,9 +74,9 @@ public class TotalSongsAdapter extends RecyclerView.Adapter<TotalSongsAdapter.Pl
                     }
                     Artist_DATA.TotalSongs--;
                     ArtistManagment.artsongs.setText(String.valueOf(Artist_DATA.TotalSongs));
-                    TotalSongs.array.remove(position);
+                    totalsongs.array.remove(position);
                     notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, TotalSongs.array.size());
+                    notifyItemRangeChanged(position, totalsongs.array.size());
                 }
 
             }

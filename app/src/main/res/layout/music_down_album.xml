@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/more_layout4"
 
-    android:background="@drawable/gradient2"
+    android:background="@drawable/gradient"
     >
 
 

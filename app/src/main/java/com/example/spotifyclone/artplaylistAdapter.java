@@ -10,23 +10,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-/**
- * This is an adapter for the artist Albums that shows all the albums of the artist loggedin
- * @author Ahmed Mahmoud Fawzi <br>
- */
-public class ArtPlaylistAdapter extends RecyclerView.Adapter<ArtPlaylistAdapter.PlaylistsView> {
+public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.PlaylistsView> {
 
     private List<PlaylistResponse> Playlists;
     private Context context;
     onClickInterface onClickInterface;
     CheckBox check;
-    public ArtPlaylistAdapter(Context context, List<PlaylistResponse> list, onClickInterface onClickInterface) {
+    public artplaylistAdapter(Context context, List<PlaylistResponse> list, onClickInterface onClickInterface) {
         this.Playlists = list;
         this.context = context;
         this.onClickInterface = onClickInterface;
@@ -38,12 +35,6 @@ public class ArtPlaylistAdapter extends RecyclerView.Adapter<ArtPlaylistAdapter.
         return new PlaylistsView(LayoutInflater.from(context).inflate(R.layout.artitem, parent, false));
     }
 
-    /**
-     * the onBindViewHolder checks if an Album is chosen to delete and deletes it and all the songs it has because if an album is deleted the songs are deleted unless the user add them to realease again
-     * @param holder
-     * @param position
-     * @author Ahmed Mahmoud Fawzi <br>
-     */
     @Override
     public void onBindViewHolder(@NonNull PlaylistsView holder, final int position) {
         PlaylistResponse block = Playlists.get(position);
@@ -57,7 +48,7 @@ public class ArtPlaylistAdapter extends RecyclerView.Adapter<ArtPlaylistAdapter.
                 .into(holder.imageViewMovie);
         holder.checkbox.setVisibility(View.GONE);
 
-        if(ArtPlaylistFragment.deleteonoff){
+        if(artPlaylistFragment.deleteonoff){
             holder.checkbox.setVisibility(View.VISIBLE);
         }else{
             holder.checkbox.setVisibility(View.GONE);
@@ -65,21 +56,21 @@ public class ArtPlaylistAdapter extends RecyclerView.Adapter<ArtPlaylistAdapter.
         holder.checkbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ArtPlaylistFragment.deleteonoff == true) {
-                    if(ArtPlaylistFragment.array.get(position).getTracks()==null)
+                if (artPlaylistFragment.deleteonoff == true) {
+                    if(artPlaylistFragment.array.get(position).getTracks()==null)
                     {
                     }
                     else{
-                        for (int j = 0; j < ArtPlaylistFragment.array.get(position).getTracks().size(); j++)
+                        for (int j = 0; j < artPlaylistFragment.array.get(position).getTracks().size(); j++)
                         {
                             Artist_DATA.TotalSongs--;
-                            TotalSongs.array.remove(ArtPlaylistFragment.array.get(position).getTracks().get(j));
+                            totalsongs.array.remove(artPlaylistFragment.array.get(position).getTracks().get(j));
                         }
                     }
                     ArtistManagment.artsongs.setText(String.valueOf(Artist_DATA.TotalSongs));
-                    ArtPlaylistFragment.array.remove(position);
+                    artPlaylistFragment.array.remove(position);
                     notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, ArtPlaylistFragment.array.size());
+                    notifyItemRangeChanged(position, artPlaylistFragment.array.size());
                     ArtistManagment art = new ArtistManagment();
                     Artist_DATA.APlaylists--;
                     ArtistManagment.artplay.setText(String.valueOf(Artist_DATA.APlaylists));
@@ -87,18 +78,14 @@ public class ArtPlaylistAdapter extends RecyclerView.Adapter<ArtPlaylistAdapter.
                 }
             }
         });
-        /**
-         * when the user clicks on the Album it checks if it is empty or not to add songs or show the songs contained
-         * @author Ahmed Mahmoud Fawzi <br>
-         */
         holder.imageViewMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(! (ArtPlaylistFragment.array.get(position).getTracks()==null)){
-                    ArtPlaylistFragment.valuecheck=0;
+                if(! (artPlaylistFragment.array.get(position).getTracks()==null)){
+                    artPlaylistFragment.valuecheck=0;
                     onClickInterface.setClick(position);
                 }else{
-                    ArtPlaylistFragment.valuecheck=1;
+                    artPlaylistFragment.valuecheck=1;
                     onClickInterface.setClick(position);
                 }
 
@@ -107,11 +94,11 @@ public class ArtPlaylistAdapter extends RecyclerView.Adapter<ArtPlaylistAdapter.
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(! (ArtPlaylistFragment.array.get(position).getTracks()==null)){
-                    ArtPlaylistFragment.valuecheck=0;
+                if(! (artPlaylistFragment.array.get(position).getTracks()==null)){
+                    artPlaylistFragment.valuecheck=0;
                     onClickInterface.setClick(position);
                 }else{
-                    ArtPlaylistFragment.valuecheck=1;
+                    artPlaylistFragment.valuecheck=1;
                     onClickInterface.setClick(position);
                 }
             }
@@ -127,10 +114,6 @@ public class ArtPlaylistAdapter extends RecyclerView.Adapter<ArtPlaylistAdapter.
         return Playlists.size();
     }
 
-    /**
-     * Initialize the Image and text and checbox of the adapter contents
-     * @author Ahmed Mahmoud Fawzi <br>
-     */
     public class PlaylistsView extends RecyclerView.ViewHolder {
 
         private TextView textViewTitle;

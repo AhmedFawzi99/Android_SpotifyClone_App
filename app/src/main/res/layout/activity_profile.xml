@@ -164,26 +164,6 @@
                     android:textSize="20dp"
                     android:layout_marginLeft="20dp"
                     />
-                <TextView
-                    android:id="@+id/recent_activity1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text=""
-                    android:textColor="@android:color/holo_green_light"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="20dp"
-                    />
-                <TextView
-                    android:id="@+id/recent_activity2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text=""
-                    android:textColor="@android:color/holo_green_light"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="20dp"
-                    />
                 <Button
                     android:id="@+id/logout_button"
                     android:layout_width="match_parent"

@@ -15,10 +15,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-/**
- * @author shaimma
- * Adapter to fill the popular_releases adaapter
- */
 public class Popular_releases_adapter extends RecyclerView.Adapter<Popular_releases_adapter.MyViewHolder3>{
     ArrayList<Type> playlists;
     Context context;
@@ -26,12 +22,8 @@ public class Popular_releases_adapter extends RecyclerView.Adapter<Popular_relea
         this.context=contextt;
         this.playlists=playlists;
     }
-    /**
-     * main functions of each adapter
-     */
     @NonNull
     @Override
-
 
     public MyViewHolder3 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -80,3 +72,4 @@ public class Popular_releases_adapter extends RecyclerView.Adapter<Popular_relea
         }
     }
 }
+

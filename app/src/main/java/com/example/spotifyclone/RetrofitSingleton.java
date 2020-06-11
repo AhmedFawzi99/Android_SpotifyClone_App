@@ -9,7 +9,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * This Class is where the Server Link is stored to be used anywhere in the project
+ * Created by enyason on 10/9/18.
  */
 
 public class RetrofitSingleton {

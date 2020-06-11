@@ -3,10 +3,6 @@ package com.example.spotifyclone;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * A setter and Getter class for tracks
- * @author Ahmed Mahmoud Fawzi <br>
- */
 public class Track {
     @SerializedName("aid")
     @Expose

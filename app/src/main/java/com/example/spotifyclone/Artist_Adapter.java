@@ -17,24 +17,10 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * @author shaimaa
- * class artistadapter that fill the recyclerview
- */
 public class Artist_Adapter extends RecyclerView.Adapter<Artist_Adapter.MyViewHolder2>{
-    /**
-     * array of artists that will be shown
-     */
     ArrayList<Artist> artists;
     Context context;
     onClickInterface onClickInterface;
-
-    /**
-     * the constructor
-     * @param contextt
-     * @param artistist
-     * @param onClickInterface
-     */
     public Artist_Adapter(Context contextt, ArrayList<Artist> artistist, onClickInterface onClickInterface) {
         this.context=contextt;
         this.artists=artistist;
@@ -80,10 +66,28 @@ public class Artist_Adapter extends RecyclerView.Adapter<Artist_Adapter.MyViewHo
         public MyViewHolder2(View itemView) {
             super(itemView);
 
-            cardView= (CardView)  itemView.findViewById(R.id.card_view_artist);
+             cardView= (CardView)  itemView.findViewById(R.id.card_view_artist);
             artistname = (TextView) itemView.findViewById(R.id.artistname);
             imageViewartist=(CircleImageView) itemView.findViewById(R.id.circleimageartist);
 
+            //  parent = itemView.findViewById(R.id.parent);
+            // name = itemView.findViewById(R.id.name);
+            // age = itemView.findViewById(R.id.age);
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

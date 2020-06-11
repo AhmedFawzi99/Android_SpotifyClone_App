@@ -14,17 +14,17 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-/**
- * Java Mail API to send email to specified email
- * @author Salma Hazem
- * @version 1.0
- */
 
 public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
 
-    /**
-     * Declaring Variables
-     */
+    //Add those line in dependencies
+    //implementation files('libs/activation.jar')
+    //implementation files('libs/additionnal.jar')
+    //implementation files('libs/mail.jar')
+
+    //Need INTERNET permission
+
+    //Variables
     private Context mContext;
     private Session mSession;
 
@@ -34,13 +34,7 @@ public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
 
     private ProgressDialog mProgressDialog;
 
-    /**
-     * Constructor
-     * @param mContext
-     * @param mEmail
-     * @param mSubject
-     * @param mMessage
-     */
+    //Constructor
     public JavaMailAPI(Context mContext, String mEmail, String mSubject, String mMessage) {
         this.mContext = mContext;
         this.mEmail = mEmail;
@@ -48,45 +42,37 @@ public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
         this.mMessage = mMessage;
     }
 
-    /**
-     * Show progress dialog while sending email
-     */
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        //Show progress dialog while sending email
         mProgressDialog = ProgressDialog.show(mContext,"Sending message", "Please wait...",false,false);
     }
 
-    /**
-     * Dismiss progress dialog when message successfully send
-     * @param aVoid
-     */
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        //Dismiss progress dialog when message successfully send
         mProgressDialog.dismiss();
 
         //Show success toast
         Toast.makeText(mContext,"Message Sent", Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * Creating properties
-     * Configuring properties for gmail
-     * Creating a new session
-     * @param params
-     * @return
-     */
     @Override
     protected Void doInBackground(Void... params) {
+        //Creating properties
         Properties props = new Properties();
 
+        //Configuring properties for gmail
+        //If you are not using gmail you may need to change the values
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", "465");
 
+        //Creating a new session
         mSession = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     //Authenticating the password
@@ -110,6 +96,25 @@ public class JavaMailAPI extends AsyncTask<Void, Void, Void> {
             //Sending email
             Transport.send(mm);
 
+//            BodyPart messageBodyPart = new MimeBodyPart();
+//
+//            messageBodyPart.setText(message);
+//
+//            Multipart multipart = new MimeMultipart();
+//
+//            multipart.addBodyPart(messageBodyPart);
+//
+//            messageBodyPart = new MimeBodyPart();
+//
+//            DataSource source = new FileDataSource(filePath);
+//
+//            messageBodyPart.setDataHandler(new DataHandler(source));
+//
+//            messageBodyPart.setFileName(filePath);
+//
+//            multipart.addBodyPart(messageBodyPart);
+
+//            mm.setContent(multipart);
 
         } catch (MessagingException e) {
             e.printStackTrace();
