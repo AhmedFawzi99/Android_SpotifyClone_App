@@ -22,7 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Fragment for Artist Albums It has all the Albums that are of that the Artist loggedin
+ * Fragment for Artist Albums It has all the Albums that are of that the Artist loggedin <br>
  * @author Ahmed Mahmoud Fawzi <br>
  * @version 1.0
  */

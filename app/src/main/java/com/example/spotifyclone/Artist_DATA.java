@@ -1,7 +1,7 @@
 package com.example.spotifyclone;
 
 /**
- * A class that has static variables that contains the data of the Artist which are obtained when the user signsin
+ * A class that has static variables that contains the data of the Artist which are obtained when the user signsin <br>
  * @author Ahmed Mahmoud Fawzi <br>
  */
 public class Artist_DATA {

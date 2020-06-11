@@ -20,7 +20,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 /**
- * Birthdate Activity to allow new users to enter their birthdate
+ * Birthdate Activity to allow new users to enter their birthdate <br>
  * @author Salma Hazem
  * @version 1.0
  */

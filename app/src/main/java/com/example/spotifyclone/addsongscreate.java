@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 /**
- * This Class creates a Fragment that has songs which are not in albums and you can add them to Albums
+ * This Class creates a Fragment that has songs which are not in albums and you can add them to Albums <br>
  * @author Ahmed Mahmoud Fawzi <br>
  */
 public class addsongscreate extends DialogFragment {

@@ -24,7 +24,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass. <br>
  * @author Shaimaa Osama
  */
 public class ArtistFragment extends Fragment {

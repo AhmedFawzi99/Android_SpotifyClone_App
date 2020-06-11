@@ -38,7 +38,7 @@ import retrofit2.Response;
 import static com.example.spotifyclone.App.CHANNEL_1_ID;
 
 /**
- * Artist Manager for Atrist's account
+ * Artist Manager for Atrist's account <br>
  * Helping Source: <a href="https://www.youtube.com/watch?v=sXo2SkX7rGk&t=658s">https://www.youtube.com/watch?v=sXo2SkX7rGk&t=658s</a> <br>
  * License for Circular View Image: <a href="https://github.com/hdodenhof/CircleImageView/blob/master/LICENSE.txt">https://github.com/hdodenhof/CircleImageView/blob/master/LICENSE.txt</a> <br>
  * BieChart License: <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a> <br>
