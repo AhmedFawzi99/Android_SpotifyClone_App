@@ -11,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -19,10 +18,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * addsongscreateadapter is the adapter of addsongscreate  that is used to add the songs that has no albums
+ * @author Ahmed Mahmoud Fawzi <br>
  */
-public class addsongscreateadapter extends RecyclerView.Adapter<addsongscreateadapter.PlaylistsView> {
+public class AddSongsCreateAdapter extends RecyclerView.Adapter<AddSongsCreateAdapter.PlaylistsView> {
 
     private List<Track> Tracks;
     private Context context;
@@ -34,7 +38,7 @@ public class addsongscreateadapter extends RecyclerView.Adapter<addsongscreatead
      * @param list
      * @param onClickInterface
      */
-    public addsongscreateadapter(Context context, List<Track> list, onClickInterface onClickInterface) {
+    public AddSongsCreateAdapter(Context context, List<Track> list, onClickInterface onClickInterface) {
         this.Tracks = list;
         this.context = context;
         this.onClickInterface = onClickInterface;
@@ -47,6 +51,12 @@ public class addsongscreateadapter extends RecyclerView.Adapter<addsongscreatead
 
     }
 
+    /**
+     * In the onBindViewHoler if the add button is on and a user clicks on check it checks the poition of the the album clicked and then adds the chosen songs to the album and seting it to this album
+     * @param holder
+     * @param position
+     * @author Ahmed Mahmoud Fawzi <br>
+     */
     @Override
     public void onBindViewHolder(@NonNull PlaylistsView holder, final int position) {
         Track block = Tracks.get(position);
@@ -55,7 +65,7 @@ public class addsongscreateadapter extends RecyclerView.Adapter<addsongscreatead
         /// holder.textViewGenre.setText(playlist.getDescription());
 
         holder.check.setVisibility(View.GONE);
-        if(addsongscreate.addd){
+        if(AddSongsCreate.addd){
             holder.check.setVisibility(View.VISIBLE);
         }else{
             holder.check.setVisibility(View.GONE);
@@ -64,21 +74,34 @@ public class addsongscreateadapter extends RecyclerView.Adapter<addsongscreatead
         holder.check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (addsongscreate.addd == true) {
-                    Log.d(String.valueOf(artPlaylistFragment.array.get(artPlaylistFragment.pos)), "onClick: ");
-                    Log.d(String.valueOf(artPlaylistFragment.pos), "onClick: ");
+                if (AddSongsCreate.addd == true) {
+                    Log.d(String.valueOf(ArtPlaylistFragment.array.get(ArtPlaylistFragment.pos)), "onClick: ");
+                    Log.d(String.valueOf(ArtPlaylistFragment.pos), "onClick: ");
                     ArrayList<Track> list =new ArrayList<Track>();
-                    list.add(addsongscreate.array.get(position));
-                    if(artPlaylistFragment.array.get(artPlaylistFragment.pos).getTracks()==null){
-                        artPlaylistFragment.array.get(artPlaylistFragment.pos).setTracks(list);}
+                    list.add(AddSongsCreate.array.get(position));
+                    if(ArtPlaylistFragment.array.get(ArtPlaylistFragment.pos).getTracks()==null){
+                        ArtPlaylistFragment.array.get(ArtPlaylistFragment.pos).setTracks(list);}
                     else{
-                        artPlaylistFragment.array.get(artPlaylistFragment.pos).getTracks().add(list.get(0));
+                        ArtPlaylistFragment.array.get(ArtPlaylistFragment.pos).getTracks().add(list.get(0));
                     }
-                    addsongscreate.array.get(position).settPname( artPlaylistFragment.array.get(artPlaylistFragment.pos).getPlayname());
+                    AddSongsCreate.array.get(position).settPname( ArtPlaylistFragment.array.get(ArtPlaylistFragment.pos).getPlayname());
+
+                    Call<String> call =  RetrofitSingleton.getInstance().getApi().putsongtop(AddSongsCreate.array.get(position).gettId());
+                    call.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Log.d(response.body(), "onResponse: ");
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
                 }
-                addsongscreate.array.remove(position);
+                AddSongsCreate.array.remove(position);
                 notifyItemRemoved(position);
-                notifyItemRangeChanged(position, addsongscreate.array.size());
+                notifyItemRangeChanged(position, AddSongsCreate.array.size());
 
 
             }
@@ -94,6 +117,9 @@ public class addsongscreateadapter extends RecyclerView.Adapter<addsongscreatead
         return Tracks.size();
     }
 
+    /**
+     * Intializez the views and text in the adapter
+     */
     public class PlaylistsView extends RecyclerView.ViewHolder {
 
         private TextView textViewTitle;

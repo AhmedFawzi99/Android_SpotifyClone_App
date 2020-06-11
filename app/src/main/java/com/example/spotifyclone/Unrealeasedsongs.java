@@ -1,13 +1,10 @@
 package com.example.spotifyclone;
 
-import android.annotation.SuppressLint;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,34 +14,28 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class Unrealeasedsongs extends DialogFragment {
+/**
+ * This Class has the songs that are not yet realesed by the user which he chooses to add them to the songs list and release them now or anytime he wants
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
+public class UnrealeasedSongs extends DialogFragment {
 
 
     static ArrayList<Track> array = new ArrayList<Track>();
     onClickInterface onClickInterface;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView playadapt;
-    Unrealeasedsongsadapter totalsongsadapter;
-    totalsongsadapter adapt;
+    UnrealeasedSongsAdapter totalsongsadapter;
+    TotalSongsAdapter adapt;
     private ImageButton backk3;
     private ImageButton addd;
     TextView text;
 
     static boolean add=false;
 
-    public Unrealeasedsongs(ArrayList<Track> sentarray, totalsongsadapter ad) {
+    public UnrealeasedSongs(ArrayList<Track> sentarray, TotalSongsAdapter ad) {
         array=sentarray;
         adapt=ad;
         Log.d(String.valueOf(array.size()), "Unrealeasedsongs: ");
@@ -63,7 +54,13 @@ public class Unrealeasedsongs extends DialogFragment {
 
     }
 
-
+    /**
+     * the oncreate
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.songsunrealeased, container, false);
@@ -79,7 +76,7 @@ public class Unrealeasedsongs extends DialogFragment {
         playadapt.addItemDecoration(new SpaceItemDecoration(2));
         playadapt.setItemAnimator(new DefaultItemAnimator());
         Log.d(String.valueOf(array.size()), "artPlaylistFragment: ");
-        totalsongsadapter = new Unrealeasedsongsadapter(getContext(), array, onClickInterface);
+        totalsongsadapter = new UnrealeasedSongsAdapter(getContext(), array, onClickInterface);
         playadapt.setAdapter(totalsongsadapter);
         playadapt.setRecycledViewPool(recycledViewPool);
 

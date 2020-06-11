@@ -1,9 +1,6 @@
 package com.example.spotifyclone;
 
-import android.Manifest;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,34 +9,30 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.muddzdev.styleabletoast.StyleableToast;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class totalsongs extends DialogFragment {
+/**
+ * A class that is resposible to show total songs of the artist
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
+public class TotalSongs extends DialogFragment {
 
 
     static ArrayList<Track> array = new ArrayList<Track>();
     onClickInterface onClickInterface;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView playadapt;
-    totalsongsadapter totalsongsadapter;
+    TotalSongsAdapter totalsongsadapter;
     private ImageButton backk3;
     TextView text;
 
@@ -49,17 +42,17 @@ public class totalsongs extends DialogFragment {
     ImageButton add;
     static ImageButton delete;
     static boolean deleteonoff=false;
-    public totalsongs(ArrayList<Track> sentarray) {
+    public TotalSongs(ArrayList<Track> sentarray) {
         array = sentarray;
         Log.d(String.valueOf(array.size()), "artPlaylistFragment: ");
     }
-    public totalsongs(Track t) {
+    public TotalSongs(Track t) {
         array.add(t);
         Artist_DATA.TotalSongs++;
         ArtistManagment.artsongs.setText(String.valueOf(Artist_DATA.TotalSongs));
 
     }
-    public totalsongs() {
+    public TotalSongs() {
 
     }
 
@@ -70,7 +63,13 @@ public class totalsongs extends DialogFragment {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullscreenDialogTheme);
     }
 
-
+    /**
+     * the onCreateView where the adapter is set and the buttons for the add and delete songs which calls their functions
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.songstotal, container, false);
@@ -93,7 +92,7 @@ public class totalsongs extends DialogFragment {
         playadapt.addItemDecoration(new SpaceItemDecoration(2));
         playadapt.setItemAnimator(new DefaultItemAnimator());
         Log.d(String.valueOf(array.size()), "artPlaylistFragment: ");
-        totalsongsadapter = new totalsongsadapter(getContext(), array, onClickInterface);
+        totalsongsadapter = new TotalSongsAdapter(getContext(), array, onClickInterface);
         playadapt.setAdapter(totalsongsadapter);
         playadapt.setRecycledViewPool(recycledViewPool);
         if(ArtistManagment.val==0) {
@@ -126,7 +125,7 @@ public class totalsongs extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                Unrealeasedsongs art = new Unrealeasedsongs(sendingarray,totalsongsadapter);
+                UnrealeasedSongs art = new UnrealeasedSongs(sendingarray,totalsongsadapter);
                 art.show(getFragmentManager(), "Playlist");
 
             }
@@ -149,6 +148,11 @@ public class totalsongs extends DialogFragment {
         });
         return v;
     }
+
+    /**
+     * getting the tracks that are not released yet from the database and send them
+     * @param grade
+     */
     public void getTracks( ArrayList<Track> grade )
     {
         sendingarray = grade;

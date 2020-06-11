@@ -1,5 +1,4 @@
 package com.example.spotifyclone;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,20 @@ import android.widget.TextView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
-import java.security.PublicKey;
-
+/**
+ * This Class is A BottomSheetDialogFragment which is created when the More Button is pressed in the MusicActivityClass.<br>
+ * It gives the user the options such as: <br>
+ * 1 like/dislike  <br>
+ * 2 Hide <br>
+ * 3 View Artist <br>
+ * 4 Set Timer to Auto stop Music <br>
+ * 6 Share <br>
+ * 7 Report <br>
+ * 8 SHow credits <br>
+ * Helping Source: <a href="https://www.youtube.com/watch?v=IfpRL2K1hJk&t=709s">https://www.youtube.com/watch?v=IfpRL2K1hJk&t=709s</a> <br>
+ * @author Ahmed Mahmoud Fawzi <br>
+ * @version 2.0
+ */
 public class MorePageDown extends BottomSheetDialogFragment {
     private static MorePageDown instance;
     private TextView bShare2;
@@ -48,6 +59,14 @@ public class MorePageDown extends BottomSheetDialogFragment {
         return instance;
     }
 
+
+    /**
+     * OnCreate View Sets the layout to open and the image of the music track and then Updates the like button to its current state
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_more_page, container, false);
@@ -75,6 +94,10 @@ public class MorePageDown extends BottomSheetDialogFragment {
         hidelay=v.findViewById(R.id.hidelay);
         artview=v.findViewById(R.id.artview);
         account_music=v.findViewById(R.id.art);
+
+        /**
+         * artist text and button defining what to do when clicked
+         */
         art2=v.findViewById(R.id.art2);
         art2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +119,9 @@ public class MorePageDown extends BottomSheetDialogFragment {
         });
 
         updatelike();
+        /**
+         * Dismiss when clicked else where
+         */
         smallLayout = v.findViewById(R.id.layout_small);
         smallLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +136,10 @@ public class MorePageDown extends BottomSheetDialogFragment {
                 dismiss();
             }
         });
+
+        /**
+         * Share text and button defining what to do when clicked
+         */
         bShare2 = v.findViewById(R.id.btn_share2);
         bShare2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +161,10 @@ public class MorePageDown extends BottomSheetDialogFragment {
                 shareFunction();
             }
         });
+
+        /**
+         * Like text and button defining what to do when clicked
+         */
         bLike3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,6 +184,10 @@ public class MorePageDown extends BottomSheetDialogFragment {
 
             }
         });
+
+        /**
+         * Timer text and button defining what to do when clicked
+         */
         timer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,6 +208,9 @@ public class MorePageDown extends BottomSheetDialogFragment {
             }
         });
 
+        /**
+         * Report text and button defining what to do when clicked
+         */
         Report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,6 +230,10 @@ public class MorePageDown extends BottomSheetDialogFragment {
                 sendreport();
             }
         });
+
+        /**
+         * Hide text and button defining what to do when clicked
+         */
         hide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -211,12 +256,7 @@ public class MorePageDown extends BottomSheetDialogFragment {
             }
         });
 
-        artview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
 
         return v;
@@ -233,6 +273,10 @@ public class MorePageDown extends BottomSheetDialogFragment {
 
 
     }
+
+    /**
+     * A function that opens the Timer BottomSheetDialogFragment for the user to set the time to stop the song
+     */
     private void timerFunction(){
         TimerClass time=new TimerClass();
         time.show(this.getFragmentManager(),"TIMER");
@@ -240,11 +284,17 @@ public class MorePageDown extends BottomSheetDialogFragment {
 
     }
 
+    /**
+     * A function that opens the Share BottomSheetDialogFragment for the user to share
+     */
     private void shareFunction(){
         ShareFragment share=new ShareFragment();
         share.show(this.getFragmentManager(),"SHARE");
         dismiss();
     }
+    /**
+     * This Function is Responsible to update the likeButton by updating the button to either liked or no and then calls the Function in the MusicActivity to update the button in player and notification and send to the serve to add or reove the like
+     */
     private void likefunction(){
         MusicActivity main = (MusicActivity) getActivity();
         if(likeToggle==0)
@@ -270,6 +320,9 @@ public class MorePageDown extends BottomSheetDialogFragment {
         }
 
     }
+    /**
+     * This Function is called int the OnCreateView to update the like/dislike to match the state of the Player and notification in the MusicActivity
+     */
     public void updatelike()
     {
         if(getLikeToggle()==1){
@@ -282,24 +335,39 @@ public class MorePageDown extends BottomSheetDialogFragment {
         }
     }
 
+    /**
+     * A function to send a Report Explicit Content email
+     */
     public void sendreport(){
-        String mail = "salmahazem310@yahoo.com";
+        String mail = Profile_DATA.mail;
         String message = songname+" has been reported as explicit content" +"\n"+"We would look into it";
-        String subject = "Report Explicit COntent";
+        String subject = "Report Explicit Content";
         JavaMailAPI javaMailAPI = new JavaMailAPI(getContext(),mail,subject,message);
         javaMailAPI.execute();
         dismiss();
 
     }
 
+    /**
+     * a function to open the View Artist Fragment
+     */
     public void viewart() {
-        viewart time = new viewart();
+        ViewArt time = new ViewArt();
         time.show(this.getFragmentManager(), "vieart");
         dismiss();
     }
+    /**
+     * getter for the liketoogle
+     * @return
+     */
     int getLikeToggle(){
         return likeToggle;
     }
+
+    /**
+     * setter for the liketoogle
+     * @param a Integer 1/0
+     */
     void setLikeToggle(int a){
 
         likeToggle=a;

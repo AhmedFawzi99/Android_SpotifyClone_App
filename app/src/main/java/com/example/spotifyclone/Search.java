@@ -29,8 +29,8 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
 
     // Declare Variables
     /**
-     *List that contains the animals
-     * Abimal list in a String array
+     *List that contains the songs
+     * Song list in a String array
      */
     ListView list;
     ListViewAdapter adapter;
@@ -50,10 +50,9 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         setContentView(R.layout.activity_search);
         songNameList = new ArrayList<String>();
 
-
-        // Generate sample data
-
-
+        /**
+         * Generate sample data
+         */
         Call<List<SearchResponse>> call = RetrofitSingleton.getInstance().getApi().searchList();
         call.enqueue(new Callback<List<SearchResponse>>() {
             @Override
@@ -77,6 +76,10 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         });
 
     }
+    /**
+     * Access the array retrieved from the server
+     * @param danceSchool
+     */
     void accessArrayList(ArrayList<String> danceSchool){
         list = (ListView) findViewById(R.id.listview);
         for (int i = 0; i < songNameList.size(); i++) {
@@ -95,6 +98,9 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         editsearch = (SearchView) findViewById(R.id.search);
         editsearch.setOnQueryTextListener(this);
 
+        /**
+         * Moves to the SearchedSong Activity and show the searched song
+         */
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -120,9 +126,9 @@ public class Search extends AppCompatActivity implements SearchView.OnQueryTextL
         list.setVisibility(View.VISIBLE);
         String text = newText;
         adapter.filter(text);
-//        list.setVisibility(View.GONE);
+        if(newText.isEmpty()) {
+            list.setVisibility(View.GONE);
+        }
         return false;
-
     }
-
 }

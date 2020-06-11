@@ -3,6 +3,10 @@ package com.example.spotifyclone;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * A class that sets and gets the data of the artist which are obtained from a get request to get the information of the signedin user
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class ArtistResponse {
     @SerializedName("ID")
     @Expose

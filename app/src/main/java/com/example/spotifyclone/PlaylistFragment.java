@@ -32,7 +32,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+
 /**
+ * @author shaimaa
  * A simple {@link Fragment} subclass.
  */
 public class PlaylistFragment extends Fragment implements OnClickListener{
@@ -132,6 +134,12 @@ public class PlaylistFragment extends Fragment implements OnClickListener{
 
     }
 
+    /**
+     * this function communicates with the floating fragment
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Make sure fragment codes match up
         Random rand = new Random(); //instance of random class
@@ -159,12 +167,7 @@ public class PlaylistFragment extends Fragment implements OnClickListener{
     public void addPlaylist()
     {
         ArrayList<Tracks> songs= new ArrayList<Tracks>();
-        // // songs.add(new Tracks("shaimaa"));
-        ////songs.add(new Tracks("shaimaa"));
-        ////songs.add(new Tracks("shaimaa"));
-        ////songs.add(new Tracks("shaimaa"));
-        ////songs.add(new Tracks("shaimaa"));
-        ////songs.add(new Tracks("shaimaa"));
+
         Rowitems.add(new RowItem ("Amr Diab",String.valueOf(R.drawable.flower) ));
         Rowitems.add(new RowItem("Mohamed Monir",String.valueOf(R.drawable.flower) ));
         Rowitems.add(new RowItem("Mohamed Monir",String.valueOf(R.drawable.flower) ));
@@ -204,26 +207,30 @@ public class PlaylistFragment extends Fragment implements OnClickListener{
         }
 
     }
-void checklike()
-{if (Rowitems2!=null)
-{
-    for(int i=0;i<Rowitems2.size();i++)
+
+    /**
+     * check if the playlist is liked
+     */
+    void checklike()
+    {if (Rowitems2!=null)
     {
-        if(!Rowitems2.get(i).isIsliked())
+        for(int i=0;i<Rowitems2.size();i++)
         {
-            Rowitems2.remove(i);
-            //  Toast.makeText(this.getContext(),"removed" , Toast.LENGTH_LONG).show();
+            if(!Rowitems2.get(i).isIsliked())
+            {
+                Rowitems2.remove(i);
+                //  Toast.makeText(this.getContext(),"removed" , Toast.LENGTH_LONG).show();
 
-        }
+            }
 //                myadapter.notifyItemRemoved(i);
-        //      myadapter.notifyItemRangeChanged(i, artistslist.size());
+            //      myadapter.notifyItemRangeChanged(i, artistslist.size());
+        }
+
+    }}
+
+    void checklikeadd(RowItem p)
+    {
+        Rowitems2.add(p);
     }
-
-}}
-
-   void checklikeadd(RowItem p)
-   {
-       Rowitems2.add(p);
-   }
 
 }

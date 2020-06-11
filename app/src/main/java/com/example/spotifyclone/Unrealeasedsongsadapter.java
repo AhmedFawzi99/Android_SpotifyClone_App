@@ -1,6 +1,7 @@
 package com.example.spotifyclone;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +11,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class Unrealeasedsongsadapter extends RecyclerView.Adapter<Unrealeasedsongsadapter.PlaylistsView> {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+/**
+ * The Adapter forr the songs that are not yet released and waiting to be added by the Artist.
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
+public class UnrealeasedSongsAdapter extends RecyclerView.Adapter<UnrealeasedSongsAdapter.PlaylistsView> {
 
     private List<Track> Tracks;
     private Context context;
     onClickInterface onClickInterface;
-    public Unrealeasedsongsadapter(Context context, List<Track> list, onClickInterface onClickInterface) {
+    public UnrealeasedSongsAdapter(Context context, List<Track> list, onClickInterface onClickInterface) {
         this.Tracks = list;
         this.context = context;
         this.onClickInterface = onClickInterface;
@@ -36,6 +43,11 @@ public class Unrealeasedsongsadapter extends RecyclerView.Adapter<Unrealeasedson
 
     }
 
+    /**
+     * onBindViewHolder adds the unreleased songs to the adapter
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull PlaylistsView holder, final int position) {
         Track block = Tracks.get(position);
@@ -44,7 +56,7 @@ public class Unrealeasedsongsadapter extends RecyclerView.Adapter<Unrealeasedson
         /// holder.textViewGenre.setText(playlist.getDescription());
 
         holder.check.setVisibility(View.VISIBLE);
-        if(Unrealeasedsongs.add){
+        if(UnrealeasedSongs.add){
             holder.check.setVisibility(View.VISIBLE);
         }else{
             holder.check.setVisibility(View.GONE);
@@ -52,13 +64,25 @@ public class Unrealeasedsongsadapter extends RecyclerView.Adapter<Unrealeasedson
         holder.check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Unrealeasedsongs.add == true){
+                if (UnrealeasedSongs.add == true){
 
-                    totalsongs songss=new totalsongs(Unrealeasedsongs.array.get(position));
-                    Unrealeasedsongs.array.remove(position);
+                    TotalSongs songss=new TotalSongs(UnrealeasedSongs.array.get(position));
+                    ArtistManagment.notffication(2);
+                    Call<String> call =  RetrofitSingleton.getInstance().getApi().putsong(UnrealeasedSongs.array.get(position).gettId());
+                    call.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Log.d(response.body(), "onResponse: ");
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                    UnrealeasedSongs.array.remove(position);
                     notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, Unrealeasedsongs.array.size());
-
+                    notifyItemRangeChanged(position, UnrealeasedSongs.array.size());
 
                 }
             }
