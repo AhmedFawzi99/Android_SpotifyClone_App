@@ -16,6 +16,10 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * @author shaimaa
+ * adapter to fill the fans also like list
+ */
 public class Fansalsolike_Adapter extends RecyclerView.Adapter<Fansalsolike_Adapter.PlaylistsViewHolder26> {
 
 
@@ -42,7 +46,6 @@ public class Fansalsolike_Adapter extends RecyclerView.Adapter<Fansalsolike_Adap
 
         holder.textViewTitle.setText(playlist.getName());
 
-        /// holder.textViewGenre.setText(playlist.getDescription());
 
 // load images using picasso
         Picasso.with(context).
@@ -56,6 +59,9 @@ public class Fansalsolike_Adapter extends RecyclerView.Adapter<Fansalsolike_Adap
         return artists.size();
     }
 
+    /**
+     * holder that gets the layout of the RecyclerView
+     */
 
     public class PlaylistsViewHolder26 extends RecyclerView.ViewHolder {
 
@@ -77,4 +83,3 @@ public class Fansalsolike_Adapter extends RecyclerView.Adapter<Fansalsolike_Adap
 
     }
 }
-

@@ -1,5 +1,8 @@
 package com.example.spotifyclone;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
 import com.muddzdev.styleabletoast.StyleableToast;
@@ -21,37 +25,68 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.example.spotifyclone.App.CHANNEL_1_ID;
+
+/**
+ * @author shaimaa
+ * each playlist class
+ */
 public class EachPlaylist extends Fragment
 {
+    /**
+     * each playlist class
+     */
     private static EachPlaylist instance;
     private  String PlaylistName;
     private  String image2;
     public static TextView textView;
     public static TextView textView2;
     private ImageView btn_more;
-     public  static  ImageView imageView;
-PlaylistFragment playlistFragment= new PlaylistFragment();
+    public  static  ImageView imageView;
+    /**
+     * playlist fragment objrct
+     */
+    PlaylistFragment playlistFragment= new PlaylistFragment();
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private ImageButton next;
     public  static ArrayList<Tracks> Songs= new ArrayList<Tracks>();
-//    private  ArrayList<Tracks> Songs2= new ArrayList<Tracks>();
+
 
     private Tracks s1;
-private  RowItem playlistt;
+    private  RowItem playlistt;
+
+    /**
+     * constructor
+     * @param playlistname
+     * @param image
+     * @param id
+     */
     public EachPlaylist(String playlistname, String image , String id ) {
         PlaylistName=playlistname;
         image2=image;
     }
 
-public  EachPlaylist(RowItem s){Songs=s.getSongs(); PlaylistName=s.getName();
-    image2=s.getImage();
-    playlistt=s;
-}
+    /**
+     * overriding constructor
+     * @param s
+     */
+    public  EachPlaylist(RowItem s){Songs=s.getSongs(); PlaylistName=s.getName();
+        image2=s.getImage();
+        playlistt=s;
+    }
 
 
     //public static EachPlaylist getInstance(){
     //    return instance;
     //}
+
+    /**
+     * on creating the page this function is called
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,7 +106,7 @@ public  EachPlaylist(RowItem s){Songs=s.getSongs(); PlaylistName=s.getName();
             textView=(TextView)s.findViewById(R.id.textView3);
             textView2=(TextView)s.findViewById(R.id.textView9);
             textView2.setText(PlaylistName);
-             imageView= (ImageView) s.findViewById(R.id.btn_Likeplaylist);
+            imageView= (ImageView) s.findViewById(R.id.btn_Likeplaylist);
             ImageView imagee=(ImageView) s.findViewById(R.id.image2);
             ImageView imageVieww=(ImageView) s.findViewById(R.id.backplayer);
             Picasso.with(getContext()).
@@ -111,13 +146,7 @@ public  EachPlaylist(RowItem s){Songs=s.getSongs(); PlaylistName=s.getName();
                 public void onClick(View view) {
                     if(MainActivitysha.checker==0) {
                         Intent i = new Intent(getActivity(), MusicActivity.class);
-                   /* i.putExtra("SENDER_KEY", "EachPlaylist");
-                    i.putExtra("NAME", "salma ");
-                    i.putExtra("URL",s1.getURL() );
-                    i.putExtra("IMAGE",s1.getImageid());
-                    i.putExtra("ID",s1.getId() );
-                    i.putExtra("PLAYLISTNAME",PlaylistName);
-                    i.putExtra("Artist","salma" );*/
+
                         s1 = Songs.get(0);
                         Log.d(String.valueOf(Songs.size()), "SIZEEEE: ");
                         adapter.notifyDataSetChanged();
@@ -143,14 +172,14 @@ public  EachPlaylist(RowItem s){Songs=s.getSongs(); PlaylistName=s.getName();
                     else {
                         MusicActivity main = MusicActivity.getInstance();
                         main.buttonPlayerAction();
-                       if( main.media_player.isPlaying())
-                       {
-                           textView.setText("PAUSE");
-                       }
-                       else
-                       {
-                           textView.setText("PLAY");
-                       }
+                        if( main.media_player.isPlaying())
+                        {
+                            textView.setText("PAUSE");
+                        }
+                        else
+                        {
+                            textView.setText("PLAY");
+                        }
 
                     }
 
@@ -162,13 +191,7 @@ public  EachPlaylist(RowItem s){Songs=s.getSongs(); PlaylistName=s.getName();
                 public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                     //MusicActivity activity=(MusicActivity) getActivity();;
                     Intent i = new Intent(getActivity(), MusicActivity.class);
-                   /* i.putExtra("SENDER_KEY", "EachPlaylist");
-                    i.putExtra("NAME", "salma ");
-                    i.putExtra("URL",s1.getURL() );
-                    i.putExtra("IMAGE",s1.getImageid());
-                    i.putExtra("ID",s1.getId() );
-                    i.putExtra("PLAYLISTNAME",PlaylistName);
-                    i.putExtra("Artist","salma" );*/
+
                     s1 = Songs.get(position);
                     Log.d(String.valueOf(Songs.size()), "SIZEEEE: ");
                     adapter.notifyDataSetChanged();
@@ -212,17 +235,7 @@ public  EachPlaylist(RowItem s){Songs=s.getSongs(); PlaylistName=s.getName();
         Log.d(String.valueOf(Songs.size()), "getSONG: ");
         Tracks s2 = Songs.get(a);
         return s2;
-//        String name = s2.getName();
-//        Log.d(name, "getSONG: ");
-//        String url = s2.getURL();
-//        String imageid = s2.getImageid();
-//        String id = s2.getId();
-//        String playlistnamee = s2.getName();
-//        String artist = "salmaaaaaaaaaaa";
-//        int position =a;
-//        boolean isliked=s2.getIsliked();
 
-//        activity.setMusicPlayerComponents(position,name,artist,"Playing from Playlist",playlistnamee,imageid,url,isliked);
 
     }
 
@@ -233,31 +246,46 @@ public  EachPlaylist(RowItem s){Songs=s.getSongs(); PlaylistName=s.getName();
     public void showlike(String S ) {
         StyleableToast.makeText(this.getContext(), S, R.style.exampleToast).show();
     }
-public void buttonlikeplaylist()
-{
-    if(playlistt.isIsliked())
+    public void buttonlikeplaylist()
     {
-        playlistt.setIsliked(false);
-        imageView.setImageResource(R.drawable.like);
-        showlike("disliked");
-        playlistFragment.checklike();
-        //////// putlike();
+        if(playlistt.isIsliked())
+        {
+            playlistt.setIsliked(false);
+            imageView.setImageResource(R.drawable.like);
+            showlike("disliked");
+            playlistFragment.checklike();
+            //////// putlike();
 
-        // showLikeToast(" Added to Liked Songs. ");
+            // showLikeToast(" Added to Liked Songs. ");
 
 
-    }else{
-        imageView.setImageResource(R.drawable.favorite_green);
-        showlike("Liked");
-        playlistFragment.checklikeadd(playlistt);
+        }else{
+            More_Page_Playlist.like_song="You Liked a song";
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),CHANNEL_1_ID)
+                    .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                    .setContentTitle("Activity Notification")
+                    .setContentText("You liked a song")
+                    .setAutoCancel(true);
+            Intent i = new Intent(getContext(), More_Page_Playlist.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra("message", "You liked a song ");
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(pendingIntent);
+
+            NotificationManager notificationManager = (NotificationManager)getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(0, builder.build());
+            imageView.setImageResource(R.drawable.favorite_green);
+            showlike("Liked");
+            playlistFragment.checklikeadd(playlistt);
 //            notificationManager.notify(1, );
-        //  artistFragment.artistslist.remove(artist);
-        /////////////deletelike();
-        playlistt.setIsliked(true);
-        //    showLikeToast(" Removed from Liked Songs. ");
+            //  artistFragment.artistslist.remove(artist);
+            /////////////deletelike();
+            playlistt.setIsliked(true);
+            //    showLikeToast(" Removed from Liked Songs. ");
+
+        }
+
 
     }
-
-
-}
 }

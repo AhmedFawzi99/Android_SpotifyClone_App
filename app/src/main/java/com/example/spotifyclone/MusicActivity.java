@@ -13,14 +13,12 @@ import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,7 +26,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import androidx.annotation.RequiresApi;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -41,8 +39,17 @@ import retrofit2.Response;
 
 import static com.example.spotifyclone.App.CHANNEL_2_ID;
 
+/**
+ * Main Music Activity Class Where Music Data Gets,Set and Played <br>
+ * Helping Source: <a href="https://www.youtube.com/watch?v=Qr88MxPijN4">https://www.youtube.com/watch?v=Qr88MxPijN4</a> <br>
+ * @author Ahmed Mahmoud Fawzi <br>
+ * @version 2.0
+ */
 public class MusicActivity<pubic> extends AppCompatActivity {
 
+    /**
+     * Define all Variables needed throughout the Whole Activity
+     */
     private static MusicActivity instance;
     private ImageButton btn_more;
     private View parent_view;
@@ -89,7 +96,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
 
 
-
+    /**
+     * A Runnable that is used to set the progress with the current position of the song.
+     */
     private Runnable mUpdateSeekbar = new Runnable() {
         @Override
         public void run() {
@@ -101,17 +110,27 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
 
 
-
+    /**
+     * The on Start of the MusicActivity.
+     */
     @Override
     protected void onStart() { // onStart() of your activity
         super.onStart();
         instance = this;
     }
+    /**
+     * Getting the Instance of the MusicActivity Class.
+     * @return Return the Instance of the MusicActivity.
+     */
     public static MusicActivity getInstance(){
         return instance;
     }
 
 
+    /**
+     * The Oncreate Funtion is responsible for assigning the variables needed to each content in the layotu page and creates the activity with the layout.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -158,6 +177,10 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             this.receiveData();
 
         }
+
+        /**
+         * this is called when the share button is clicked beging a new intent to share a subject and opens options for the user.
+         */
         btn_share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,7 +190,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         }) ;
 
 
-
+        /**
+         * A click on the down Button calls the onBackPressed
+         */
         btn_playerdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,12 +201,19 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
 
         });
+
+        /**
+         *  A click on the like button triggers the buttonlikeAction
+         */
         btn_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 buttonLikeAction();
             }
         });
+        /**
+         *  A click on the like button opens the More Fragment
+         */
         btn_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -253,7 +285,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     }
 
 
-
+    /**
+     * A Function Responsible to return to home when pressed on inside the player
+     */
     public void onBackPressed() {
 
         Intent activityIntent = new Intent(MusicActivity.this,MainActivitysha.class);
@@ -276,6 +310,22 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     }
 
 
+    /**
+     * A Funtion responsible to set the Music Data and Plays it using Android Media Player <br>
+     * It gets the needed data and assigns it then sets the path for the music to stream and play <br>
+     * The Whole Music Playing is all about this Function after setting the data media player is prepared and then started <br>
+     * Also inside the function seekbar listener is called to detect when the user moves the seek bar and then seeks the music to the desired position <br>
+     * handlers for seekbar and time changing are called also in function to keep updating. <br>
+     * @param position position of the song playlist array
+     * @param sName Song Name Parameter
+     * @param aName Artist Name Parameter
+     * @param pName Playlist Name Parameter
+     * @param hName Hit Name Parameter
+     * @param iURL  Image Url to Set the photo in the assigned Image View
+     * @param mURL  Music Url to stream the music
+     * @param isliked the song is liked or no
+     * @param id id of the song
+     */
     public void setMusicPlayerComponents( int position, String sName, String aName, String pName, String hName, final String iURL, final String mURL, boolean isliked,String id){
 
         sID=id;
@@ -337,6 +387,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
         Log.d(Profile_DATA.Type, "setMusicPlayerComponents: ");
 
+        /**
+         * Checks is the seekbar is moved and then seeks the song to the new place
+         */
         song_progress.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -355,6 +408,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             }
         });
         updateTimeAndSeekbar();
+        /**
+         * A click on the paue/play button calls the buttonPlayerAction
+         */
         btn_pause_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
@@ -374,6 +430,12 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         mHandler.post(mUpdateTimeTask);
     }
 
+    /**
+     * A Function that listens to the user interaction with the Play/Pause Button changing the Image resource and then stops the music or starts it again. <br>
+     * Also inside the function notification Player is updated to change the Play/pause icon also <br>
+     * A Handler Remove Call Back is Also Called to stop/continue updating the music seekbar and the time <br>
+     * Also the mainactivity widget is updated also
+     */
     public void buttonPlayerAction(){
 //        TimerClass timer=new TimerClass();
         if(media_player.isPlaying() ){
@@ -397,6 +459,10 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             mHandler.post(mUpdateTimeTask);
         }
     }
+
+    /**
+     * a function that gets the next song and sets its data
+     */
     public void next()
     {
         skipscount++;
@@ -426,6 +492,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         }
     }
 
+    /**
+     * A function that gets the previous song and sets its data
+     */
     public void prev()
     {
         if(Profile_DATA.Type.equals("r")) {
@@ -449,6 +518,10 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         sendOnChannel2(parent_view,pauseplayDrawable,likeDrawable);
     }
 
+
+    /**
+     * StopTimer is a function Called by the Timer Fragment created and is called when the timer is reached to the assigned time and then stops the music and updates all components.
+     */
     public void stopTimer()
     {
         if(media_player.isPlaying() ) {
@@ -462,6 +535,10 @@ public class MusicActivity<pubic> extends AppCompatActivity {
             return;
         }
     }
+
+    /**
+     * ReceiveData is a Function responsible for receiving the Track Data sent from MainActivitysha Class and then calls setMusicPlayerComponents Function to start the player.
+     */
     public void receiveData()
     {
 
@@ -477,6 +554,14 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         setMusicPlayerComponents(position,name,artist,"Playing from Playlist",playlistnamee,imageid,url,isliked,id);
     }
 
+    /**
+     * A function reponsible to convert the drawable to Bitmap. <br>
+     * This Function is used in the notification calling because the notification Large icon needs a bitmap but the music image is a drawable. <br>
+     * So this function converts it to transform the Image to be able to be used in Notification. <br>
+     * @param drawable   The Drawable Image to be converted
+     * @return  Returns a Bitmap
+     * Source: <a href="https://stackoverflow.com/questions/3035692/how-to-convert-a-drawable-to-a-bitmap">https://stackoverflow.com/questions/3035692/how-to-convert-a-drawable-to-a-bitmap</a>
+     */
     public static Bitmap drawableToBitmap (Drawable drawable) {
         Bitmap bitmap = null;
 
@@ -499,6 +584,16 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         return bitmap;
     }
 
+    /**
+     * This Function creates the Notification Player it takes 2 Drawabels and then Creates a notificarion with using NotificationCompat MediaStyle. <br>
+     * This Function has 4 Actions like/previous/Play/next/dislike <br>
+     * Inside the Fucntion the type for each action is set to be able to tell which action is pressed on and do a response in terms of the type <br>
+     * @param v
+     * @param drawable    This Drawable is Play/Pause Button Image to be able to update the Image Resource every time
+     * @param likeDrawable This Drawable is for the Like Button and it is used to update ethier it is liked or no and set the image resource.
+     * Source Took Things From : <a href="https://codinginflow.com/tutorials/android/notifications-notification-channels/part-4-bigpicturestyle-mediastyle">https://codinginflow.com/tutorials/android/notifications-notification-channels/part-4-bigpicturestyle-mediastyle</a>
+     * Modified By : Ahmed Mahmoud Fawzi
+     */
     public void sendOnChannel2(View v,int drawable,int likeDrawable) {
 
 
@@ -543,26 +638,45 @@ public class MusicActivity<pubic> extends AppCompatActivity {
                 )
                 .setSubText(name_playlist.getText())
                 .setPriority(NotificationCompat.PRIORITY_LOW)
-                .setOngoing(true)
+                .setOngoing(false)
                 .setShowWhen(false)
                 .build();
 
         notificationManager.notify(1, notification);
     }
+
+
+    /**
+     * A getter for the likeToggle which acts as a flag to weather the Track is liked or no
+     * @return
+     */
     int getLikeToggle(){
         return likeToggle;
     }
+    /**
+     * A setter for the likeToggle which acts as a flag to weather the Track is liked or no
+     * @param a  An integr either 1/0
+     */
     void setLikeToggle(int a){
 
         likeToggle=a;
     }
 
+    /**
+     * A toast that shows when the like button is pressed Indicating what happened now (added to liked or Removed )
+     * @param S     A String for the Toast
+     */
     public void showLikeToast(String S ) {
         StyleableToast.makeText(this, S, R.style.exampleToast).show();
     }
 
 
 
+    /**
+     * This Function is Called when a like button has been pressed. <br>
+     * It sets the Player like Button and the notification like to either liked or unliked and it also sets the liktoggle flag to 1 which means that it is liked. <br>
+     * I also show a toast using the showliketoast function. <br>
+     */
     public void buttonLikeAction(){
 
         if(getLikeToggle()==0)
@@ -591,6 +705,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
     }
 
 
+    /**
+     * A runnable that is used to update the time while the music is playing.
+     */
     private Runnable mUpdateTimeTask=new Runnable() {
         @Override
         public void run() {
@@ -601,6 +718,10 @@ public class MusicActivity<pubic> extends AppCompatActivity {
         }
     };
 
+    /**
+     * This Function is Used to update the time and is called in the runnable. <br>
+     * It uses a object to MusicControl Class to transform the Milliseconds to Time for both the Current duration and the Total Duration. <br>
+     */
     private void updateTimeAndSeekbar(){
 
         long totalDuration= media_player.getDuration();
@@ -615,14 +736,23 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
     }
 
+    /**
+     * function that sets remaining time of playing
+     * @param a
+     */
     private void setRemaining(long a){
         remaining_duration=a;
     }
+    /**
+     * function that gets remaining time of playing
+     */
     public long getRemaining(){
         return remaining_duration;
     }
 
-
+    /**
+     * This Function Connects to the server and The Song Id variable(sID) to add it as liked in the server
+     */
     public void putlike() {
 
         likeDislike likee=new likeDislike(sID);
@@ -650,6 +780,10 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
     }
 
+
+    /**
+     * This Function Connects to the server and The Song Id variable(sID) to delete it from the liked songs
+     */
     public void deletelike() {
 
 
@@ -667,11 +801,7 @@ public class MusicActivity<pubic> extends AppCompatActivity {
                     return;
                 }
                 Log.d("delete", "onResponse: ");
-//                getmessage message=response.body();
-//                String content = "";
-//                content += "Code:" + response.code()+"\n";
-//                content += "message: " + message.getMessage();
-//                textViewResult.setText(content);
+
             }
 
 
@@ -683,6 +813,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
     }
 
+    /**
+     * This Function is Called to show adds after certain amount of time
+     */
     public void addPOP(final int a ){
 
         addtimer = new CountDownTimer(a, 1000) {
@@ -705,7 +838,9 @@ public class MusicActivity<pubic> extends AppCompatActivity {
 
 
 
-
+    /**
+     * This Function is Called when the activity is closed reseting the mediaplayer and the notificationplayer also
+     */
     @Override
     protected void onDestroy(){
 

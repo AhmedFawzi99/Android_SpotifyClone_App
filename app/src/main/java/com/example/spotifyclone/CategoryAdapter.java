@@ -19,7 +19,8 @@ import java.util.List;
 
 
 /**
- * Created by shaimaa
+ * @author   shaimaa
+ * this adapter fills recyclerview of  the home fragment
  */
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.HomeViewHolder> {
@@ -31,7 +32,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.HomeVi
     private RecyclerView.RecycledViewPool recycledViewPool;
     FragmentManager fragmentmanager;
 
-
+    /**
+     * constructor of the adapter
+     * @param data
+     * @param context
+     * @param onClickInterface
+     * @param fragmentmanager
+     */
     public CategoryAdapter(List<Category> data, Context context, onClickInterface onClickInterface, FragmentManager fragmentmanager) {
         this.data = data;
         this.context = context;
@@ -41,7 +48,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.HomeVi
 
     }
 
-
+    /**
+     *Main functions of each adapter
+     */
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -57,11 +66,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.HomeVi
             public void setClick(int abc) {
                 // list.remove(abc);
 
-                 //Toast.makeText(context,"Position is"+abc, Toast.LENGTH_LONG).show();
+                //Toast.makeText(context,"Position is"+abc, Toast.LENGTH_LONG).show();
 
                 Type BLOCK= data.get(position).getBlocks().get(abc);
                 Toast.makeText(context,BLOCK.getType(), Toast.LENGTH_LONG).show();
-               if(BLOCK.getType().equals("playlist")) {
+                if(BLOCK.getType().equals("playlist")) {
                     String image = BLOCK.rowitem.getImage();
                     String name = BLOCK.rowitem.getName();
                     String id=BLOCK.rowitem.getId();
@@ -86,12 +95,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.HomeVi
         holder.recyclerViewHorizontal.setAdapter(horizontalAdapter);
 
         holder.recyclerViewHorizontal.setRecycledViewPool(recycledViewPool);
-/*holder.textViewCategory.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        onClickInterface2.setClick(position);
-    }
-});*/
 
     }
 

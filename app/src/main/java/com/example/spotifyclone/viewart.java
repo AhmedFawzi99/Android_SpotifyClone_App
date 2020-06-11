@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
+/**
+ * The Class that shows the artist data in Music Player
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class viewart extends BottomSheetDialogFragment {
     private static MorePageDown instance;
     private LinearLayout smallLayout;

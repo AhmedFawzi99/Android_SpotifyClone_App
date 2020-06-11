@@ -2,6 +2,9 @@ package com.example.spotifyclone;
 
 import java.util.ArrayList;
 
+/**
+ * @author  shaimaa
+ */
 public class Category {
 
     /**
@@ -13,6 +16,19 @@ public class Category {
      */
     ArrayList<RowItem> playlists =new ArrayList<RowItem>();
 
+    /**
+     * ArrayList of albums
+     */
+    ArrayList<Album> albums = new ArrayList<>();
+    /**
+     * ArrayList of blocks
+     */
+    ArrayList<Type> blocks = new ArrayList<>();
+
+    /**
+     * setters and getters
+     * @return
+     */
     public ArrayList<Type> getBlocks() {
         return blocks;
     }
@@ -21,11 +37,9 @@ public class Category {
         this.blocks = blocks;
     }
 
-    /**
-     * ArrayList of albums
-     */
-    ArrayList<Album> albums = new ArrayList<>();
-    ArrayList<Type> blocks = new ArrayList<>();
+
+
+
 
     public ArrayList<RowItem> getPlaylists() {
         return playlists;

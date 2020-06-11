@@ -10,13 +10,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * This is an adapter for the artist Albums that shows all the albums of the artist loggedin
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.PlaylistsView> {
 
     private List<PlaylistResponse> Playlists;
@@ -35,6 +38,12 @@ public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.
         return new PlaylistsView(LayoutInflater.from(context).inflate(R.layout.artitem, parent, false));
     }
 
+    /**
+     * the onBindViewHolder checks if an Album is chosen to delete and deletes it and all the songs it has because if an album is deleted the songs are deleted unless the user add them to realease again
+     * @param holder
+     * @param position
+     * @author Ahmed Mahmoud Fawzi <br>
+     */
     @Override
     public void onBindViewHolder(@NonNull PlaylistsView holder, final int position) {
         PlaylistResponse block = Playlists.get(position);
@@ -78,6 +87,10 @@ public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.
                 }
             }
         });
+        /**
+         * when the user clicks on the Album it checks if it is empty or not to add songs or show the songs contained
+         * @author Ahmed Mahmoud Fawzi <br>
+         */
         holder.imageViewMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +127,10 @@ public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.
         return Playlists.size();
     }
 
+    /**
+     * Initialize the Image and text and checbox of the adapter contents
+     * @author Ahmed Mahmoud Fawzi <br>
+     */
     public class PlaylistsView extends RecyclerView.ViewHolder {
 
         private TextView textViewTitle;

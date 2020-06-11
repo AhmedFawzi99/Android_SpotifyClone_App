@@ -7,6 +7,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+/**
+ * This Class is responsible for showing the add pop in the music player while the user is Free and not premium
+ * Helping Source: <a href="https://www.youtube.com/watch?v=fn5OlqQuOCk">https://www.youtube.com/watch?v=fn5OlqQuOCk</a> <br>
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class Pop extends Activity {
     public Button subscribeadd;
     @Override
@@ -25,7 +30,7 @@ public class Pop extends Activity {
         subscribeadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mail = "salmahazem310@yahoo.com";
+                String mail = Profile_DATA.mail;
                 String message = "You are upgraded to Maestro";
                 String subject = "Getting Premium";
                 JavaMailAPI javaMailAPI = new JavaMailAPI(Pop.this,mail,subject,message);

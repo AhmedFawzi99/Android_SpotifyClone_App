@@ -3,6 +3,10 @@ package com.example.spotifyclone;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Setters and Getters for SignUP data
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class SignUP {
     @SerializedName("Email")
     @Expose

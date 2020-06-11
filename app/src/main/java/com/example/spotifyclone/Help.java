@@ -1,22 +1,19 @@
 package com.example.spotifyclone;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.squareup.picasso.Picasso;
 
-import java.security.PublicKey;
-
+/**
+ * Fragment that lets the user chooses which help page he wants to open
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class Help extends DialogFragment {
 
     public TextView Search;
@@ -38,6 +35,41 @@ public class Help extends DialogFragment {
         Radio=v.findViewById(R.id.radio);
         Rights=v.findViewById(R.id.datarights);
         help=v.findViewById(R.id.helplayout);
+        Search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHelp(1);
+
+            }
+        });
+        Playlists.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHelp(2);
+
+            }
+        });
+        Radio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHelp(3);
+
+            }
+        });
+        ShareandPoadcasts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHelp(4);
+
+            }
+        });
+        Rights.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openHelp(5);
+
+            }
+        });
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +93,15 @@ public class Help extends DialogFragment {
     }
 
 
-
+    /**
+     * A function that opens the choosen Help page
+     * @param a number indicating which help page is chosen
+     */
+    void openHelp(int a){
+        HelpEach moreDown=new HelpEach();
+        moreDown.show(this.getFragmentManager(),"Helpeach");
+        moreDown.a=a;
+    }
 
 }
 

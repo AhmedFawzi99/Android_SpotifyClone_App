@@ -28,6 +28,11 @@ import java.net.URI;
 
 import static androidx.core.content.ContextCompat.getSystemService;
 
+/**
+ * ShareFragment class that opens a dialog and lets the user choose which way he wants to send with.
+ * Helping Source: <a href="https://www.youtube.com/watch?v=CC79Qz6n22c&t=375s">https://www.youtube.com/watch?v=CC79Qz6n22c&t=375s</a> <br>
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class ShareFragment extends BottomSheetDialogFragment {
     private static ShareFragment instance;
     private ImageView musicImage;
@@ -193,6 +198,10 @@ public class ShareFragment extends BottomSheetDialogFragment {
     }
 
 
+    /**
+     * the major function of share which determines which app the user wants to share to
+     * @param a
+     */
     private void share(int a){
         MusicActivity main = (MusicActivity) getActivity();
         Intent shareIntent = new Intent();
@@ -213,6 +222,12 @@ public class ShareFragment extends BottomSheetDialogFragment {
         startActivity(shareIntent);
     }
 
+    /**
+     * function that Checks if the app is installed or no on the user phone
+     * @param packageName
+     * @param packageManager
+     * @return
+     */
     private boolean isPackageInstalled(String packageName, PackageManager packageManager) {
         try {
             packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);

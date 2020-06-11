@@ -5,6 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+/**
+ * Shows the clicked on song in the search
+ * @author Salma Hazem
+ * @version 1.0
+ */
+
 public class SearchedSong extends AppCompatActivity {
 
     TextView searched;

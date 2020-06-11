@@ -2,6 +2,10 @@ package com.example.spotifyclone;
 
 import java.util.ArrayList;
 
+/**
+ * @author shaimaa
+ * class artist
+ */
 public class Artist {
     /**
      * String id of the Artist
@@ -23,8 +27,14 @@ public class Artist {
      array of fans also like
      */
     ArrayList<Artist> FANSALSOLIKE =null;
+    /**
+     * boolean that tell whether this artist is followed by the user or not
+     */
     boolean following =true;
 
+    /**
+     * setters and getters
+     */
     public boolean isFollowing() {
         return following;
     }

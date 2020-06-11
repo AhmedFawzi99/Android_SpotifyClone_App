@@ -1,9 +1,6 @@
 package com.example.spotifyclone;
 
-import android.Manifest;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,28 +9,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.muddzdev.styleabletoast.StyleableToast;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
- * This Class creates a Fragment that has songs which are not in albums and you can add them.
+ * This Class creates a Fragment that has songs which are not in albums and you can add them to Albums
+ * @author Ahmed Mahmoud Fawzi <br>
  */
 public class addsongscreate extends DialogFragment {
 
@@ -64,7 +49,7 @@ public class addsongscreate extends DialogFragment {
     }
 
     /**
-     * onCreateView of the addsongsadapter
+     * onCreateView of the addsongsadapterin which it checks if there are songs which are not in albums yet and then adds them if they are solo to be able to add them in Albums
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -102,6 +87,9 @@ public class addsongscreate extends DialogFragment {
         playadapt.setAdapter(totalsongsadapter);
         playadapt.setRecycledViewPool(recycledViewPool);
 
+        /**
+         * this is a button that when makes the check marks visible or no
+         */
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

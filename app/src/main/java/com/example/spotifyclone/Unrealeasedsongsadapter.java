@@ -1,6 +1,7 @@
 package com.example.spotifyclone;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +11,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+/**
+ * The Adapter forr the songs that are not yet released and waiting to be added by the Artist.
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class Unrealeasedsongsadapter extends RecyclerView.Adapter<Unrealeasedsongsadapter.PlaylistsView> {
 
     private List<Track> Tracks;
@@ -36,6 +43,11 @@ public class Unrealeasedsongsadapter extends RecyclerView.Adapter<Unrealeasedson
 
     }
 
+    /**
+     * onBindViewHolder adds the unreleased songs to the adapter
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull PlaylistsView holder, final int position) {
         Track block = Tracks.get(position);
@@ -55,10 +67,22 @@ public class Unrealeasedsongsadapter extends RecyclerView.Adapter<Unrealeasedson
                 if (Unrealeasedsongs.add == true){
 
                     totalsongs songss=new totalsongs(Unrealeasedsongs.array.get(position));
+                    ArtistManagment.notffication(2);
+                    Call<String> call =  RetrofitSingleton.getInstance().getApi().putsong(Unrealeasedsongs.array.get(position).gettId());
+                    call.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Log.d(response.body(), "onResponse: ");
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
                     Unrealeasedsongs.array.remove(position);
                     notifyItemRemoved(position);
                     notifyItemRangeChanged(position, Unrealeasedsongs.array.size());
-
 
                 }
             }

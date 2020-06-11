@@ -2,6 +2,9 @@ package com.example.spotifyclone;
 
 import java.util.ArrayList;
 
+/**
+ * @author Shaimaa Osama
+ */
 public class RowItem {
     /**
      * each playlist contains of an image
