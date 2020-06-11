@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * A class that sets and gets the data of the artist which are obtained from a get request to get the information of the signedin user
+ * A class that sets and gets the data of the artist which are obtained from a get request to get the information of the signedin user <br>
  * @author Ahmed Mahmoud Fawzi <br>
  */
 public class ArtistResponse {

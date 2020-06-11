@@ -3,7 +3,7 @@ package com.example.spotifyclone;
 import java.time.Duration;
 
 /**
- * This Class is Mainly to Calculate the Duration of the music and the Current Duration Time.
+ * This Class is Mainly to Calculate the Duration of the music and the Current Duration Time. <br>
  * Helping Source: <a href="https://www.youtube.com/watch?v=Qr88MxPijN4">https://www.youtube.com/watch?v=Qr88MxPijN4</a> <br>
  * Helping Source: <a href="https://www.youtube.com/watch?v=ZRffTnk8ug8&list=PL9vy4y29rrd4x5pAbowit8gpjsXAai0yF">https://www.youtube.com/watch?v=ZRffTnk8ug8&list=PL9vy4y29rrd4x5pAbowit8gpjsXAai0yF</a> <br>
  * Helping Source: <a href="https://www.youtube.com/watch?v=cbDHgoCVWak https://www.youtube.com/watch?v=bslTj2zDARc">https://www.youtube.com/watch?v=cbDHgoCVWak https://www.youtube.com/watch?v=bslTj2zDARc</a> <br>
