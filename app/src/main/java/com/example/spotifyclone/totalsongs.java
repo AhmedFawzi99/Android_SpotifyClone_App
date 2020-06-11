@@ -32,7 +32,7 @@ public class totalsongs extends DialogFragment {
     onClickInterface onClickInterface;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView playadapt;
-    com.example.spotifyclone.totalsongsadapter totalsongsadapter;
+    totalsongsadapter totalsongsadapter;
     private ImageButton backk3;
     TextView text;
 

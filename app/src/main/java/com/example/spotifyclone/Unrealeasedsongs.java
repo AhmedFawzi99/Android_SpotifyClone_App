@@ -28,14 +28,14 @@ public class Unrealeasedsongs extends DialogFragment {
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView playadapt;
     Unrealeasedsongsadapter totalsongsadapter;
-    com.example.spotifyclone.totalsongsadapter adapt;
+    totalsongsadapter adapt;
     private ImageButton backk3;
     private ImageButton addd;
     TextView text;
 
     static boolean add=false;
 
-    public Unrealeasedsongs(ArrayList<Track> sentarray, com.example.spotifyclone.totalsongsadapter ad) {
+    public Unrealeasedsongs(ArrayList<Track> sentarray, totalsongsadapter ad) {
         array=sentarray;
         adapt=ad;
         Log.d(String.valueOf(array.size()), "Unrealeasedsongs: ");

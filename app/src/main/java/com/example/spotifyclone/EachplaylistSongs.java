@@ -28,7 +28,7 @@ public class EachplaylistSongs extends DialogFragment {
     onClickInterface onClickInterface;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView playadapt;
-    static com.example.spotifyclone.playlistsongsadapter playlistsongsadapter;
+    static playlistsongsadapter playlistsongsadapter;
     private ImageButton backk2;
     private String data;
     TextView text;

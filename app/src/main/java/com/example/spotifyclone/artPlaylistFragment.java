@@ -33,7 +33,7 @@ public class artPlaylistFragment extends DialogFragment {
     onClickInterface onClickInterface2;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView  playadapt;
-    com.example.spotifyclone.artplaylistAdapter artplaylistAdapter;
+    artplaylistAdapter artplaylistAdapter;
     private ImageButton back;
 
     TextView text;

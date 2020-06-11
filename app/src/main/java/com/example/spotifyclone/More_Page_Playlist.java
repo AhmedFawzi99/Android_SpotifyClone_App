@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import static com.example.spotifyclone.App.CHANNEL_1_ID;
 
+
 /**
  * @author shaimaa
  * the settings page in artist page
