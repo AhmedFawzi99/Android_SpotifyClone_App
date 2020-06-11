@@ -16,12 +16,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+/**
+ * Gender Activity to allow new users to enter their gender
+ * @author Salma Hazem
+ * @version 1.0
+ */
 
 public class Gender extends AppCompatActivity implements View.OnClickListener {
-
+    /**
+     * Buttons fo the user to select their gender
+     * String that is assigned the gender in String
+     */
     private Button bFemale, bMale;
     String gender;
 
+    /**
+     * Assign Instances
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +48,11 @@ public class Gender extends AppCompatActivity implements View.OnClickListener {
     }
 
 
+    /**
+     * Calls userSignUp if bFemale or bMale buttons are clicked
+     * Assign gender with the gender entered by the user
+     * @param v
+     */
 
     @Override
     public void onClick(View v) {

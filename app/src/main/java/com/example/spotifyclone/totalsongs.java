@@ -1,9 +1,6 @@
 package com.example.spotifyclone;
 
-import android.Manifest;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,26 +9,22 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.muddzdev.styleabletoast.StyleableToast;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * A class that is resposible to show total songs of the artist
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class totalsongs extends DialogFragment {
 
 
@@ -70,7 +63,13 @@ public class totalsongs extends DialogFragment {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullscreenDialogTheme);
     }
 
-
+    /**
+     * the onCreateView where the adapter is set and the buttons for the add and delete songs which calls their functions
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.songstotal, container, false);
@@ -149,6 +148,11 @@ public class totalsongs extends DialogFragment {
         });
         return v;
     }
+
+    /**
+     * getting the tracks that are not released yet from the database and send them
+     * @param grade
+     */
     public void getTracks( ArrayList<Track> grade )
     {
         sendingarray = grade;

@@ -1,5 +1,7 @@
 package com.example.spotifyclone;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +12,21 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.core.app.NotificationCompat;
+
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
+import static com.example.spotifyclone.App.CHANNEL_1_ID;
+
+
+/**
+ * @author shaimaa
+ * the settings page in artist page
+ */
 public class More_Page_Playlist extends BottomSheetDialogFragment {
     private static More_Page_Playlist instance;
+    public static String like_song="";
     String Playlistname;
     String playlistimage;
     private ImageView musicImage;
@@ -37,12 +49,19 @@ public class More_Page_Playlist extends BottomSheetDialogFragment {
         this.play=playlist;
 
     }
+    /**
+     * when you open this page this function is called to detect the clicks the user make
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.more_down_playlist, container, false);
         likebut = v.findViewById(R.id.btn_like2);
         likete = v.findViewById(R.id.btn_like3);
-      likelay = v.findViewById(R.id.like_lay);
+        likelay = v.findViewById(R.id.like_lay);
 
         musicImage=v.findViewById(R.id.Playlistimage_);
         playlistname=v.findViewById(R.id.name_playlist_);
@@ -107,6 +126,18 @@ public class More_Page_Playlist extends BottomSheetDialogFragment {
         // EachArtist artisteach = (EachArtist) getFragmentManager().findFragmentByTag("");
         if(!play.isIsliked())
         {
+            More_Page_Playlist.like_song="You Liked a song";
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(),CHANNEL_1_ID)
+                    .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                    .setContentTitle("Activity Notification")
+                    .setContentText("You Liked a song")
+                    .setAutoCancel(true);
+            Intent i = new Intent(getContext(), More_Page_Playlist.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            i.putExtra("message", "You Liked a song");
+
+            PendingIntent pendingIntent = PendingIntent.getActivity(getContext(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(pendingIntent);
             likete.setText("Liked");
             ///////////////  main.buttonLikeAction();
             likebut.setImageResource(R.drawable.favorite_green);

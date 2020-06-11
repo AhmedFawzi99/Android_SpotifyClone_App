@@ -16,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+/**
+ * @author Salma Hazem
+ * @author Shaimaa Osama
+ */
 public class SearchFragment extends Fragment {
     private Button bSearch;
     private ScrollView mainScrollView;

@@ -5,18 +5,27 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 
-
+/**
+ * This Class is Responsible for creating the Notification Once the notification Function in the MusicActivity Class is Called an object of this class is used to create it. <br>
+ * Source: <a href="https://codinginflow.com/tutorials/android/notifications-notification-channels/part-1-notification-channels">https://codinginflow.com/tutorials/android/notifications-notification-channels/part-1-notification-channels</a> <br>
+ * @version 1.0
+ */
 public class App extends Application {
     public static final String CHANNEL_1_ID = "channel1";
     public static final String CHANNEL_2_ID = "channel2";
 
+    /**
+     *  The on create calls the createNotificationChannels
+     */
     @Override
     public void onCreate() {
         super.onCreate();
 
         createNotificationChannels();
     }
-
+    /**
+     * This Function is responsible for Creating the Notification Channels
+     */
     private void createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel1 = new NotificationChannel(
@@ -32,7 +41,6 @@ public class App extends Application {
                     NotificationManager.IMPORTANCE_LOW
             );
             channel2.setDescription("This is Channel 2");
-
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel1);
             manager.createNotificationChannel(channel2);

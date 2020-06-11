@@ -6,14 +6,18 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
+/**
+ * @author shaimaa
+ * this class makes the view pager in which the user can navigates between fragments(playlist - artist - albums)
+ */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
-   ArrayList<Fragment> fragments=new ArrayList<>();
+    ArrayList<Fragment> fragments=new ArrayList<>();
     ArrayList<String> tabTitles =new ArrayList<>();
-public void addfragments (Fragment fragment, String title )
-{
-    this.fragments.add(fragment);
-    this.tabTitles.add(title);
-}
+    public void addfragments (Fragment fragment, String title )
+    {
+        this.fragments.add(fragment);
+        this.tabTitles.add(title);
+    }
     public ViewPagerAdapter(FragmentManager fm)
     {
         super(fm);

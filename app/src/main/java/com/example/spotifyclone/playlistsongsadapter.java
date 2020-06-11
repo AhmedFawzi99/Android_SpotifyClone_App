@@ -10,13 +10,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * This is the adapter responsible for showing the songs in each Album of the Artist
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class playlistsongsadapter extends RecyclerView.Adapter<playlistsongsadapter.PlaylistsView> {
 
     private List<Track> Tracks;

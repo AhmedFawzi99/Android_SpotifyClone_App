@@ -11,13 +11,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * The Adapter for the total songs of the Artist
+ *  * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.PlaylistsView> {
 
     private List<Track> Tracks;
@@ -36,6 +39,11 @@ public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.Pl
 
     }
 
+    /**
+     * on the onBindViewHolder the delete happens when the user checks songs deleting them from the array and also from the albums as artist removed it from the songs list so no need to keep them in the album as they are deleted
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull PlaylistsView holder, final int position) {
         Track block = Tracks.get(position);
@@ -50,6 +58,9 @@ public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.Pl
             holder.check.setVisibility(View.GONE);
         }
 
+        /**
+         * deleing the songs and removing them from the albums also
+         */
         holder.check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,11 +70,8 @@ public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.Pl
                         Log.d("checker", "onClick: ");
                         Log.d(String.valueOf(artPlaylistFragment.array.size()), "onClick: ");
                         if(! (artPlaylistFragment.array.get(i).getTracks()==null)){
-                            Log.d(String.valueOf(artPlaylistFragment.array.size()), "munuletshhhhhhhhhh: ");
                             for (int j = 0; j < artPlaylistFragment.array.get(i).getTracks().size(); j++){
-                                Log.d("gowa el loop", "onClick: ");
                                 if (artPlaylistFragment.array.get(i).getTracks().get(j).equals(totalsongs.array.get(position))){
-                                    Log.d("gowa el if", "onClick: ");
                                     artPlaylistFragment.array.get(i).getTracks().remove(j);
 
                                     Log.d(String.valueOf(artPlaylistFragment.array.get(i).getTracks().size()), "onClick: ");

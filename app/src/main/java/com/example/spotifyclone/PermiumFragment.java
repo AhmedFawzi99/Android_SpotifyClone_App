@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,8 @@ import static com.example.spotifyclone.App.CHANNEL_1_ID;
 
 /**
  * Premium Fragment in Home Layout
+ * @author Salma Hazem
+ * @version 1.0
  */
 public class PermiumFragment extends Fragment {
     Context context; //Declare the variable context
@@ -81,6 +82,10 @@ public class PermiumFragment extends Fragment {
         });
         return f;
     }
+
+    /**
+     * Sends the user email entered in the login page to let them know they got premium and sets its type to premium
+     */
     private void sendMail() {
         // This should be the email saved in the server
         String mail = Profile_DATA.mail;

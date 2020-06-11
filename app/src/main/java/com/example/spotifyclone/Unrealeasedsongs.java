@@ -1,13 +1,10 @@
 package com.example.spotifyclone;
 
-import android.annotation.SuppressLint;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,18 +14,12 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
+/**
+ * This Class has the songs that are not yet realesed by the user which he chooses to add them to the songs list and release them now or anytime he wants
+ * @author Ahmed Mahmoud Fawzi <br>
+ */
 public class Unrealeasedsongs extends DialogFragment {
 
 
@@ -63,7 +54,13 @@ public class Unrealeasedsongs extends DialogFragment {
 
     }
 
-
+    /**
+     * the oncreate
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.songsunrealeased, container, false);

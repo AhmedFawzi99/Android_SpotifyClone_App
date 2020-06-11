@@ -3,6 +3,9 @@ package com.example.spotifyclone;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ * @author Salma Hazem
+ */
 public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "my_shared_preff";
     private static SharedPrefManager mInstance;

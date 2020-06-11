@@ -2,11 +2,48 @@ package com.example.spotifyclone;
 
 import java.util.ArrayList;
 
+/**
+ * @author Shaimaa
+ * album class
+ */
 public class Album {
+    /**
+     * string ID of the album
+     */
     String ID;
+    /**
+     * string  the album name
+     */
     String Album_name;
+    /**
+     * string  the album image
+     */
     String Image_id;
 
+    /**
+     * Each album contains of a type
+     */
+    private String type;
+    /**
+     * description of album
+     */
+    String description;
+    /**
+     * Array of artists for each album
+     */
+    ArrayList<Artist> artists ;
+    /**
+     * Array of songs for each album
+     */
+    ArrayList<Tracks> Songs;
+    /**
+     * boolean isliked whether the album is liked or not
+     */
+    boolean isliked=false;
+
+    /**
+     * the setters and getters
+     */
     public boolean isIsliked() {
         return isliked;
     }
@@ -15,9 +52,7 @@ public class Album {
         this.isliked = isliked;
     }
 
-    ArrayList<Artist> artists ;
-    ArrayList<Tracks> Songs;
-    boolean isliked=false;
+
     public String getDescription() {
         return description;
     }
@@ -26,11 +61,7 @@ public class Album {
         this.description = description;
     }
 
-    String description;
-    /**
-     * Each playlist contains of a type
-     */
-    private String type;
+
 
     public String getType() {
         return type;
