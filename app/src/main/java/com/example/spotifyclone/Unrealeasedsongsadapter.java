@@ -23,6 +23,7 @@ import retrofit2.Response;
 
 /**
  * The Adapter forr the songs that are not yet released and waiting to be added by the Artist.
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
  * @author Ahmed Mahmoud Fawzi <br>
  */
 public class Unrealeasedsongsadapter extends RecyclerView.Adapter<Unrealeasedsongsadapter.PlaylistsView> {

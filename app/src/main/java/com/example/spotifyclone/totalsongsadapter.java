@@ -19,7 +19,8 @@ import java.util.List;
 
 /**
  * The Adapter for the total songs of the Artist
- *  * @author Ahmed Mahmoud Fawzi <br>
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
+ * @author Ahmed Mahmoud Fawzi <br>
  */
 public class totalsongsadapter extends RecyclerView.Adapter<totalsongsadapter.PlaylistsView> {
 

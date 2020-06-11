@@ -16,6 +16,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 /**
  * Java Mail API to send email to specified email
+ *Helping Source: <a href="https://youtu.be/RahBCY5BfS0">https://youtu.be/RahBCY5BfS0</a> <br>
  * @author Salma Hazem
  * @version 1.0
  */

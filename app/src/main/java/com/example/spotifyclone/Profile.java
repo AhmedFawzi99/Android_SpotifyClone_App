@@ -24,6 +24,11 @@ import retrofit2.Response;
 
 import static com.example.spotifyclone.App.CHANNEL_1_ID;
 
+/**
+ * Profile Page showing all its data
+ * @author Ahmed Mahmoud Fawzi and Salma Hazem
+ * License for Circular View Image: <a href="https://github.com/hdodenhof/CircleImageView/blob/master/LICENSE.txt">https://github.com/hdodenhof/CircleImageView/blob/master/LICENSE.txt</a> <br>
+ */
 public class Profile extends AppCompatActivity implements View.OnClickListener {
     /**
      * Declaring Variables

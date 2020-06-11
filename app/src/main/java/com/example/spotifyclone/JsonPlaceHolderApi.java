@@ -16,6 +16,11 @@ import retrofit2.http.Query;
 
 /**
  * The Requests Are Defined in this Interface
+ * Helping Source: <a href="https://www.youtube.com/watch?v=4JGvDUlfk7Y&vl=en">https://www.youtube.com/watch?v=4JGvDUlfk7Y&vl=en</a> <br>
+ * Helping Source: <a href="https://www.youtube.com/watch?v=TyJEDhauUeQ&t=499s">https://www.youtube.com/watch?v=TyJEDhauUeQ&t=499s</a> <br>
+ * Helping Source: <a href="https://www.youtube.com/watch?v=GP5OyYDu_mU&t=650s">https://www.youtube.com/watch?v=GP5OyYDu_mU&t=650s</a> <br>
+ * Helping Source: <a href="https://www.youtube.com/watch?v=xKEFGsMUG8s&t=305s">https://www.youtube.com/watch?v=xKEFGsMUG8s&t=305s</a> <br>
+ * License: <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a> <br>
  */
 public interface JsonPlaceHolderApi {
     @GET("home")

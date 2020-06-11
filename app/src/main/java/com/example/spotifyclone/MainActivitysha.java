@@ -35,8 +35,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * @author shaimaa
- * @author Ahmed
+ * The main Activity
+ * Helping Source: <a href="https://medium.com/@suragch/how-to-add-a-bottom-navigation-bar-in-android-958ed728ef6c">https://medium.com/@suragch/how-to-add-a-bottom-navigation-bar-in-android-958ed728ef6c</a> <br>
+ * @author Shaimaa Osama
  */
 public class MainActivitysha extends AppCompatActivity {
     public ArrayList<Tracks> Songs= new ArrayList<Tracks>();

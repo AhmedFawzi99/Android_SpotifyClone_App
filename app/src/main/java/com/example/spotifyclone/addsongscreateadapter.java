@@ -24,6 +24,7 @@ import retrofit2.Response;
 
 /**
  * addsongscreateadapter is the adapter of addsongscreate  that is used to add the songs that has no albums
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
  * @author Ahmed Mahmoud Fawzi <br>
  */
 public class addsongscreateadapter extends RecyclerView.Adapter<addsongscreateadapter.PlaylistsView> {

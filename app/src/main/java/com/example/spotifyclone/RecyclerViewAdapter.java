@@ -17,7 +17,10 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
+/**
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
+ * License: <a href="https://github.com/bumptech/glide/blob/master/LICENSE">https://github.com/bumptech/glide/blob/master/LICENSE</a> <br>
+ */
 public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
 

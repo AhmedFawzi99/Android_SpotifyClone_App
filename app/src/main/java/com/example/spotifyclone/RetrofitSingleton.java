@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * This Class is where the Server Link is stored to be used anywhere in the project
+ * License: <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a> <br>
  */
 
 public class RetrofitSingleton {

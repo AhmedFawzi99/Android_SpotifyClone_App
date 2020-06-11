@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /** @author shaimaa
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
  * adapter in which fills the list
  */
 public class Player_Adapter_two extends RecyclerView.Adapter<Player_Adapter_two.PlaylistsViewHolder> {

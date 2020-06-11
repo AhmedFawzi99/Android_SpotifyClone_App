@@ -8,7 +8,6 @@ import java.time.Duration;
  * Helping Source: <a href="https://www.youtube.com/watch?v=ZRffTnk8ug8&list=PL9vy4y29rrd4x5pAbowit8gpjsXAai0yF">https://www.youtube.com/watch?v=ZRffTnk8ug8&list=PL9vy4y29rrd4x5pAbowit8gpjsXAai0yF</a> <br>
  * Helping Source: <a href="https://www.youtube.com/watch?v=cbDHgoCVWak https://www.youtube.com/watch?v=bslTj2zDARc">https://www.youtube.com/watch?v=cbDHgoCVWak https://www.youtube.com/watch?v=bslTj2zDARc</a> <br>
  * Helping Source <a href="https://developer.android.com/guide/topics/media-apps/volume-and-earphones">https://developer.android.com/guide/topics/media-apps/volume-and-earphones</a>
- *
  * @author Ahmed Mahmoud Fawzi <br>
  * @version 1.0
  */

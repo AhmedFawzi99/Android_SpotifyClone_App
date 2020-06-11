@@ -9,6 +9,7 @@ import android.widget.Toast;
 /**
  * This Class Mainly focuses on the Actions of the Notification for each Action a type is set for it. <br>
  * Inside this extended BroadcastReceiver class the Type of each Action is CHeck and an function is called in response. <br>
+ * Source: <a href="https://codinginflow.com/tutorials/android/notifications-notification-channels/part-1-notification-channels">https://codinginflow.com/tutorials/android/notifications-notification-channels/part-1-notification-channels</a> <br>
  * @author Ahmed Mahmoud Fawzi <br>
  * @version 1.0
  */
