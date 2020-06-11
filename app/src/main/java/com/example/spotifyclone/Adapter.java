@@ -12,6 +12,9 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.List;
 
+/**
+ * An Adapter Class
+ */
 public class Adapter extends PagerAdapter {
 
     private List<Model> models;

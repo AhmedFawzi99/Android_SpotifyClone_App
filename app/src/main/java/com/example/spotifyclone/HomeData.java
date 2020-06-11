@@ -2,11 +2,21 @@ package com.example.spotifyclone;
 
 import java.util.List;
 
+/**
+ * @author shaimaa
+ * it contains both the recently played songs and the other categories in home
+ */
 public class HomeData {
+    /**
+     * members of Homedata
+     */
     List<Category> data;
 
     Category recentlyplayed;
 
+    /**
+     * setters and getters
+     */
     public Category getRecentlyplayed() {
         return recentlyplayed;
     }

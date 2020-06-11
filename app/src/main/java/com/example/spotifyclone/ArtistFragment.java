@@ -29,7 +29,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 public class ArtistFragment extends Fragment {
     private RecyclerView recyclerView;
-  public static   ArrayList<Artist> artistslist = new ArrayList<>();
+    public static   ArrayList<Artist> artistslist = new ArrayList<>();
     private Artist_Adapter myadapter;
     private int REQUEST_CODE = 0;
     private onClickInterface onclickInterface;
@@ -37,7 +37,13 @@ public class ArtistFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    /**
+     * this function always check if the user clicks on one of the artists or clicks on choose artist.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,28 +78,9 @@ public class ArtistFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-/*
-        Artist artist =new Artist("1170522", "Amr Diab", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff");
-        Artist artist2 =new Artist("1170523", "Tamer Hosny", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff");
-        Artist artist3 =new Artist("1170524", " Hamza Namira", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff");
-*/
-/*
-        artistslist.add(artist);
-        artistslist.add(artist2);
-        artistslist.add(artist2);
-        artistslist.add(artist2);
-        artistslist.add(artist2);
-        artistslist.add(artist3);
-        artistslist.add(artist3);
-        artistslist.add(artist3);
-        artistslist.add(artist3);
-        artistslist.add(artist);
-        artistslist.add(artist);
-        artistslist.add(artist2);
-        artistslist.add(artist3);
-        artistslist.add(artist2);
 
-*/onclickInterface = new onClickInterface() {
+
+        onclickInterface = new onClickInterface() {
             @Override
             public void setClick(int abc) {
                 // list.remove(abc);
@@ -109,41 +96,16 @@ public class ArtistFragment extends Fragment {
 
         recyclerView.addItemDecoration(new SpaceItemDecoration(2));
         recyclerView.setClickable(true);
-     /*   recyclerView.setOnClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                Artist r1 = artistslist.get(position);
-                Fragment selectedFragment=new EachArtist(r1.getName(),r1.getImage(),r1.getId());
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
-
-            }
-        });*/
         return  s;
-        /*    @Override
-            public void onClick(View v) {
-                DialogFragment builder2 = Choose_Artist.newInstance();
-          //    builder2.setTargetFragment(getParentFragment(), REQUEST_CODE);
-                builder2.show(getFragmentManager(), "tag");
-            }});
-        floatingActionButton.setOnClickListener(new View.OnClickListener(){
-
-
-            @Override
-            public void onClick(View v) {
-                DialogFragment builder2 = Choose_Artist.newInstance();
-              //  builder2.setTargetFragment(getParentFragment(), REQUEST_CODE);
-                builder2.show(getFragmentManager(), "tag");
-            }});
-        // I3nflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_artist, container, false);
-    }/*
-
-         */
 
 
 
 
     }
+
+    /**
+     * check if the user unfollowed an artist from the list
+     */
     void checkfollow()
     {
         if (artistslist!=null)
@@ -153,11 +115,11 @@ public class ArtistFragment extends Fragment {
                 if(!artistslist.get(i).isFollowing())
                 {
                     artistslist.remove(i);
-                  //  Toast.makeText(this.getContext(),"removed" , Toast.LENGTH_LONG).show();
+                    //  Toast.makeText(this.getContext(),"removed" , Toast.LENGTH_LONG).show();
 
                 }
 //                myadapter.notifyItemRemoved(i);
-          //      myadapter.notifyItemRangeChanged(i, artistslist.size());
+                //      myadapter.notifyItemRangeChanged(i, artistslist.size());
             }
 
         }
@@ -173,7 +135,7 @@ public class ArtistFragment extends Fragment {
     }
     public void onActivityResult( int requestCode, int resultCode, Intent data) {
         String editTextString = "shread";
-       // Toast.makeText(this.getContext(), editTextString, Toast.LENGTH_LONG).show();
+        // Toast.makeText(this.getContext(), editTextString, Toast.LENGTH_LONG).show();
         // Make sure fragment codes match up
         int listsize = data.getIntExtra("size", 0);
         for (int i = 0; i < listsize; i++) {

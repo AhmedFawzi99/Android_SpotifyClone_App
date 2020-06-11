@@ -1,7 +1,15 @@
 package com.example.spotifyclone;
 
+/**
+ * Contains the email and the password of the sender of emails
+ * Should be the email of the company
+ * @author Salma Hazem
+ * @version 1.0
+ */
+
 public class Utils {
 
+    // Maestro is an email app that does not require phone number but it shoul be replaced by a gmail account
     public static final String EMAIL = "maestroandroid@tutanota.com";
     public static final String PASSWORD = "maestro123456789";
 

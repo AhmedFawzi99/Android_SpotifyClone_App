@@ -21,12 +21,25 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+/**
+ * Name Activity to allow new users to add their names
+ * @author Salma Hazem
+ * @version 1.0
+ */
 
 public class Name extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     * Buttons fo the user to submit the name
+     * Edit text to write the name in it
+     */
     private Button bCreate;
     private EditText etName;
 
+    /**
+     * Assign Instances
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +56,20 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
 
 
     private TextWatcher passTextWatcher = new TextWatcher() {
+        /**
+         * Text watcher that sees what is written in the edit text
+         */
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
         }
 
+        /**
+         * Enables the button to be clicked only when edit is not empty
+         * @param s
+         * @param start
+         * @param count
+         */
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -66,6 +88,10 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
             }
         }
     };
+    /**
+     * Assign the text in the edit texts to Strings to make it easier for checks
+     * Calls createName
+     */
     private void userSignUp() {
         String name = etName.getText().toString().trim();
         Profile_DATA.UserName=name;
@@ -73,6 +99,13 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
         SignUP signup=new SignUP(Profile_DATA.mail, Profile_DATA.Password,Profile_DATA.Gender, Profile_DATA.Date, Profile_DATA.UserName, Profile_DATA.Type, "ncdisnjcb;dsjb");
         Call<SignUP> call=RetrofitSingleton.getInstance().getApi().createuser(Profile_DATA.mail, Profile_DATA.Password, Profile_DATA.Date,Profile_DATA.Gender, Profile_DATA.UserName, Profile_DATA.Type, "ncdisnjcb;dsjb");
         call.enqueue(new Callback<SignUP>() {
+            /**
+             * Checks if the email is added in the database, gets the page of the user and go to create password activity
+             * If not, Toast an error and go to the createPassword
+             * @see CreatePassword
+             * @param call
+             * @param response
+             */
             @Override
             public void onResponse(Call<SignUP> call, Response<SignUP> response) {
                 if(!response.isSuccessful()){
@@ -80,15 +113,6 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
                     Log.d(String.valueOf(response.code()), "ismot: ");
                     return;
                 }
-//                SignUP res=response.body();
-//                Log.d(String.valueOf(response.code()), "succes: ");
-//                Log.d(res.getDate(), "onResponse: ");
-//                Log.d(res.getEmail(), "onResponse: ");
-//                Log.d(res.getGender(), "onResponse: ");
-//                Log.d(res.getID(), "onResponse: ");
-//                Log.d(res.getPassword(), "onResponse: ");
-//                Log.d(res.getType(), "onResponse: ");
-//                Log.d(res.getName(), "onResponse: ");
                 Log.d("successyaba", "onResponse: ");
 
             }
@@ -99,6 +123,10 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
             }
         });
     }
+    /**
+     * Calls userSignUp if bCreate button is clicked
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -111,15 +139,3 @@ public class Name extends AppCompatActivity implements View.OnClickListener {
         }
     }
 }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if(id==android.R.id.home) {
-//            this.finish();
-//
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }

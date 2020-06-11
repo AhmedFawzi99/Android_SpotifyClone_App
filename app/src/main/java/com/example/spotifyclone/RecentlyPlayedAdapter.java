@@ -16,12 +16,21 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * @author shaimaa
+ * adapter that fills the recently played
+ */
 public class RecentlyPlayedAdapter extends RecyclerView.Adapter<RecentlyPlayedAdapter.PlaylistsViewHolder2> {
 
 
     private List<RowItem> playlists=new ArrayList<>();
     private Context context;
 
+    /**
+     * constructor
+     * @param context
+     * @param list
+     */
     public RecentlyPlayedAdapter(Context context, List<RowItem> list) {
 
         this.playlists = list;
@@ -29,6 +38,10 @@ public class RecentlyPlayedAdapter extends RecyclerView.Adapter<RecentlyPlayedAd
 
 
     }
+
+    /**
+     * main functions of each adapter
+     */
     @NonNull
     @Override
     public PlaylistsViewHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -119,4 +132,3 @@ public class RecentlyPlayedAdapter extends RecyclerView.Adapter<RecentlyPlayedAd
 
     }
 }
-

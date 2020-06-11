@@ -1,11 +1,33 @@
 package com.example.spotifyclone;
 
+/**
+ * @author shaimaa
+ */
 public class Type {
+    /**
+     * members of type
+     */
     String type;
     RowItem rowitem;
     Album album;
- Tracks track;
+    Tracks track;
 
+    /**
+     * constructor
+     * @param ttype
+     * @param rrowitem
+     * @param aalbum
+     */
+    Type(String ttype, RowItem rrowitem, Album aalbum)
+    {
+        album=aalbum;
+        rowitem=rrowitem;
+        type=ttype;
+    }
+
+    /**
+     * setters and getters
+     */
     public Tracks getTrack() {
         return track;
     }

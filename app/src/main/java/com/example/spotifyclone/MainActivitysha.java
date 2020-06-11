@@ -40,6 +40,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.spotifyclone.App.CHANNEL_2_ID;
 
+/**
+ * @author shaimaa
+ * @author Ahmed
+ */
 public class MainActivitysha extends AppCompatActivity {
     public ArrayList<Tracks> Songs= new ArrayList<Tracks>();
     ArrayList<RowItem> Rowitems=new ArrayList<RowItem>();
@@ -60,7 +64,7 @@ public class MainActivitysha extends AppCompatActivity {
 
     final Fragment fragment1 = new HomeFragment();
     final Fragment fragment3 = new LibraryFragment();
-    final Fragment fragment4 = new PermiumFragment();
+    final Fragment fragment4 = new PremiumFragment();
     final Fragment fragment2 = new SearchFragment();
 
     final FragmentManager fm = getSupportFragmentManager();
@@ -70,7 +74,10 @@ public class MainActivitysha extends AppCompatActivity {
 
 
 
-
+    /**
+     * get the songs from the server
+     * @return
+     */
     public ArrayList<Tracks> gettrackss()
     {
 
@@ -110,32 +117,14 @@ public class MainActivitysha extends AppCompatActivity {
         });
         return Songs;
     }
+
+    /**
+     * opening the fragment which create a new playlist
+     * @param view
+     */
     public void functionF(View view)
     {
 
-        /// LayoutInflater factory = LayoutInflater.from(this);
-        //final View textEntryView;
-        // textEntryView = factory.inflate(R.layout.floating, null);
-        ///   Dialog builder = new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        // builder.setTitle("Give your playlist a name");
-        //builder.setMessage("Would you like to continue learning how to use Android alerts?");
-        //add plain text
-
-
-        // add the buttons
-      /*  builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                EditText text2=(EditText)findViewById(R.id.editText);
-
-            }
-        });*/
-
-///        builder.setContentView(R.layout.floating);
-
-        // create and show the alert dialog
-
-        ///  builder.show();
         DialogFragment builder= FloatingFragment.newInstance();
         builder.show(getSupportFragmentManager(),"tag");
 
@@ -228,6 +217,11 @@ public class MainActivitysha extends AppCompatActivity {
 
 
     }
+
+    /**
+     * get the playlists from the server
+     * @return
+     */
     public  ArrayList<RowItem> getplaylists()
     {
 
@@ -258,9 +252,6 @@ public class MainActivitysha extends AppCompatActivity {
 
 
             }
-
-
-
             @Override
             public void onFailure(Call<ArrayList<RowItem>> call, Throwable t) {
 
@@ -268,6 +259,10 @@ public class MainActivitysha extends AppCompatActivity {
         });
         return Rowitems;
     }
+
+    /**
+     * the buttomnavigation (home-search -library)
+     */
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -286,7 +281,7 @@ public class MainActivitysha extends AppCompatActivity {
 
                     break;
                 case R.id.Premium_item:
-                    selectedFragment = new PermiumFragment();
+                    selectedFragment = new PremiumFragment();
                     break;
 
 
@@ -294,6 +289,11 @@ public class MainActivitysha extends AppCompatActivity {
             return loadfragment(selectedFragment);
         }   };
 
+    /**
+     * loading the fragment selected
+     * @param fragment
+     * @return
+     */
     private boolean loadfragment(Fragment fragment) {
         //switching fragment
         if(fragment!=null)

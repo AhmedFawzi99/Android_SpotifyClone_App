@@ -16,7 +16,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/** @author shaimaa
+ * adapter in which fills the list
+ */
 public class PlaylistAdapter extends ArrayAdapter<RowItem> {
     public PlaylistAdapter(@NonNull Context context, @NonNull ArrayList<RowItem> rowItems) {
         super(context, 0, rowItems);

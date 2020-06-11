@@ -15,6 +15,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/** @author shaimaa
+ * adapter in which fills the list
+ */
 public class Player_Adapter_two extends RecyclerView.Adapter<Player_Adapter_two.PlaylistsViewHolder> {
 
     private List<Type> blocks;
@@ -26,6 +29,10 @@ public class Player_Adapter_two extends RecyclerView.Adapter<Player_Adapter_two.
         this.onClickInterface = onClickInterface;
 
     }
+
+    /**
+     * each adapter contains these main functions
+     */
     @NonNull
     @Override
     public PlaylistsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -75,49 +82,6 @@ public class Player_Adapter_two extends RecyclerView.Adapter<Player_Adapter_two.
         return blocks.size();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*public Player_Adapter_two(@NonNull Context context, @NonNull ArrayList<RowItem> rowItems) {
-        super(context, 0, rowItems);
-    }
-    /**
-     * to fill the listview (names and images ) of the playlist (rowItems) in the home
-     */
-    //  @NonNull
-    // @Override
-
-    /*  public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-          View listItemView=convertView;
-          listItemView= LayoutInflater.from(getContext()).inflate(R.layout.list_itemhome,parent,false);
-
-          RowItem rowItem =getItem(position);
-          TextView name =(TextView) listItemView.findViewById(R.id.namehell);
-          name.setText(rowItem.getName());
-          ImageView image =(ImageView) listItemView.findViewById(R.id.imageViewhell);
-          image.setImageResource(Integer.parseInt(rowItem.getImageid()));
-
-          return listItemView;
-      }*/
     public class PlaylistsViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textViewTitle;
@@ -137,4 +101,3 @@ public class Player_Adapter_two extends RecyclerView.Adapter<Player_Adapter_two.
 
     }
 }
-
