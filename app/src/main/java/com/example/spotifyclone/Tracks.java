@@ -2,14 +2,7 @@ package com.example.spotifyclone;
 
 import java.util.ArrayList;
 
-/**
- *@author  shaimaa
- * songs class
- */
 public class Tracks {
-    /**
-     *members of the class
-     */
     private String name;
     private String type;
     private String image;
@@ -19,10 +12,6 @@ public class Tracks {
     private String pname;
     private String aname;
 
-    /**
-     * setters and getters
-     * @return
-     */
     public String getPname() {
         return pname;
     }

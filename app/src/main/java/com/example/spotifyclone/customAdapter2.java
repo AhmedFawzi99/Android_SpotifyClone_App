@@ -15,77 +15,59 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * @author shaimaa
- * Adapter class to fill the artists list in artist fragment
- */
 public class customAdapter2 extends RecyclerView.Adapter<customAdapter2.MyViewHolder> {
-    Context context;
-    ArrayList<Artist> list;
-    onClickInterface onClickInterface;
-    private static final String TAG = "MyActivity";
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title;
-        public CircleImageView imageView;
+        Context context;
+        ArrayList<Artist> list;
+        onClickInterface onClickInterface;
+        private static final String TAG = "MyActivity";
+        public class MyViewHolder extends RecyclerView.ViewHolder {
+            public TextView title;
+            public CircleImageView imageView;
+            public MyViewHolder(View view) {
+                super(view);
+                title = (TextView) view.findViewById(R.id.description2);
+                imageView=(CircleImageView) view.findViewById(R.id.circleimagechoose);
+            }
+        }
+   public customAdapter2(Context context, ArrayList<Artist> list, onClickInterface onClickInterface) {
+            this.context = context;
+            this.list = list;
+            this.onClickInterface = onClickInterface;
+        }
+        @NonNull
+        @Override
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.lay, viewGroup, false);
+            return new MyViewHolder(itemView);
+        }
+        @Override
+        public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
+            myViewHolder.title.setText(list.get(i).getName());
+            Picasso.with(context).
+                 load(list.get(i).getImage())
+                    .into(myViewHolder.imageView);
+            myViewHolder.title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickInterface.setClick(i);
 
-        public MyViewHolder(View view) {
-            super(view);
-            title = (TextView) view.findViewById(R.id.description2);
-            imageView=(CircleImageView) view.findViewById(R.id.circleimagechoose);
+
+
+                }
+            });
+            myViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onClickInterface.setClick(i);
+
+
+
+                }
+            });
+        }
+        @Override
+        public int getItemCount() {
+            return list.size();
         }
     }
 
-    /**
-     * constructor
-     * @param context
-     * @param list
-     * @param onClickInterface
-     */
-    public customAdapter2(Context context, ArrayList<Artist> list, onClickInterface onClickInterface) {
-        this.context = context;
-        this.list = list;
-        this.onClickInterface = onClickInterface;
-    }
-
-    /**
-     * main functions of every adapter
-     * @param viewGroup
-     * @param i
-     * @return
-     */
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.lay, viewGroup, false);
-        return new MyViewHolder(itemView);
-    }
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int i) {
-        myViewHolder.title.setText(list.get(i).getName());
-        Picasso.with(context).
-                load(list.get(i).getImage())
-                .into(myViewHolder.imageView);
-        myViewHolder.title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickInterface.setClick(i);
-
-
-
-            }
-        });
-        myViewHolder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickInterface.setClick(i);
-
-
-
-            }
-        });
-    }
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-}

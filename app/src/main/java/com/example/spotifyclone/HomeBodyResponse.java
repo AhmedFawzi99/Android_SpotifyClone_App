@@ -1,12 +1,6 @@
 package com.example.spotifyclone;
-/**
- * @author shaimaa
- * class that contains the whole data of home
- */
+
 public class HomeBodyResponse {
-    /**
-     * members of homebodyrespon
-     */
     String status;
     HomeData data;
 

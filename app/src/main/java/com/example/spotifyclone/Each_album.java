@@ -19,28 +19,16 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
-/**
- * @author  shaimaa
- * this is the class of album page
- */
+
 public class Each_album extends Fragment {
-    /**
-     * name of the album
-     */
     String name;
-    /**
-     *  the album opened
-     */
     Album album ;
-    /**
-     *  the image of the album
-     */
     String image;
     private ImageView btn_more;
     AlbumFragment albumFragment = new AlbumFragment();
-    private ImageView like;
-    private RecyclerView recyclerViewpopularartists;
-    private  ArrayList<Artist> artists = new ArrayList<>();
+   private ImageView like;
+   private RecyclerView recyclerViewpopularartists;
+   private  ArrayList<Artist> artists = new ArrayList<>();
     private Artist_Adapter myadapter;
     private onClickInterface onclickInterface;
    /* Each_album(String Artist_name, String imageid, String id)
@@ -48,20 +36,12 @@ public class Each_album extends Fragment {
         name=Artist_name;
         image=imageid;
     }*/
-
-    /**
-     * each_album constructor
-     * @param a
-     */
-    Each_album(Album a)
-    {
-        album=a;
-        name=a.getAlbum_name();
-        image=a.getImage_id();
-    }
-    /**
-     * the main functions
-     */
+Each_album(Album a)
+{
+album=a;
+    name=a.getAlbum_name();
+    image=a.getImage_id();
+}
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
@@ -90,9 +70,9 @@ public class Each_album extends Fragment {
         GridLayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(),1);
         recyclerViewpopularartists.setLayoutManager(mLayoutManager);
         recyclerViewpopularartists.setItemAnimator(new DefaultItemAnimator());
-        Artist artist =new Artist("1170522", "Amr Diab", "https://celebborn.com/celeb_image/amr-diab-26592.jpg?fbclid=IwAR1NnxgzRJFNahdrocTRjv1yP2OwMgnZ_Ox5J1wuVZOJN9TPOop3RwTJCZ0",false);
-        Artist artist2 =new Artist("1170523", "Tamer Hosny", "https://p16-va-default.akamaized.net/img/musically-maliva-obj/1654423082333189~c5_720x720.jpeg",false);
-        Artist artist3 =new Artist("1170524", " Hamza Namira", "https://www.namirahamza.com/wp-content/uploads/2019/03/479.jpeg",false);
+        Artist artist =new Artist("1170522", "Amr Diab", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff",false);
+        Artist artist2 =new Artist("1170523", "Tamer Hosny", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff",false);
+        Artist artist3 =new Artist("1170524", " Hamza Namira", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff",false);
 
         artists.add(artist);
         artists.add(artist2);
@@ -130,13 +110,27 @@ public class Each_album extends Fragment {
             }
 
         };
+       /* getView().setFocusableInTouchMode(true);
+       getView().requestFocus();
+        getView().setOnKeyListener( new View.OnKeyListener()
+        {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event )
+            {
+                if( keyCode == KeyEvent.KEYCODE_BACK )
+                {
+                    return true;
+                }
+                return false;
+            }
+        } );*/
         myadapter = new Artist_Adapter(getContext(), artists,onclickInterface);
         recyclerViewpopularartists.setAdapter(myadapter);
         recyclerViewpopularartists.addItemDecoration(new SpaceItemDecoration(2));
         recyclerViewpopularartists.setClickable(true);
 
         return s;
-    }
+}
     public void showlike(String S ) {
         StyleableToast.makeText(this.getContext(), S, R.style.exampleToast).show();
     }
@@ -147,7 +141,7 @@ public class Each_album extends Fragment {
             album.setIsliked(false);
             like.setImageResource(R.drawable.like);
             showlike("disliked");
-            //>>>>>>  albumFragment.checklike();
+          //>>>>>>  albumFragment.checklike();
             //////// putlike();
 
             // showLikeToast(" Added to Liked Songs. ");
@@ -156,7 +150,7 @@ public class Each_album extends Fragment {
         }else{
             like.setImageResource(R.drawable.favorite_green);
             showlike("Liked");
-            //>>>>>>>>>>>>  albumFragment.checklikeadd(album); after making Array of albums
+          //>>>>>>>>>>>>  albumFragment.checklikeadd(album); after making Array of albums
 //            notificationManager.notify(1, );
             //  artistFragment.artistslist.remove(artist);
 

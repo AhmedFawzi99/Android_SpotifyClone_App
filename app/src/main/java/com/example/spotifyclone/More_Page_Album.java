@@ -13,27 +13,23 @@ import android.widget.TextView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
 
-/**
- * @author shaimaa
- * the settings page in album
- */
 public class More_Page_Album extends com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-{
-    private static More_Page_Album instance;
-    String albumname;
-    String albumimage;
-    private ImageView musicImage;
-    private LinearLayout smallLayout;
-    private RelativeLayout moreLayout;
-    public ImageButton likebut;
-    private TextView likete;
-    private LinearLayout likelay;
-    private TextView albname;
-    private  boolean like;
-    private Album alb;
+    {
+        private static More_Page_Album instance;
+        String albumname;
+        String albumimage;
+        private ImageView musicImage;
+        private LinearLayout smallLayout;
+        private RelativeLayout moreLayout;
+        public ImageButton likebut;
+        private TextView likete;
+        private LinearLayout likelay;
+        private TextView albname;
+        private  boolean like;
+        private Album alb;
 
-    public static More_Page_Album getInstance(){
+        public static More_Page_Album getInstance(){
         return instance;
     }
     public More_Page_Album(Album al){
@@ -43,16 +39,8 @@ public class More_Page_Album extends com.google.android.material.bottomsheet.Bot
         this.alb =al;
 
     }
-
-    /**
-     * when you open this page this function is called to detect the clicks the user make
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.music_down_album, container, false);
         likebut = v.findViewById(R.id.btn_like2);
         likete = v.findViewById(R.id.btn_like3);
@@ -106,8 +94,8 @@ public class More_Page_Album extends com.google.android.material.bottomsheet.Bot
 
 
 
-    @Override
-    public void onCreate(Bundle savedInstance){
+        @Override
+        public void onCreate(Bundle savedInstance){
 
         super.onCreate(savedInstance);
         instance=this;
@@ -116,10 +104,8 @@ public class More_Page_Album extends com.google.android.material.bottomsheet.Bot
 
     }
 
-    /**
-     * check if you press like or unlike in this page
-     */
-    private void likefunction(){
+
+        private void likefunction(){
         // EachArtist artisteach = (EachArtist) getFragmentManager().findFragmentByTag("");
         if(!alb.isIsliked())
         {
@@ -141,18 +127,20 @@ public class More_Page_Album extends com.google.android.material.bottomsheet.Bot
         }
 
     }
-    public void updatelike()
-    {
-        if(alb.isIsliked()){
-            likete.setText("Liked");
-            likebut.setImageResource(R.drawable.favorite_green);
+        public void updatelike()
+        {
+            if(alb.isIsliked()){
+                likete.setText("Liked");
+                likebut.setImageResource(R.drawable.favorite_green);
+            }
+            else{
+                likete.setText("Like");
+                likebut.setImageResource(R.drawable.like);
+            }
         }
-        else{
-            likete.setText("Like");
-            likebut.setImageResource(R.drawable.like);
-        }
+
+
+
     }
 
 
-
-}

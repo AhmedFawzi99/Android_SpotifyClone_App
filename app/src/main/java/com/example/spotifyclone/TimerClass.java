@@ -15,12 +15,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Locale;
 
-/**
- * TimerClass is Responsible for opening and making the Timer Function to Make the music Stop after a certain amount of time the user chooses. <br>
- * Source: <a href="https://codinginflow.com/tutorials/android/countdowntimer/part-1-countdown-timer">https://codinginflow.com/tutorials/android/countdowntimer/part-1-countdown-timer</a> <br>
- * Modified By : Ahmed Mahmoud Fawzi <br>
- * @version 1.0
- */
 public class TimerClass extends BottomSheetDialogFragment {
 
     private TextView five2; private LinearLayout five1;
@@ -38,22 +32,11 @@ public class TimerClass extends BottomSheetDialogFragment {
     private Handler mHandler = new Handler();
     public static int mTimerRunning=0;
 
-    /**
-     * This is Variable that with each option the variable is changed to count down in reverse with the assigned time.
-     */
     private long mTimeLeftInMillis;
 
 
 
 
-    /**
-     * The OnCreateView in this Class is responsible for assigning the variables and opening the layout assigned. <br>
-     * Inside the OnCreateView the onclicklistener for the buttons is called to call its Function. <br>
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View t = inflater.inflate(R.layout.timerpage, container, false);
         five1=t.findViewById(R.id.five1);
@@ -80,9 +63,7 @@ public class TimerClass extends BottomSheetDialogFragment {
         }
 
 
-        /**
-         * When Timer five is pressed the milliseconds is set to 5 minutes and the function is called.
-         */
+
         five1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,9 +75,6 @@ public class TimerClass extends BottomSheetDialogFragment {
             }
         });
 
-        /**
-         * When Timer ten is pressed the milliseconds is set to 10 minutes and the function is called.
-         */
         ten1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,9 +87,6 @@ public class TimerClass extends BottomSheetDialogFragment {
             }
         });
 
-        /**
-         * When Timer fifteen is pressed the milliseconds is set to 15 minutes and the function is called.
-         */
         fiften1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,9 +98,6 @@ public class TimerClass extends BottomSheetDialogFragment {
             }
         });
 
-        /**
-         * When Timer thirty is pressed the milliseconds is set to 30 minutes and the function is called.
-         */
         thirty1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,9 +109,6 @@ public class TimerClass extends BottomSheetDialogFragment {
             }
         });
 
-        /**
-         * When Timer forty is pressed the milliseconds is set to 45 minutes and the function is called.
-         */
         forty1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,9 +120,6 @@ public class TimerClass extends BottomSheetDialogFragment {
             }
         });
 
-        /**
-         * When Timer hour is pressed the milliseconds is set to 60 minutes and the function is called.
-         */
         hour1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,9 +131,6 @@ public class TimerClass extends BottomSheetDialogFragment {
             }
         });
 
-        /**
-         * Turning off timer
-         */
         turnoff1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -198,11 +161,7 @@ public class TimerClass extends BottomSheetDialogFragment {
 
     }
 
-    /**
-     * This Function is responsible to do an action after a certain amount of time. <br>
-     * It creates an  object of the CountDownTimer CLass giving it the time assigned with the click of each button. <br>
-     * It then Does a function when a time reaches and sets the Text and the drawable resource for the Timer button in the MorePageDown. <br>
-     */
+
     private void startTimer() {
         final MusicActivity main = (MusicActivity) getActivity();
          mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
@@ -227,9 +186,6 @@ public class TimerClass extends BottomSheetDialogFragment {
 
     }
 
-    /**
-     * A function to calculate to stop timer at end of music
-     */
     private void endstartTimer() {
         final MusicActivity main = (MusicActivity) getActivity();
         mCountDownTimer = new CountDownTimer(main.getRemaining(), 1000) {
@@ -256,10 +212,6 @@ public class TimerClass extends BottomSheetDialogFragment {
         mTimerRunning=1;
     }
 
-    /**
-     * This Function is Responsible for stopping the timer. <br>
-     * @param a
-     */
     private void stopTimer(int a) {
         if(this.mTimerRunning==1) {
             mCountDownTimer.cancel();
@@ -270,26 +222,16 @@ public class TimerClass extends BottomSheetDialogFragment {
             return;
         }
     }
-    /**
-     * a function responsible for Resetting the timer and giving a new Time parameter. <br>
-     * @param a New Time Parameter
-     */
     private void resetTimer(int a) {
         mTimeLeftInMillis = a;
         updateCountDownText();
     }
 
-    /**
-     * A Function Responsible to pause the Timer. <br>
-     */
     public void pauseTimer(){
         mCountDownTimer.cancel();
         mTimerRunning = 0;
     }
 
-    /**
-     * This Function is Responsible to Continuously update how many Min left and Output them as text for the user in the Sleep Timer button and TextView. <br>
-     */
     public void updateCountDownText() {
 
         MorePageDown more = MorePageDown.getInstance();

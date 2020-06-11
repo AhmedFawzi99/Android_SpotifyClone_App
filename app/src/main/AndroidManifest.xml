@@ -10,14 +10,14 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_maestro"
+        android:icon="@mipmap/ic_launcher"
         android:label="Maestro"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MorePage"></activity>
-        <activity android:name=".FirstPage">
+        <activity android:name=".firstPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,11 +26,11 @@
         </activity>
         <activity android:name=".Register" />
         <activity android:name=".Login" />
-        <activity android:name=".CreatePassword" />
+        <activity android:name=".createPassword" />
         <activity android:name=".Birthdate" />
         <activity android:name=".Gender" />
         <activity android:name=".Name" />
-        <activity android:name=".Facebook"/>
+        <activity android:name=".facebook"/>
         <activity android:name=".Profile"/>
         <activity android:name=".SearchedSong"/>
 

@@ -6,9 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A class that has getters and setters for the data of each Playlist
- */
 public class PlaylistResponse {
     @SerializedName("playid")
     @Expose

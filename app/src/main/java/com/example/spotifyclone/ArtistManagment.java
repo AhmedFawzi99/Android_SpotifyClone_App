@@ -1,24 +1,37 @@
 package com.example.spotifyclone;
 
+import android.Manifest;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
@@ -26,28 +39,23 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.muddzdev.styleabletoast.StyleableToast;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.spotifyclone.App.CHANNEL_1_ID;
 
-/**
- * Artist Manager for Atrist's account
- * @authors:
- * Ahmed Mahmoud Fawzi
- * Salma Hazem
- * @version 1.0
- */
+
 public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
-    /**
-     * Declaring Variables
-     */
     private static final int MY_PERMISSION_REQUEST = 1 ;
     private static final int RQS_OPEN_AUDIO_MP3_NEW = 1;
     private TextView artname;
@@ -56,8 +64,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
     public static TextView artsongs;
     private TextView artpopular;
     private TextView artTlist;
-    public static int not=0;
-    private static Context context;
     private TextView artTlikes;
     private de.hdodenhof.circleimageview.CircleImageView imagee;
     private LinearLayout aplayl;
@@ -71,14 +77,13 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
     public static ArrayList<Track> sentsongarray= new ArrayList<Track>();
     public static int val = 0;
     public static ArrayList<String> stringnamesoffiles= new ArrayList<String>();
-    ArtPlaylistFragment artt;
-    TotalSongs art ;
+    artPlaylistFragment artt;
+    totalsongs art ;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.artistmanagment);
-        ArtistManagment.context = getApplicationContext();
 
 
         artname = findViewById(R.id.aartname);
@@ -102,9 +107,7 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
             }
         });
 
-        /**
-         * Spinner for the user to choose the data wanted in which time(day, month, year)
-         */
+
         Spinner spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.spinner, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -135,9 +138,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
             }
         });
 
-        /**
-         * Spinner for the user to choose the data wanted in which time(day, month, year)
-         */
         Spinner spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.spinner, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -168,9 +168,7 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
         });
 
 
-        /**
-         * show total Album Fragment
-         */
+
         aplayl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,9 +177,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
 
             }
         });
-        /**
-         * show total Song Fragment
-         */
         asongl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,10 +184,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
                 art.show(getSupportFragmentManager(), "Playlist");
             }
         });
-
-        /**
-         * Get the artist data from the server
-         */
         Call<List<ArtistResponse>> call = RetrofitSingleton.getInstance().getApi().artistdata(Profile_DATA.ID);
         call.enqueue(new Callback<List<ArtistResponse>>() {
             @Override
@@ -235,9 +226,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
 
         });
 
-        /**
-         * get the Artist Albums and Songs
-         */
         Call<List<PlaylistResponse>> play = RetrofitSingleton.getInstance().getApi().getplaylist(Profile_DATA.ID);
         play.enqueue(new Callback<List<PlaylistResponse>>() {
             @Override
@@ -265,21 +253,12 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
 
     }
 
-    /**
-     * To show the pop up menu that allows the user to logout
-     * @param v
-     */
     public void showPopup(View v){
         PopupMenu popup = new PopupMenu(this,v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.log_out);
         popup.show();
     }
-    /**
-     * Draws the bar chart showing the number of listeners in a day
-     * Gets the data from the server
-     * @param method
-     */
     private void getDayListeners(final String method){
         final BarChart mBarChart;
         mBarChart = findViewById(R.id.barChart1);
@@ -324,11 +303,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
             }
         });
     }
-    /**
-     * Draws the bar chart showing the number of listeners in a month
-     * Gets the data from the server
-     * @param method
-     */
     private void getMonthListeners(final String method){
         final BarChart mBarChart;
         mBarChart = findViewById(R.id.barChart1);
@@ -372,12 +346,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
             }
         });
     }
-
-    /**
-     * Draws the bar chart showing the number of listeners in a year
-     * Gets the data from the server
-     * @param method
-     */
     private void getYearListeners(final String method){
         final BarChart mBarChart;
         mBarChart = findViewById(R.id.barChart1);
@@ -422,11 +390,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
         });
     }
 
-    /**
-     * Draws the bar chart showing the number of likes in a day
-     * Gets the data from the server
-     * @param method
-     */
     private void getDayLikes(final String method){
         final BarChart mBarChart;
         mBarChart = findViewById(R.id.barChart2);
@@ -472,11 +435,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
             }
         });
     }
-    /**
-     * Draws the bar chart showing the number of likes in a month
-     * Gets the data from the server
-     * @param method
-     */
     private void getMonthLikes(final String method){
         final BarChart mBarChart;
         mBarChart = findViewById(R.id.barChart2);
@@ -520,11 +478,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
             }
         });
     }
-    /**
-     * Draws the bar chart showing the number of likes in a year
-     * Gets the data from the server
-     * @param method
-     */
     private void getYearLikes(final String method){
         final BarChart mBarChart;
         mBarChart = findViewById(R.id.barChart2);
@@ -570,11 +523,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
     }
 
 
-    /**
-     * Logs out and show notification that the user is logged out
-     * @param item
-     * @return
-     */
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
@@ -584,7 +532,7 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
                         .setContentTitle("Activity Notification")
                         .setContentText("ssss")
                         .setAutoCancel(true);
-                Intent i = new Intent(getApplicationContext(), FirstPage.class);
+                Intent i = new Intent(getApplicationContext(), firstPage.class);
                 String recent = getIntent().getStringExtra("message");
 //                recent_activity.setText(recent);
                 startActivity(i);
@@ -600,15 +548,12 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
     }
 
 
-    /**
-     * Gets Albums from the server and add it
-     * @param a
-     */
+
     public void getPlaylists( ArrayList<PlaylistResponse> a)
     {
 
         sentarray=a;
-        artt = new ArtPlaylistFragment(sentarray);
+        artt = new artPlaylistFragment(sentarray);
 
         for (int i = 0; i < a.size(); i++) {
             playlistname.add(a.get(i).getPlayname());
@@ -624,10 +569,6 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
         artsongs.setText(String.valueOf(Artist_DATA.TotalSongs));
     }
 
-    /**
-     * Gets songs from the server and add it
-     * @param a
-     */
     public void gettracks(ArrayList<PlaylistResponse> a){
         for(int i = 0; i < a.size(); i++){
 
@@ -637,50 +578,15 @@ public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMe
             }
         }
         sentsongarray=songarray;
-        art = new TotalSongs(sentsongarray);
+        art = new totalsongs(sentsongarray);
     }
 
-    /**
-     * Showing Notification when the Artist adds songs or albums
-     * @param a
-     */
-    public static void notffication(int a){
-        String Message;
-        if (a==1){
-            Message = Artist_DATA.Aname +" added new Album check it out !";
-        }else{
-            Message = Artist_DATA.Aname +" added new Song check it out !";
-        }
 
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getAppContext(),CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_notifications_black_24dp)
-                .setContentTitle("Activity Notification")
-                .setContentText(Message)
-                .setAutoCancel(true);
-        Intent i = new Intent(getAppContext(), ArtistManagment.class);
-//                startActivity(i);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        i.putExtra("message", Message);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(getAppContext(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(pendingIntent);
 
-        NotificationManager notificationManager = (NotificationManager) getAppContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, builder.build());
-    }
 
-    /**
-     * get the context of the app to acces in static functions
-     * @return
-     */
-    public static Context getAppContext() {
-        return ArtistManagment.context;
-    }
 
-    /**
-     * Function to prevent the user to get back to the login page
-     */
     @Override
     public void onBackPressed() {
         return;

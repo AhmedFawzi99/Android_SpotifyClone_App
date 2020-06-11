@@ -12,27 +12,16 @@ import java.util.ArrayList;
 
 
 /**
- * @author shaimaa
- * Album Fragment in view pager.
+ * A simple {@link Fragment} subclass.
  */
 public class AlbumFragment extends Fragment {
 
-    ArrayList<Album> albums=null;
-
-    /**
-     * empty constructor
-     */
+ArrayList<Album> albums=null;
     public AlbumFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * creating the fragment
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,9 +29,7 @@ public class AlbumFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_album, container, false);
     }
 
-    /**
-     * this function check if the album is liked or not if yes it will keep it but if not it will remove it from the list
-     */
+
     void checklike()
     {if (albums!=null)
     {
@@ -60,9 +47,6 @@ public class AlbumFragment extends Fragment {
 
     }}
 
-    /**
-     * this function is called when the user like an album and it will add the liked album to the list
-     */
     void checklikeadd(Album p)
     {
         albums.add(p);

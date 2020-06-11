@@ -22,10 +22,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-/**
- * @author shaimaa
- * choose artist page
- */
+
 public class Choose_Artist extends DialogFragment  {
     TextView text;
     ArrayList<Artist> list = new ArrayList<>();
@@ -45,30 +42,21 @@ public class Choose_Artist extends DialogFragment  {
     }
 
 
-    /**
-     * MAIN FUNCTIONS OF DIALOG FRAGMENTS
-     */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullscreenDialogTheme);
-    }
+        }
 
-    /**
-     * This func sends the  artists picked to the artist fragment page and detects which functions the user choose
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.lay2, container, false);
+       View view= inflater.inflate(R.layout.lay2, container, false);
         CircleImageView circleImageView = (CircleImageView) view.findViewById(R.id.circleimagechoose);
         TextView textView =(TextView) view.findViewById(R.id.textView11) ;
         textView.setOnClickListener(new OnClickListener(){@Override
-        public void onClick(View v) {
+                                    public void onClick(View v) {
             Intent intent = new Intent();
             intent.putExtra("size",selectedlist.size());
             for(int i=0 ; i<selectedlist.size();i++) {
@@ -79,17 +67,19 @@ public class Choose_Artist extends DialogFragment  {
             }
 
             if(getTargetFragment()!=null){
-                getTargetFragment().onActivityResult(
-                        getTargetRequestCode(), REQUEST_CODE, intent);
-                dismiss();}
+            getTargetFragment().onActivityResult(
+                    getTargetRequestCode(), REQUEST_CODE, intent);
+             //   Toast.makeText(getContext(),selectedlist.get(0).getName(), Toast.LENGTH_LONG).show();
+            dismiss();}
 
         }});
+        //Picasso.with(getApplicationContext()).load("https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff").into(circleImageView);;
         // Inflate the layout for this fragment
         onclickInterface = new onClickInterface() {
             @Override
             public void setClick(int abc) {
-                // list.remove(abc);
-                // Toast.makeText(getContext(),"Position is"+abc, Toast.LENGTH_LONG).show();
+               // list.remove(abc);
+               // Toast.makeText(getContext(),"Position is"+abc, Toast.LENGTH_LONG).show();
                 mAdapter.notifyDataSetChanged();
                 selectedlist.add(list.get(abc));
             }
@@ -100,22 +90,25 @@ public class Choose_Artist extends DialogFragment  {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        Artist artist =new Artist("1170522", "Amr Diab", "https://celebborn.com/celeb_image/amr-diab-26592.jpg?fbclid=IwAR1NnxgzRJFNahdrocTRjv1yP2OwMgnZ_Ox5J1wuVZOJN9TPOop3RwTJCZ0",true);
-        Artist artist2 =new Artist("1170523", "Tamer Hosny", "https://p16-va-default.akamaized.net/img/musically-maliva-obj/1654423082333189~c5_720x720.jpeg",true);
-        Artist artist3 =new Artist("1170524", " Hamza Namira", "https://www.namirahamza.com/wp-content/uploads/2019/03/479.jpeg",true);
-        Artist artist4 =new Artist("1170524", " Nancy Ajram", "https://i1.wp.com/www.eg24.news/wp-content/uploads/2020/03/6534651-2015959685.jpg?fit=1000%2C678&ssl=1",true);
-        Artist artist1= new Artist("1170524", " Moahmed Foad", "https://nogomistars.com/wallpaper/untitled8.jpg?fbclid=IwAR3Bl2ApUkKDd8VKUaC4sMDRAPZWAO_J-59G6r7y0NYj0OY9bGgvz52JiBo",true);
-        Artist artist6= new Artist("1170524", " Elisa", "https://imagevars.gulfnews.com/2018/8/7/1_16a084fe2d8.2263028_1984710504_16a084fe2d8_medium.jpg",true);
-        Artist artist5= new Artist("1170524", " Om Kalthom", "https://egyptianstreets.com/wp-content/uploads/2016/02/maxresdefault.jpg",true);
+        Artist artist =new Artist("1170522", "Amr Diab", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff",true);
+        Artist artist2 =new Artist("1170523", "Tamer Hosny", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff",true);
+        Artist artist3 =new Artist("1170524", " Hamza Namira", "https://i.scdn.co/image/ab67616d00001e0219ab0403aa0de6ee32b101ff",true);
 
 
         list.add(artist);
-        list.add(artist1);
+        list.add(artist2);
+        list.add(artist2);
+        list.add(artist2);
         list.add(artist2);
         list.add(artist3);
-        list.add(artist4);
-        list.add(artist6);
-        list.add(artist5);
+        list.add(artist3);
+        list.add(artist3);
+        list.add(artist3);
+        list.add(artist);
+        list.add(artist);
+        list.add(artist2);
+        list.add(artist3);
+        list.add(artist2);
 
 
         mAdapter = new customAdapter2(getContext(), list, onclickInterface);
@@ -125,5 +118,17 @@ public class Choose_Artist extends DialogFragment  {
         return view;
 
     }
-
+   /*public void onClick(View view) {
+       {
+           int id = view.getId();
+           switch (id) {
+               case R.id.cancel:
+                   dismiss();
+                   break;
+               case R.id.skip:
+                   dismiss();
+                   break;
+           }
+       }
+   }*/
 }

@@ -11,25 +11,20 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
 
-/**
- * Register Activity to allow new users to create email
- * @author Salma Hazem
- * @version 1.0
- */
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
-    /**
-     * Buttons fo the user to submit the email
-     * Edit text to write the email in it
-     */
     Button bNext;
     EditText etNewEmail;
 
-    /**
-     * Assign Instances
-     * @param savedInstanceState
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +39,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     }
 
-    /**
-     * Text watcher that sees what is written in the edit text
-     */
     private TextWatcher registerTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
         }
-        /**
-         * Enables the button to be clicked only when edit texts contains ("@") and ends with (".com")
-         * @param s
-         * @param start
-         * @param count
-         */
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -73,26 +59,18 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         }
     };
 
-    /**
-     * Assign the text in the edit texts to Strings to make it easier for checks
-     * Calls createEmail
-     */
     private void userSignUp() {
         String email = etNewEmail.getText().toString().trim();
         Profile_DATA.mail=email;
 
     }
 
-    /**
-     * Calls userSignUp if bNext button is clicked
-     * @param v
-     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bNext:
                 userSignUp();
-                Intent intent = new Intent(Register.this, CreatePassword.class);
+                Intent intent = new Intent(Register.this, createPassword.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 // startActivity(new Intent(this, createPassword.class));

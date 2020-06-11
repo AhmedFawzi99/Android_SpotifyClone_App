@@ -1,9 +1,5 @@
 package com.example.spotifyclone;
-/**
- * Class to save and access data of the user
- * @author Salma Hazem
- * @version 1.0
- */
+
 public class User {
     private int id;
     private String email, password, name, birthDate, gender,token;

@@ -3,11 +3,6 @@ package com.example.spotifyclone;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * A class that has setters and getters for the login data of the user
- * @author Ahmed Mahmoud Fawzi
- * @author Salma Hazem
- */
 public class LoginResponse {
 
     @SerializedName("email")

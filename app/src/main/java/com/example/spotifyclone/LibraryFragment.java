@@ -14,22 +14,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 public class LibraryFragment extends Fragment {
-    /**
-     * library fragment that contains the view pager (artist- playlist- album)
-     */
+
     @Nullable
     Toolbar toolbar;
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
-
-    /**
-     * on creating the fragment this function is called
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View s;

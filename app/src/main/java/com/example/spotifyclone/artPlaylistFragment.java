@@ -1,39 +1,50 @@
 package com.example.spotifyclone;
 
+import android.annotation.SuppressLint;
+import android.app.Fragment;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.muddzdev.styleabletoast.StyleableToast;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Fragment for Artist Albums It has all the Albums that are of that the Artist loggedin
- * @author Ahmed Mahmoud Fawzi <br>
- * @version 1.0
- */
-public class ArtPlaylistFragment extends DialogFragment {
+import static com.example.spotifyclone.App.CHANNEL_1_ID;
+
+public class artPlaylistFragment extends DialogFragment {
 
 
     public static ArrayList<PlaylistResponse> array=new ArrayList<PlaylistResponse>();
     onClickInterface onClickInterface2;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView  playadapt;
-    ArtPlaylistAdapter artplaylistAdapter;
+    artplaylistAdapter artplaylistAdapter;
     private ImageButton back;
 
     TextView text;
@@ -42,44 +53,23 @@ public class ArtPlaylistFragment extends DialogFragment {
     static ImageButton delete;
     static int pos=0;
     static boolean deleteonoff=false;
-    public ArtPlaylistFragment(ArrayList<PlaylistResponse> sentarray) {
+    public artPlaylistFragment(ArrayList<PlaylistResponse> sentarray) {
         array=sentarray;
         Log.d(String.valueOf(array.size()), "artPlaylistFragment: ");
     }
 
-    /**
-     * A constructor Taking a string it is called when we create a new playlist passing that name to the constructor
-     * @param start a regular string
-     */
-    public ArtPlaylistFragment(String start) {
+    public artPlaylistFragment(String start) {
         Random rand = new Random(); //instance of random class
         int upperbound = 734948535;
         int int_random = rand.nextInt(upperbound);
-        PlaylistResponse p=new PlaylistResponse(String.valueOf(int_random),Profile_DATA.ID, CreateArtPlay.GetEditText,"https://images.macrumors.com/t/MKlRm9rIBpfcGnjTpf6ZxgpFTUg=/1600x1200/smart/article-new/2018/05/apple-music-note.jpg",null);
+        PlaylistResponse p=new PlaylistResponse(String.valueOf(int_random),Profile_DATA.ID,cretaeartplay.GetEditText,"https://images.macrumors.com/t/MKlRm9rIBpfcGnjTpf6ZxgpFTUg=/1600x1200/smart/article-new/2018/05/apple-music-note.jpg",null);
         array.add(p);
         Artist_DATA.APlaylists++;
         ArtistManagment.artplay.setText(String.valueOf(Artist_DATA.APlaylists));
-        ArtistManagment.notffication(1);
-        Call<String> call =  RetrofitSingleton.getInstance().getApi().putplaylist(String.valueOf(int_random));
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.d(response.body(), "onResponse: ");
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-            }
-        });
 
     }
 
 
-    /**
-     * Oncreate Function
-     * @param savedInstanceState
-     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,13 +77,7 @@ public class ArtPlaylistFragment extends DialogFragment {
     }
 
 
-    /**
-     * The oncreateview where variables are initialized
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.artplaylistfrag, container, false);
@@ -121,7 +105,7 @@ public class ArtPlaylistFragment extends DialogFragment {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CreateArtPlay a=new CreateArtPlay();
+                cretaeartplay a=new cretaeartplay();
                 a.show(getFragmentManager(),"hii");
             }
         });
@@ -141,15 +125,12 @@ public class ArtPlaylistFragment extends DialogFragment {
                 }
             }
         });
-        /**
-         * The oncClick listens to when a playlist is clicked and then checks if the album is empty or no if empty it calls addsongscreate to add new songs if there are songs that are without a list
-         * and if it has songs it shows them.
-         */
         onClickInterface2 =new onClickInterface() {
             @Override
             public void setClick(int abc) {
                 if(valuecheck==0) {
                     pos=abc;
+                    Log.d("gfdswert", "setClick: ");
                     PlaylistResponse BLOCK = array.get(abc);
                     ArrayList<Track> trs = new ArrayList<Track>();
                     trs = BLOCK.getTracks();
@@ -157,12 +138,12 @@ public class ArtPlaylistFragment extends DialogFragment {
                     art.show(getFragmentManager(), "Playlist");
                 }else{
                     pos=abc;
-                    AddSongsCreate arto = new AddSongsCreate();
+                    addsongscreate arto = new addsongscreate();
                     arto.show(getFragmentManager(), "Playlist");
                 }
             }
         };
-        artplaylistAdapter = new ArtPlaylistAdapter(getContext(), array, onClickInterface2);
+        artplaylistAdapter = new artplaylistAdapter(getContext(), array, onClickInterface2);
         playadapt.setAdapter(artplaylistAdapter);
         playadapt.setRecycledViewPool(recycledViewPool);
         return v;

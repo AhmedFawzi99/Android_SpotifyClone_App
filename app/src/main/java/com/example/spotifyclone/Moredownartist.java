@@ -11,15 +11,12 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squareup.picasso.Picasso;
-/**
- * @author shaimaa
- * the settings page in playlist page
- */
+
 public class Moredownartist extends BottomSheetDialogFragment {
     private static Moredownartist instance;
 
-    String artistName;
-    String artistimage;
+String artistName;
+String artistimage;
     private ImageView musicImage;
     private LinearLayout smallLayout;
     private RelativeLayout moreLayout;
@@ -27,26 +24,19 @@ public class Moredownartist extends BottomSheetDialogFragment {
     private TextView Followte;
     private LinearLayout followlay;
     private TextView artistname;
-    private  boolean follow;
-    private Artist artist;
+     private  boolean follow;
+private Artist artist;
 
-    public static Moredownartist getInstance(){
+ public static Moredownartist getInstance(){
         return instance;
     }
-    public Moredownartist(Artist artist){
-        artistimage=artist.getImage();
-        artistName=artist.getName();
-        follow=artist.isFollowing();
-        this.artist=artist;
+   public Moredownartist(Artist artist){
+    artistimage=artist.getImage();
+    artistName=artist.getName();
+    follow=artist.isFollowing();
+    this.artist=artist;
 
-    }
-    /**
-     * when you open this page this function is called to detect the clicks the user make
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
+}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.more_down_artist, container, false);
@@ -114,23 +104,23 @@ public class Moredownartist extends BottomSheetDialogFragment {
 
 
     private void followfunction(){
-        // EachArtist artisteach = (EachArtist) getFragmentManager().findFragmentByTag("");
+       // EachArtist artisteach = (EachArtist) getFragmentManager().findFragmentByTag("");
         if(!artist.isFollowing())
         {
             Followte.setText("Following");
             ///////////////  main.buttonLikeAction();
             followimg.setImageResource(R.drawable.favorite_green);
             artist.setFollowing(true);
-            /////////////// main.showLikeToast(" Added to Liked Songs. ");
+           /////////////// main.showLikeToast(" Added to Liked Songs. ");
             dismiss();
 
         }else {
             followimg.setImageResource(R.drawable.like);
             Followte.setText("Follow");
-            ///////////////  main.buttonLikeAction();
+          ///////////////  main.buttonLikeAction();
             artist.setFollowing(false);
 
-            ////////////   main.showLikeToast(" Removed from Liked Songs. ");
+         ////////////   main.showLikeToast(" Removed from Liked Songs. ");
             dismiss();
         }
 
@@ -150,3 +140,4 @@ public class Moredownartist extends BottomSheetDialogFragment {
 
 
 }
+

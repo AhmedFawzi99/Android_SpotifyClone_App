@@ -13,10 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-/**
- * @author shaimaa
- *  creating new playlist fragment
- */
 public class FloatingFragment extends DialogFragment implements View.OnClickListener {
     static FloatingFragment newInstance() {
         return new FloatingFragment();
@@ -32,33 +28,23 @@ public class FloatingFragment extends DialogFragment implements View.OnClickList
         setStyle(DialogFragment.STYLE_NORMAL, R.style.FullscreenDialogTheme);
     }
 
-    /**
-     * on creating the fragment
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
-     */
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.floating, container, false);
-        cancel = (TextView) view.findViewById(R.id.cancel);
-        skip = (TextView) view.findViewById(R.id.skip);
-        editText = (EditText) view.findViewById(R.id.editText22);
-        GetEditText = editText.getText().toString();
+         cancel = (TextView) view.findViewById(R.id.cancel);
+      skip = (TextView) view.findViewById(R.id.skip);
+      editText = (EditText) view.findViewById(R.id.editText22);
+         GetEditText = editText.getText().toString();
         cancel.setOnClickListener(this);
         skip.setOnClickListener(this);
-        skip.setText("Create");
+            skip.setText("Create");
 
         return view;
     }
 
-    /**
-     * choosing to cancel or to create the playlist
-     * @param view
-     */
+
     @Override
     public void onClick(View view) {
         {

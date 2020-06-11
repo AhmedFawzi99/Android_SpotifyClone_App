@@ -1,10 +1,13 @@
 package com.example.spotifyclone;
 
+import android.annotation.SuppressLint;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -14,13 +17,17 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-/**
- * A class that is responsible for showing the Songs in Each Album the Artist loggedin has
- * @author Ahmed Mahmoud Fawzi <br>
- */
 public class EachplaylistSongs extends DialogFragment {
 
 
@@ -28,17 +35,12 @@ public class EachplaylistSongs extends DialogFragment {
     onClickInterface onClickInterface;
     private RecyclerView.RecycledViewPool recycledViewPool;
     RecyclerView playadapt;
-    static PlaylistSongsAdapter playlistsongsadapter;
+    static playlistsongsadapter playlistsongsadapter;
     private ImageButton backk2;
     private String data;
     TextView text;
     ImageButton add;
 
-    /**
-     * A constructor the takes an array of songs
-     * @param sentarray Array of songs of each Album selected to open
-     * @param a the name of the Album
-     */
     public EachplaylistSongs(ArrayList<Track> sentarray,String a) {
         array = sentarray;
         data=a;
@@ -72,23 +74,32 @@ public class EachplaylistSongs extends DialogFragment {
         playadapt.addItemDecoration(new SpaceItemDecoration(2));
         playadapt.setItemAnimator(new DefaultItemAnimator());
         Log.d(String.valueOf(array.size()), "artPlaylistFragment: ");
-        playlistsongsadapter = new PlaylistSongsAdapter(getContext(), array, onClickInterface);
+        playlistsongsadapter = new playlistsongsadapter(getContext(), array, onClickInterface);
         playadapt.setAdapter(playlistsongsadapter);
         playadapt.setRecycledViewPool(recycledViewPool);
 
-        /**
-         * Calls the addsongscreate to add new ones to the Album
-         */
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddSongsCreate arto = new AddSongsCreate();
+                addsongscreate arto = new addsongscreate();
                 arto.show(getFragmentManager(), "Playlist");
 
             }
         });
 
 
+//        onClickInterface = new onClickInterface() {
+//            @Override
+//            public void setClick(int abc) {
+//
+//
+//                Track BLOCK = array.get(abc);
+//                BLOCK.getTracks();
+//
+//
+//            }
+//
+//        };
         return v;
     }
 }
