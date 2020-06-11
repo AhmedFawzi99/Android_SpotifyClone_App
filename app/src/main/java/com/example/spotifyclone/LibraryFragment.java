@@ -13,6 +13,10 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+/**
+ * library fragment that contains the view pager (artist- playlist- album)
+ * Helping Source: <a href="https://abhiandroid.com/materialdesign/viewpager">https://abhiandroid.com/materialdesign/viewpager</a> <br>
+ */
 public class LibraryFragment extends Fragment {
     /**
      * library fragment that contains the view pager (artist- playlist- album)

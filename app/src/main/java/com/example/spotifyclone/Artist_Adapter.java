@@ -19,6 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @author shaimaa
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
  * class artistadapter that fill the recyclerview
  */
 public class Artist_Adapter extends RecyclerView.Adapter<Artist_Adapter.MyViewHolder2>{

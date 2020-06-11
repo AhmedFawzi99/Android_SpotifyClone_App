@@ -19,6 +19,7 @@ import java.util.List;
 
 
 /**
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
  * @author   shaimaa
  * this adapter fills recyclerview of  the home fragment
  */
@@ -69,7 +70,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.HomeVi
                 //Toast.makeText(context,"Position is"+abc, Toast.LENGTH_LONG).show();
 
                 Type BLOCK= data.get(position).getBlocks().get(abc);
-                Toast.makeText(context,BLOCK.getType(), Toast.LENGTH_LONG).show();
+
                 if(BLOCK.getType().equals("playlist")) {
                     String image = BLOCK.rowitem.getImage();
                     String name = BLOCK.rowitem.getName();

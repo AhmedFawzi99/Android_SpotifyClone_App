@@ -9,6 +9,7 @@ import java.util.ArrayList;
 /**
  * @author shaimaa
  * this class makes the view pager in which the user can navigates between fragments(playlist - artist - albums)
+ * Helping Source: <a href="https://abhiandroid.com/materialdesign/viewpager">https://abhiandroid.com/materialdesign/viewpager</a> <br>
  */
 public class ViewPagerAdapter extends FragmentPagerAdapter {
     ArrayList<Fragment> fragments=new ArrayList<>();

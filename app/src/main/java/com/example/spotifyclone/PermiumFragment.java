@@ -22,6 +22,7 @@ import static com.example.spotifyclone.App.CHANNEL_1_ID;
 
 /**
  * Premium Fragment in Home Layout
+ * Helping Source: <a href="https://www.youtube.com/watch?v=UsXv6VRqZKs&t=431s">https://www.youtube.com/watch?v=UsXv6VRqZKs&t=431s</a> <br>
  * @author Salma Hazem
  * @version 1.0
  */

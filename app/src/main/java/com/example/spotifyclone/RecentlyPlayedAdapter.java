@@ -18,6 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @author shaimaa
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
  * adapter that fills the recently played
  */
 public class RecentlyPlayedAdapter extends RecyclerView.Adapter<RecentlyPlayedAdapter.PlaylistsViewHolder2> {

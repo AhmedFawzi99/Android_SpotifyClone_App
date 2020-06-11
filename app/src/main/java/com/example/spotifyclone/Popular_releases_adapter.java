@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 /**
  * @author shaimma
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
  * Adapter to fill the popular_releases adaapter
  */
 public class Popular_releases_adapter extends RecyclerView.Adapter<Popular_releases_adapter.MyViewHolder3>{

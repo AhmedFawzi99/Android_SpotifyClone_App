@@ -22,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Search activity to type what the user wants to search
+ *Helping Source: <a href="https://www.youtube.com/watch?v=nQnyAXJxngY">https://www.youtube.com/watch?v=nQnyAXJxngY</a> <br>
  * @author Salma Hazem
  * @version 1.0
  */

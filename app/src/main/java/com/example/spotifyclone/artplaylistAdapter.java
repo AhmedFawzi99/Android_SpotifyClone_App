@@ -18,6 +18,7 @@ import java.util.List;
 
 /**
  * This is an adapter for the artist Albums that shows all the albums of the artist loggedin
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
  * @author Ahmed Mahmoud Fawzi <br>
  */
 public class artplaylistAdapter extends RecyclerView.Adapter<artplaylistAdapter.PlaylistsView> {

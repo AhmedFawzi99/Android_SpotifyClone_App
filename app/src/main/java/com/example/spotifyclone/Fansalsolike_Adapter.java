@@ -18,6 +18,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * @author shaimaa
+ * Helping Source: <a href="https://developer.android.com/guide/topics/ui/layout/recyclerview">https://developer.android.com/guide/topics/ui/layout/recyclerview</a> <br>
  * adapter to fill the fans also like list
  */
 public class Fansalsolike_Adapter extends RecyclerView.Adapter<Fansalsolike_Adapter.PlaylistsViewHolder26> {
