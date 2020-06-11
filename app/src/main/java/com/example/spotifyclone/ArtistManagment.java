@@ -42,7 +42,7 @@ import static com.example.spotifyclone.App.CHANNEL_1_ID;
  * Helping Source: <a href="https://www.youtube.com/watch?v=sXo2SkX7rGk&t=658s">https://www.youtube.com/watch?v=sXo2SkX7rGk&t=658s</a> <br>
  * License for Circular View Image: <a href="https://github.com/hdodenhof/CircleImageView/blob/master/LICENSE.txt">https://github.com/hdodenhof/CircleImageView/blob/master/LICENSE.txt</a> <br>
  * BieChart License: <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a> <br>
- * @authors: Salma Hazem and Ahmed Mahmoud Fawzi
+ * @author Salma Hazem and Ahmed Mahmoud Fawzi
  * @version 1.0
  */
 public class ArtistManagment extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
