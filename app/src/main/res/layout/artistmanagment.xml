@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
 
             android:layout_gravity="center_horizontal"
-            android:text="Playlists"
+            android:text="Total Albums"
             android:textSize="15dp"
             android:textColor="@android:color/white">
 
